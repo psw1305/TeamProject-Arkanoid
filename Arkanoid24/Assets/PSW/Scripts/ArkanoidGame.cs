@@ -20,6 +20,6 @@ public class ArkanoidGame : MonoBehaviour
 
     private void FireBall()
     {
-        ball.StartBall();
+        
     }
 }
