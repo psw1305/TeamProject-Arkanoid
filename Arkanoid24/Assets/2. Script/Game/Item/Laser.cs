@@ -17,5 +17,7 @@ public class Laser : MonoBehaviour
     {
         transform.position += new Vector3(0, _laserSpeed, 0) * Time.deltaTime;
 
+        if (transform.position.y > 6)
+            Destroy(gameObject);
     }
 }

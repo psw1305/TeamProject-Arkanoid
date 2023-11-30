@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+ public class Item : MonoBehaviour
 {
     private float _dropSpeed = 3f;
     private Rigidbody2D _rb;
@@ -22,6 +22,7 @@ public class Item : MonoBehaviour
     void Update()
     {
         _rb.velocity = _dropSpeed * Vector3.down;
+        //transform.position += new Vector3(0, -_dropSpeed, 0) * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,13 +61,12 @@ public class Item : MonoBehaviour
                 // 공 속도 감소
                 break;
 
-            case Items.Break:
-                // 오른쪽에 탈출구 생성 ->  다음 라운드
-                break;
-
             case Items.Disruption:
                 // 공 2개 추가
                 break;
+            case Items.Power:
+                // 공격력 증가
+            break;
 
         }
     }

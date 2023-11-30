@@ -9,6 +9,6 @@ public enum Items
     Enlarge,
     Catch,
     Slow,
-    Break,
-    Disruption
+    Disruption,
+    Power,
 }
