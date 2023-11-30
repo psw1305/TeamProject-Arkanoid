@@ -11,11 +11,15 @@ public class Item : MonoBehaviour
         Enlarge,
         Catch,
         Slow,
+        Power,
     }
     public ItemType itemType = ItemType.None;
 
-    [SerializeField] float _itemSpeed = 5f;
-    [SerializeField] GameObject _paddle;
+    [SerializeField]float _itemSpeed = 5f;
+    [SerializeField]GameObject _paddle;
+    [SerializeField]PaddleNJM _paddleNJM;
+    [SerializeField] ArkanoidBall _arkanoidBall;
+
 
 
     void Update()
@@ -25,7 +29,7 @@ public class Item : MonoBehaviour
 
     public void LaserItem()
     {
-
+        _paddleNJM.IsLaser = true;
     }
 
     public void EnlargeItem()
@@ -42,6 +46,12 @@ public class Item : MonoBehaviour
     public void SlowItem()
     {
         // ball 속도가 느려짐
+        // ball speed가 private로 되어있음
+    }
+
+    public void PowerItem()
+    {
+        // ball 데미지 증가
     }
 
 
@@ -74,7 +84,6 @@ public class Item : MonoBehaviour
                 default:
                     break;
             }
-
 
             Destroy(gameObject);
         }
