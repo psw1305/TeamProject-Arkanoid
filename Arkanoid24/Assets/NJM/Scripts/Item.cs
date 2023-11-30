@@ -81,6 +81,10 @@ public class Item : MonoBehaviour
                     SlowItem();
                     break;
 
+                case ItemType.Power:
+                    PowerItem();
+                    break;
+
                 default:
                     break;
             }
