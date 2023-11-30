@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Bullet
+  - Item
   layers:
   - Default
   - TransparentFX
