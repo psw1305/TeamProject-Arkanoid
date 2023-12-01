@@ -9,6 +9,7 @@ public class BrickBreak : MonoBehaviour
     [Range(0f, 100f)]
     [SerializeField] int _itemCreateRate;
 
+    public GameObject _itemSpawner;
     //충돌이 발생하면 실행
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -36,8 +37,8 @@ public class BrickBreak : MonoBehaviour
         //_itemCreateRate 이하일 경우 아이템 생성
         if (Random.Range(0, 101) <= _itemCreateRate)
         {
-            //원본 알카노이드 아이템이 7개니까 enum을 고려해 0 ~ 7 사이
-            Debug.Log(Random.Range(0, 8));
+            _itemSpawner.transform.position = transform.position;
+            Instantiate(_itemSpawner);
         }
     }
 }
