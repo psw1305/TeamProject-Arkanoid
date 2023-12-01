@@ -9,6 +9,11 @@ public class PaddleFire : MonoBehaviour
 
     public event Action OnBallFireRequest;
 
+    private void Awake()
+    {
+        Managers.Game.Paddle = this;
+    }
+
     private void Start()
     {
         _controller = GetComponent<PaddleEventController>();
