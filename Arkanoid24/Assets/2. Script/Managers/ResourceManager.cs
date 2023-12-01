@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class ResourceManager
 {
+    private Dictionary<string, GameObject> stages = new();
     private Dictionary<string, GameObject> prefabs = new();
 
     public void Initialize()
     {
+        // 스테이지 SO 파일
+        GameObject[] stages = Resources.LoadAll<GameObject>("Bluepritn/Stage");
+        foreach (GameObject stage in stages) this.stages[stage.name] = stage;
+
         // 오브젝트 프리팹
         GameObject[] objs = Resources.LoadAll<GameObject>("Prefabs/Model");
         foreach (GameObject obj in objs) prefabs[obj.name] = obj;
