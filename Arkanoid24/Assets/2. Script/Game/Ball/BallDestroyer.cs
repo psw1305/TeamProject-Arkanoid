@@ -1,10 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class ArkanoidBallDestroyer : MonoBehaviour
+public class BallDestroyer : MonoBehaviour
 {
-    [SerializeField] ArkanoidGame game;
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Ball"))
@@ -16,7 +14,7 @@ public class ArkanoidBallDestroyer : MonoBehaviour
     private IEnumerator DelaySpawn(Collider2D col)
     {
         yield return new WaitForSeconds(0.25f);
-        game.FireBall();
+        Managers.Game.InstanceBall();
         Destroy(col.gameObject);
     }
 }

@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11a7339d73f85948a1a024ba3695697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 7979572069609189236}
+  game: {fileID: 0}
 --- !u!1 &5572097824672968054
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 7478770119738287496}
   - component: {fileID: 2463417430336690753}
   - component: {fileID: 802966153124491685}
-  - component: {fileID: 7979572069609189236}
+  - component: {fileID: 3098366998221109363}
   m_Layer: 0
   m_Name: Arkanoid_Test
   m_TagString: Untagged
@@ -196,7 +196,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &7979572069609189236
+--- !u!114 &3098366998221109363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,8 +205,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5572097824672968054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e30d94c01c3dc7048a733fb3fbd537b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 11e3da9502a76e44293a45ddfa44511e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 6437285118980658944, guid: 888243152b2febc4680d41552980ad36, type: 3}
-  paddle: {fileID: 0}
