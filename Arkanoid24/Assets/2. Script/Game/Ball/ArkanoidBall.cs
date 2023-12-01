@@ -2,7 +2,7 @@ using UnityEngine;
 
 public partial class ArkanoidBall : MonoBehaviour
 {
-    [SerializeField] private ArkanoidGame game;
+    [SerializeField] private GameManager game;
 
     [Header("Speed")]
     [SerializeField] public float ballMaxSpeed;
