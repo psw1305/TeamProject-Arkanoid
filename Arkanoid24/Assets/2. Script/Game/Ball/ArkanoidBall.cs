@@ -27,7 +27,8 @@ public class ArkanoidBall : MonoBehaviour
 
     private void Start()
     {
-        paddleFire = ArkanoidGame.Instance.GetPaddleFire();
+        // 인스턴스 관리 수정
+        paddleFire = Managers.Game.Paddle;
         paddleFire.OnBallFireRequest += StartBall;
     }
 
