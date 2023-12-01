@@ -7,9 +7,10 @@ public class ArkanoidBall : MonoBehaviour
     [Header("Speed")]
     [SerializeField] public float ballMaxSpeed;
 
+    private Rigidbody2D paddleBody;
     private Rigidbody2D ballBody;
+
     private bool isLaunch = false;
-    private PaddleFire paddleFire;
 
     /// <summary>
     /// Ball 속도 설정 [임시]
@@ -23,13 +24,13 @@ public class ArkanoidBall : MonoBehaviour
     private void Awake()
     {
         ballBody = GetComponent<Rigidbody2D>();
+        paddleBody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
         // 인스턴스 관리 수정
-        paddleFire = Managers.Game.Paddle;
-        paddleFire.OnBallFireRequest += StartBall;
+        Managers.Event.OnBallLaunch += StartBall;
     }
 
     private void FixedUpdate()
@@ -44,17 +45,28 @@ public class ArkanoidBall : MonoBehaviour
         }
     }
 
+    
+
     #region Ball State
 
     public void StartBall()
     {
         isLaunch = true;
         ballBody.velocity = new Vector2(0, 10);
+        Managers.Event.PublishBallIsLaunch(isLaunch);
     }
 
     private void ReadyBall()
     {
-        transform.position = paddleFire.transform.position;
+        FollowThePaddle();
+    }
+
+    private void FollowThePaddle()
+    {
+        Vector2 paddlePos = paddleBody.position;
+        Vector2 newBallPos = new Vector2(paddlePos.x, ballBody.position.y);
+        ballBody.position = newBallPos;
+        ballBody.velocity = Vector2.zero;
     }
 
     private void LaunchBall()
@@ -94,6 +106,10 @@ public class ArkanoidBall : MonoBehaviour
 
     private void OnDestroy()
     {
-        paddleFire.OnBallFireRequest -= StartBall;
+        if (Managers.Instance != null && Managers.Event != null)
+        {
+            Managers.Event.PublishBallIsLaunch(false);
+            Managers.Event.OnBallLaunch -= StartBall;
+        }
     }
 }

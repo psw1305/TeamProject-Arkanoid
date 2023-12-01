@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PaddleInputController : PaddleEventController
+public class PaddleInputController : MonoBehaviour
 {
     #region Member Variables
 
@@ -33,12 +33,12 @@ public class PaddleInputController : PaddleEventController
         // 월드 좌표로 변환
         mousePos = _mainCamera.ScreenToWorldPoint(mousePos);
 
-        CallMovementEvent(mousePos);
+        Managers.Event.PublishMoveEvent(mousePos);
     }
 
     private void OnFire(InputValue inputValue)
     {
-        
+        Managers.Event.PublishFireEvent();
     }
 
     #endregion

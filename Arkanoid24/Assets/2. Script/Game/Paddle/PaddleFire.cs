@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class PaddleFire : MonoBehaviour
 {
-    private PaddleEventController _controller;
-
-    public event Action OnBallFireRequest;
-
-    private void Awake()
-    {
-        Managers.Game.Paddle = this;
-    }
+    private bool _isBallLaunch = false;
 
     private void Start()
     {
-        _controller = GetComponent<PaddleEventController>();
-        _controller.OnLeftPressEvent += OnFire;
+        Managers.Event.OnFireEvent += OnBallFire;
+        Managers.Event.OnBallIsLaunch += OnBallIsLaunch;
     }
 
-    private void OnFire()
+    private void OnBallFire()
     {
-        OnBallFireRequest?.Invoke();
+        if (_isBallLaunch) return;
+
+        Managers.Event.PublishBallLaunch();
+    }
+
+    private void OnBallIsLaunch(bool isLaunch)
+    {
+        _isBallLaunch = isLaunch;
     }
 }
