@@ -173,4 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 6
   bullet: {fileID: 7714977233919293428, guid: ad86e37bbecd61b4b906fae9f667ca00, type: 3}
-  ball: {fileID: 0}
+  balls: {fileID: 6437285118980658944, guid: 888243152b2febc4680d41552980ad36, type: 3}

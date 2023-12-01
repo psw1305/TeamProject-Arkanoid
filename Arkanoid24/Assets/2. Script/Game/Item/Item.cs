@@ -15,6 +15,8 @@ using UnityEngine;
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject balls;
+    private ArkanoidBall _mainBall;
+    private float _originSpeed;
 
 
 
@@ -35,7 +37,7 @@ using UnityEngine;
         {
             ItemSkill(collision.gameObject);
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -64,10 +66,12 @@ using UnityEngine;
 
             case Items.Slow:
                 // 공 속도 감소
+                SlowItemUse();
                 break;
 
             case Items.Disruption:
                 // 공 2개 추가
+                DisruptionItemUse();
                 break;
             case Items.Power:
                 // 공격력 증가
@@ -75,10 +79,27 @@ using UnityEngine;
 
         }
     }
-    private void PlayerItemUse()
-    {
 
+    private void DisruptionItemUse()
+    {
+        Instantiate(balls);
     }
+
+    private void SlowItemUse()
+    {
+        _mainBall = GameObject.Find("BallPrefab(Clone)").GetComponent<ArkanoidBall>();
+        _originSpeed = _mainBall.ballMaxSpeed;
+        _mainBall.SetMaxSpeed(_originSpeed / 2);
+        StartCoroutine(OriginBallSpeed());
+    }
+
+    IEnumerator OriginBallSpeed()
+    {
+        yield return new WaitForSeconds(2f);
+        _mainBall.SetMaxSpeed(_originSpeed);
+    }
+
+
 
     private void LasersItemUse(GameObject player)
     {
