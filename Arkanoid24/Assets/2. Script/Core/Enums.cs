@@ -4,6 +4,7 @@
 /// </summary>
 public enum Items
 {
+    None,
     Player,
     Lasers,
     Enlarge,

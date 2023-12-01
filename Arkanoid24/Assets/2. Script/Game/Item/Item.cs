@@ -4,15 +4,19 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
- public class Item : MonoBehaviour
+ public partial class Item : MonoBehaviour
 {
     private float _dropSpeed = 3f;
     private Rigidbody2D _rb;
 
+    public float GetSpeed => (_dropSpeed);
+
     [SerializeField] private Items itemType;
 
     [SerializeField] private GameObject bullet;
-    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject balls;
+
+
 
     void Start()
     {
@@ -55,6 +59,7 @@ using UnityEngine;
 
             case Items.Catch:
                 // 공이 튕기지않고 패들에 달라붙음
+                CatchItemUse();
                 break;
 
             case Items.Slow:

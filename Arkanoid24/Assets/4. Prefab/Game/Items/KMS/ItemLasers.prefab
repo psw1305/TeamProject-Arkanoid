@@ -171,6 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1868ce50ca86ced448854812c5c8f79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 1
+  itemType: 2
   bullet: {fileID: 7714977233919293428, guid: ad86e37bbecd61b4b906fae9f667ca00, type: 3}
-  ball: {fileID: 0}
+  balls: {fileID: 0}

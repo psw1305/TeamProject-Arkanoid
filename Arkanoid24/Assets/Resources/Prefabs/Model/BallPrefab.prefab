@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6947559478884470988}
   - component: {fileID: 6600111530939969270}
   - component: {fileID: 7896207246947712285}
-  - component: {fileID: 1779972541270628170}
+  - component: {fileID: -3932980404661638965}
   m_Layer: 0
   m_Name: BallPrefab
   m_TagString: Ball
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2332927175116514950}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &6600111530939969270
 CircleCollider2D:
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1779972541270628170
+--- !u!114 &-3932980404661638965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballMaxSpeed: 10
+  currentItemSkill: 0
 --- !u!1 &3601355608852622741
 GameObject:
   m_ObjectHideFlags: 0
