@@ -25,7 +25,7 @@ public class BrickBreak : MonoBehaviour
     }
 
     //브릭을 삭제하는 메서드
-    private void BrickDestroy()
+    public void BrickDestroy()
     {
         // [박상원] 벽돌 파괴시 점수 100점 추가
         // 점수는 추후 벽돌 종류에 따라 변경 가능
