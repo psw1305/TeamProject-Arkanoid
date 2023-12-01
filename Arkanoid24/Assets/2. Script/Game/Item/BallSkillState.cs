@@ -2,59 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallSkillState : MonoBehaviour
+public class BallSkillState
 {
     public static BallSkillState instance = null;
-    private List<GameObject> _balls;
 
-    public int _ballExtraPower
+    public int BallExtraPower = 0;
+    public float BallExtraSpeed = 0f;
+
+    public Items CurrentSkill
     {
-        get
-        {
-            return _ballExtraPower;
-        }
-        private set { }
-    }
-    public float _ballExtraSpeed
-    {
-        get
-        {
-            return _ballExtraSpeed;
-        }
-        private set { }
-    }
-
-
-    public Items currentSkill
-    {
-        set
-        {
-            ResetSkill();
-            currentSkill = value;
-        }
-        get
-        {
-            return currentSkill;
-        }
-    }
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
-
-    private void Start()
-    {
-        // _balls 가져오기
-
-
-        _ballExtraPower = 0;
-        _ballExtraSpeed = 0f;
-    }
+        get; set;
+    } = Items.None;
 
     private void ResetSkill()
+    {
+
+    }
+
+    public void PowerUp()
+    {
+        BallExtraPower++;
+        foreach (var ball in Managers.Game.CurrentBalls)
+        {
+            ball.GetComponent<ArkanoidBall>().SetPower(BallExtraPower);
+        }
+    }
+
+    public void Catch()
     {
 
     }
