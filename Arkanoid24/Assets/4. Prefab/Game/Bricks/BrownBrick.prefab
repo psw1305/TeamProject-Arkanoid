@@ -167,7 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 1
-  _itemCreateRate: 10
+  _itemCreateRate: 30
+  _itemSpawner: {fileID: 4707844206680973316, guid: 7f3f303d0b81ec241a9545ac376136a6, type: 3}
 --- !u!114 &836743414098770986
 MonoBehaviour:
   m_ObjectHideFlags: 0
