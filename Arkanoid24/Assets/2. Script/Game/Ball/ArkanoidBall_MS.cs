@@ -26,9 +26,9 @@ public partial class ArkanoidBall : MonoBehaviour
 
     public void CatchBall()
     {
-        var ballPos = transform.position - paddleFire.transform.position;
-        transform.position = paddleFire.transform.position + new Vector3(0f, 0.5f, 0f);
-        ballBody.velocity = Vector3.zero;
+        //var ballPos = transform.position - paddleFire.transform.position;
+        //transform.position = paddleFire.transform.position + new Vector3(0f, 0.5f, 0f);
+        //ballBody.velocity = Vector3.zero;
     }
 
     public void ChangePower()

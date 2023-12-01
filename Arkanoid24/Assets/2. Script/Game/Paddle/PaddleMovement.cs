@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PaddleMovement : MonoBehaviour
 {
-    private PaddleEventController _controller;
     private Rigidbody2D _rbody;
 
     private Vector2 _movementAxis;
@@ -11,10 +10,9 @@ public class PaddleMovement : MonoBehaviour
 
     private void Start()
     {
-        _controller = GetComponent<PaddleEventController>();
         _rbody = GetComponent<Rigidbody2D>();
 
-        _controller.OnMoveEvent += Movement;
+        Managers.Event.OnMoveEvent += Movement;
     }
 
     private void FixedUpdate()
@@ -34,9 +32,5 @@ public class PaddleMovement : MonoBehaviour
         float moveSpeed = distancePaddleToMove * _movementSpeed;
 
         _rbody.velocity = new Vector2(moveSpeed, 0);
-
-        //Vector3 targetPosition = new Vector3(_movementAxis.x, transform.position.y, transform.position.z);
-
-        //transform.position = Vector3.Lerp(transform.position, targetPosition, _movementSpeed * Time.fixedDeltaTime);
     }
 }

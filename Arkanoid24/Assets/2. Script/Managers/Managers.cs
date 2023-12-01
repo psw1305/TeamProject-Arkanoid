@@ -1,13 +1,23 @@
 public class Managers : SingletonBehaviour<Managers>
 {
-    private ResourceManager resource = new();
-    private ArkanoidGame game = new();
-    private UIManager ui = new();
+    #region Managers Variables
+    private ResourceManager resourceManager = new();
+    private EventManager eventManager = new();
+    private UIManager uiManager = new();
+
+    private ArkanoidGame gameManager = new();
+    #endregion
 
 
-    public static ResourceManager Resource => Instance != null ? Instance.resource : null;
-    public static ArkanoidGame Game => Instance != null ? Instance.game : null;
-    public static UIManager UI => Instance != null ? Instance.ui : null;
+
+    #region Properties
+    public static ResourceManager Resource => Instance != null ? Instance.resourceManager : null;
+    public static EventManager Event => Instance != null ? Instance.eventManager : null;
+    public static UIManager UI => Instance != null ? Instance.uiManager : null;
+    public static ArkanoidGame Game => Instance != null ? Instance.gameManager : null;
+    #endregion
+
+
 
     protected override void Awake()
     {
