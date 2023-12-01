@@ -43,6 +43,7 @@ public class BrickBreak : MonoBehaviour
         {
             _itemSpawner.transform.position = transform.position;
             Instantiate(_itemSpawner);
+            _itemSpawner.transform.position = Vector2.zero;
         }
     }
 }
