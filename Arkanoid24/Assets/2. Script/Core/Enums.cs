@@ -4,11 +4,12 @@
 /// </summary>
 public enum Items
 {
+    None,
     Player,
     Lasers,
     Enlarge,
     Catch,
     Slow,
-    Break,
-    Disruption
+    Disruption,
+    Power,
 }
