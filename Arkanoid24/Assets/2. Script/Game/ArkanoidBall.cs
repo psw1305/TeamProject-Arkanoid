@@ -5,7 +5,7 @@ public class ArkanoidBall : MonoBehaviour
     [SerializeField] private ArkanoidGame game;
 
     [Header("Speed")]
-    [SerializeField] private float ballMaxSpeed;
+    [SerializeField] public float ballMaxSpeed;
 
     private Rigidbody2D ballBody;
     private bool isLaunch = false;
@@ -93,5 +93,6 @@ public class ArkanoidBall : MonoBehaviour
 
     private void OnDestroy()
     {
+        paddleFire.OnBallFireRequest -= StartBall;
     }
 }
