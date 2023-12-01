@@ -74,7 +74,7 @@ using UnityEngine;
                 DisruptionItemUse();
                 break;
             case Items.Power:
-                // 공격력 증가
+                Managers.Skill.PowerUp();
             break;
 
         }

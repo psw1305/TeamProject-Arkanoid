@@ -20,30 +20,13 @@ public partial class Item : MonoBehaviour
         //Transform[] childs = GetBallsChildrenArray();
 
 
-        var child = GameObject.FindWithTag("Ball");
-        if (child.CompareTag("Ball"))
-        {
+      
+            Managers.Skill.CurrentSkill = itemType;
 
-            //child.GetComponent<ArkanoidBall>().currentItemSkill = Items.Catch;
-
-        }
 
 
     }
 
-    private void PowerItemUse(GameObject player)
-    {
-        Transform[] childs = GetBallsChildrenArray();
-        foreach (var child in childs)
-        {
-            if (child.CompareTag("Ball"))
-            {
-
-                //child.GetComponent<ArkanoidBall>().power += 1;
-
-            }
-        }
-    }
 
     private Transform[] GetBallsChildrenArray()
     {
