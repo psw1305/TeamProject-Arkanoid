@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public partial class ArkanoidBall : MonoBehaviour
+public class ArkanoidBall : MonoBehaviour
 {
     [SerializeField] private GameManager game;
 
@@ -11,6 +11,12 @@ public partial class ArkanoidBall : MonoBehaviour
     private Rigidbody2D ballBody;
 
     private bool isLaunch = false;
+    private bool isCatch = false;
+
+    private int _defaultPower = 1;
+    private int _maxPower = 1;
+    private float _posX;
+
 
     /// <summary>
     /// Ball 속도 설정 [임시]
@@ -35,7 +41,7 @@ public partial class ArkanoidBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLaunch)
+        if (!isLaunch || isCatch)
         {
             ReadyBall();
         }
@@ -58,14 +64,15 @@ public partial class ArkanoidBall : MonoBehaviour
 
     private void ReadyBall()
     {
-        FollowThePaddle();
+        if(isCatch) FollowThePaddle(_posX);
+        else FollowThePaddle();
     }
 
-    private void FollowThePaddle()
+    private void FollowThePaddle(float posX = 0f)
     {
         Vector2 paddlePos = paddleBody.position;
         Vector2 newBallPos = new Vector2(paddlePos.x, ballBody.position.y);
-        ballBody.position = newBallPos;
+        ballBody.position = newBallPos + new Vector2(posX, 0);
         ballBody.velocity = Vector2.zero;
     }
 
@@ -96,9 +103,13 @@ public partial class ArkanoidBall : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            var x = HitFactor(col.transform.position, col.collider.bounds.size.x);
-            var dir = new Vector2(x, 1).normalized;
-            ballBody.velocity = dir * ballMaxSpeed;
+            CheckCatchActivation();
+            if (!isCatch)
+            {
+                var x = HitFactor(col.transform.position, col.collider.bounds.size.x);
+                var dir = new Vector2(x, 1).normalized;
+                ballBody.velocity = dir * ballMaxSpeed;
+            }
         }
     }
 
@@ -112,4 +123,33 @@ public partial class ArkanoidBall : MonoBehaviour
             Managers.Event.OnBallLaunch -= StartBall;
         }
     }
+    #region Item SKill
+
+    private void CheckCatchActivation()
+    {
+        if (Managers.Skill.CurrentSkill == Items.Catch)
+        {
+            isCatch = true;
+            _posX = transform.position.x - paddleBody.transform.position.x;
+        }
+        else
+        {
+            isCatch = false;
+        }
+
+    }
+
+    public void CatchBall()
+    {
+        //var ballPos = transform.position - paddleFire.transform.position;
+        //transform.position = paddleFire.transform.position + new Vector3(0f, 0.5f, 0f);
+        //ballBody.velocity = Vector3.zero;
+    }
+
+    public void SetPower(int extraPower)
+    {
+        _maxPower = _defaultPower + extraPower;
+    }
+
+    #endregion
 }
