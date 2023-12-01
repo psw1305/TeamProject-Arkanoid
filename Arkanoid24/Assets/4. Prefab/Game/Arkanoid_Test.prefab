@@ -90,7 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11a7339d73f85948a1a024ba3695697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
 --- !u!1 &5572097824672968054
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,3 +207,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e3da9502a76e44293a45ddfa44511e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageBlueprint: {fileID: 11400000, guid: 47d3c72ff470de24f92585cfcef30288, type: 2}

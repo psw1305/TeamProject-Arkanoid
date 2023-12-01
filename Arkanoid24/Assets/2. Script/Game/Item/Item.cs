@@ -4,15 +4,19 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+ public partial class Item : MonoBehaviour
 {
     private float _dropSpeed = 3f;
     private Rigidbody2D _rb;
 
+    public float GetSpeed => (_dropSpeed);
+
     [SerializeField] private Items itemType;
 
     [SerializeField] private GameObject bullet;
-    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject balls;
+
+
 
     void Start()
     {
@@ -22,6 +26,7 @@ public class Item : MonoBehaviour
     void Update()
     {
         _rb.velocity = _dropSpeed * Vector3.down;
+        //transform.position += new Vector3(0, -_dropSpeed, 0) * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,19 +59,19 @@ public class Item : MonoBehaviour
 
             case Items.Catch:
                 // 공이 튕기지않고 패들에 달라붙음
+                CatchItemUse();
                 break;
 
             case Items.Slow:
                 // 공 속도 감소
                 break;
 
-            case Items.Break:
-                // 오른쪽에 탈출구 생성 ->  다음 라운드
-                break;
-
             case Items.Disruption:
                 // 공 2개 추가
                 break;
+            case Items.Power:
+                // 공격력 증가
+            break;
 
         }
     }

@@ -3,6 +3,7 @@ public class Managers : SingletonBehaviour<Managers>
     #region Managers Variables
     private ResourceManager resourceManager = new();
     private EventManager eventManager = new();
+    private UIManager uiManager = new();
 
     private ArkanoidGame gameManager = new();
     #endregion
@@ -12,6 +13,7 @@ public class Managers : SingletonBehaviour<Managers>
     #region Properties
     public static ResourceManager Resource => Instance != null ? Instance.resourceManager : null;
     public static EventManager Event => Instance != null ? Instance.eventManager : null;
+    public static UIManager UI => Instance != null ? Instance.ui : null;
     public static ArkanoidGame Game => Instance != null ? Instance.gameManager : null;
     #endregion
 

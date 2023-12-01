@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArkanoidBall : MonoBehaviour
+public partial class ArkanoidBall : MonoBehaviour
 {
     [SerializeField] private ArkanoidGame game;
 
