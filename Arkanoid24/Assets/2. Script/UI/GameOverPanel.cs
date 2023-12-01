@@ -1,30 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Button restartButton;
+
+    private void Start()
     {
-        
+        restartButton.onClick.AddListener(Restart);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Restart()
     {
-        
+        SceneManager.LoadScene("Main");
     }
-
-
-    // GameManager에서
-    // if {ball count == 0}
-    // GameOverPanel.SetActive(true); 로 변경하고, 패널 등장 
-
-    // GameOverPanel의 역할 (패널을 누르면 메인으로 돌아감)
-    // public void ClickGameOver;
-    // {
-    //    SceneManager.LoadScene("MainScene");
-    // }
-
 }

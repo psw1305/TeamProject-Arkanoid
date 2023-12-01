@@ -14,8 +14,7 @@ public class BallDestroyer : MonoBehaviour
     private IEnumerator DelaySpawn(Collider2D col)
     {
         yield return new WaitForSeconds(0.25f);
-        Managers.Game.CurrentBalls.Remove(col.gameObject);
-        Managers.Game.InstanceBall();
+        Managers.Game.LifeDown(col.gameObject);
         Destroy(col.gameObject);
     }
 }
