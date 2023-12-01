@@ -18,7 +18,7 @@ public class GameOverPanel : MonoBehaviour
 
 
     // GameManager에서
-    // if {ball이 ground에 닿으면}
+    // if {ball count == 0}
     // GameOverPanel.SetActive(true); 로 변경하고, 패널 등장 
 
     // GameOverPanel의 역할 (패널을 누르면 메인으로 돌아감)
