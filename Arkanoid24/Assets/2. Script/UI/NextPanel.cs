@@ -5,15 +5,21 @@ using UnityEngine.SceneManagement;
 public class NextPanel : MonoBehaviour
 {
     [SerializeField] private Button nextButton;
+    [SerializeField] private Button menuButton;
 
     private void Start()
     {
-        nextButton.onClick.AddListener(Restart);
+        nextButton.onClick.AddListener(NextLevel);
+        menuButton.onClick.AddListener(Menu);
     }
 
-    public void Restart()
+    public void NextLevel()
     {
-        Managers.Game.CurrentLevel++;
         SceneManager.LoadScene("Main");
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("Lobby");
     }
 }

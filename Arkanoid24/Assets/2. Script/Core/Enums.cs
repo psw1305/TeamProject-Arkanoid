@@ -8,7 +8,6 @@ public enum GameState
     Pause,
 }
 
-
 /// <summary>
 /// 게임 아이템 타입
 /// </summary>
