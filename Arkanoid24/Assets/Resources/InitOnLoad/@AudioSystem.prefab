@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 462699daa0223b3448030b41ad4f5244, type: 2}
+  btnClick: {fileID: 8300000, guid: 575fe00b10c095c4b94c25411ae5fa27, type: 3}
   brickHit: {fileID: 8300000, guid: 7c64718d01fd0fa43a1a4c32721ec652, type: 3}
   paddleHit: {fileID: 8300000, guid: bdd2ca4525fe0b74eb641fae9d7b67b6, type: 3}
   itemPickup: {fileID: 8300000, guid: 647819ee451477843939a14f8bf8b5c7, type: 3}

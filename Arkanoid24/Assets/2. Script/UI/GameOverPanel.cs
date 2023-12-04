@@ -16,12 +16,14 @@ public class GameOverPanel : MonoBehaviour
 
     public void Restart()
     {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         Managers.Game.Score = 0;
         SceneManager.LoadScene("Main");
     }
 
     public void Menu()
     {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         SceneManager.LoadScene("Lobby");
     }
 }
