@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArkanoidBallPlayer2 : MonoBehaviour
+public class MultiPlayBall : MonoBehaviour
 {
     [SerializeField] private GameManager game;
 
@@ -77,7 +77,7 @@ public class ArkanoidBallPlayer2 : MonoBehaviour
         isLaunch = true;
         isCatch = false;
         ballBody.velocity = new Vector2(0, 10);
-        Managers.Event.PublishBallIsLaunch(isLaunch);
+       //Managers.Event.PublishBallIsLaunch(isLaunch);
     }
 
     private void ReadyBall()
@@ -149,7 +149,7 @@ public class ArkanoidBallPlayer2 : MonoBehaviour
     {
         if (Managers.Instance != null && Managers.Event != null)
         {
-            Managers.Event.PublishBallIsLaunch(false);
+            //Managers.Event.PublishBallIsLaunch(false);
             Managers.Event.OnBallLaunch -= StartBall;
         }
     }

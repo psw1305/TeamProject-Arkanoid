@@ -15,7 +15,12 @@ public class BrickBreak : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ball" || collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
         {
-            _hp--;
+            _hp -= collision.gameObject.GetComponent<Ball>()._maxPower;
+        }
+        //레이저 충돌
+        else if (collision.gameObject.tag == "Bullet")
+        {
+            //_hp -= collision.gameObject.GetComponent<Laser>()._maxPower;
         }
         if(_hp <= 0)
         {

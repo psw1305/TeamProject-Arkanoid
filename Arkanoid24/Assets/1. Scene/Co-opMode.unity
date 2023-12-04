@@ -1740,6 +1740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextButton: {fileID: 395988386}
+  menuButton: {fileID: 0}
 --- !u!114 &974585975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,6 +1833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartButton: {fileID: 348372023}
+  menuButton: {fileID: 0}
 --- !u!114 &1087198244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2730,12 +2732,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2040618866}
+  BestscoreText: {fileID: 0}
   lifes:
   - {fileID: 1487152994}
   - {fileID: 1827470131}
   - {fileID: 745538707}
   gameOverPopup: {fileID: 1087198241}
   nextStagePopup: {fileID: 974585972}
+  RankPopup: {fileID: 0}
 --- !u!222 &1914639895
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2903,12 +2907,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 693351923}
+  BestscoreText: {fileID: 0}
   lifes:
   - {fileID: 229300176}
   - {fileID: 271176563}
   - {fileID: 419620466}
   gameOverPopup: {fileID: 1087198241}
   nextStagePopup: {fileID: 974585972}
+  RankPopup: {fileID: 0}
 --- !u!222 &2009024998
 CanvasRenderer:
   m_ObjectHideFlags: 0
