@@ -27,8 +27,14 @@ using UnityEngine;
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        if (Managers.Game.State == GameState.Pause)
+        {
+            _rb.velocity = Vector3.zero;
+            return;
+        }
+
         _rb.velocity = _dropSpeed * Vector3.down;
         //transform.position += new Vector3(0, -_dropSpeed, 0) * Time.deltaTime;
     }
@@ -37,6 +43,7 @@ using UnityEngine;
     {
         if (collision.CompareTag("Player"))
         {
+            SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
             ItemSkill(collision.gameObject);
 
             //Destroy(gameObject);
@@ -76,7 +83,7 @@ using UnityEngine;
                 DisruptionItemUse();
                 break;
             case Items.Power:
-                // 공격력 증가
+                Managers.Skill.PowerUp();
             break;
 
         }
@@ -124,7 +131,7 @@ using UnityEngine;
 
     private void SlowItemUse()
     {
-        _mainBall = GameObject.Find("BallPrefab(Clone)").GetComponent<ArkanoidBall>();
+        _mainBall = Managers.Game.CurrentBalls[0].GetComponent<ArkanoidBall>();
         _originSpeed = _mainBall.ballMaxSpeed;
         _mainBall.SetMaxSpeed(_originSpeed / 2);
         StartCoroutine(OriginBallSpeed());
