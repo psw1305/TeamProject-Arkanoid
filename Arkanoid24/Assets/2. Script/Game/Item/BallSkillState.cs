@@ -24,7 +24,7 @@ public class BallSkillState
         BallExtraPower++;
         foreach (var ball in Managers.Game.CurrentBalls)
         {
-            ball.GetComponent<ArkanoidBall>().SetPower(BallExtraPower);
+            ball.GetComponent<Ball>().SetPower(BallExtraPower);
         }
     }
 
@@ -43,7 +43,7 @@ public class BallSkillState
     {
         foreach (var ball in Managers.Game.CurrentBalls)
         {
-            ball.GetComponent<ArkanoidBall>().SetMaxSpeed(BallExtraSpeed);
+            ball.GetComponent<Ball>().SetMaxSpeed(BallExtraSpeed);
         }
     }
 }

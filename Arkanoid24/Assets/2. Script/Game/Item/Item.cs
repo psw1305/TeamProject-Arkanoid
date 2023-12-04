@@ -15,7 +15,7 @@ using UnityEngine;
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject balls;
-    private ArkanoidBall _mainBall;
+    private Ball _mainBall;
     private float _originSpeed;
 
 
@@ -94,7 +94,7 @@ using UnityEngine;
 
     private void SlowItemUse()
     {
-        _mainBall = Managers.Game.CurrentBalls[0].GetComponent<ArkanoidBall>();
+        _mainBall = Managers.Game.CurrentBalls[0].GetComponent<Ball>();
         _originSpeed = _mainBall.ballMaxSpeed;
         _mainBall.SetMaxSpeed(_originSpeed / 2);
         StartCoroutine(OriginBallSpeed());
