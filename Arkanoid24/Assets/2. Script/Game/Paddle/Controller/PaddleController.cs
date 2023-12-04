@@ -11,7 +11,7 @@ public class PaddleController : MonoBehaviour
 
     public PADDLE_STATE PaddleState {  get; set; } = PADDLE_STATE.READY;
 
-    private void Start()
+    private void Awake()
     {
         ServiceLocator.RegisterService(this);
     }
