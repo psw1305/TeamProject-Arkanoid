@@ -5,7 +5,7 @@ public class Ball : BallPreference
     [SerializeField] public float ballMaxSpeed;
     [SerializeField] private float ballDefaultMaxSpeed;
 
-    private bool isLaunch = false;
+    public bool isLaunch = false;
     private bool isCatchLaunch = false;
     private bool isCatch = false;
 
@@ -28,6 +28,8 @@ public class Ball : BallPreference
         base.Start();
 
         Managers.Event.OnBallLaunch += StartBall;
+        SetMaxSpeed(Managers.Skill.BallExtraSpeed);
+        SetPower(Managers.Skill.BallExtraPower);
     }
 
     protected override void FixedUpdate()
@@ -157,6 +159,10 @@ public class Ball : BallPreference
     public void SetPower(int extraPower)
     {
         _maxPower = _defaultPower + extraPower;
+        if(Managers.Skill.CurrentSkill == Items.Power)
+        {
+            transform.localScale = transform.localScale * 2f;
+        }
     }
 
     #endregion
