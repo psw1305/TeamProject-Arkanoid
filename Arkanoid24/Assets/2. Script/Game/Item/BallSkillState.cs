@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class BallSkillState : MonoBehaviour 
 {
@@ -60,7 +61,7 @@ public class BallSkillState : MonoBehaviour
         CurrentSkill = Items.Catch;
     }
 
-    public void SlowItemUse()
+    public void Slow()
     {
         BallExtraSpeed -= 1f;
         SetSpeed();
@@ -72,6 +73,11 @@ public class BallSkillState : MonoBehaviour
         {
             ball.GetComponent<Ball>().SetAdditionalCurrentSpeed(BallExtraSpeed);
         }
+    }
+
+    public void PlayerItem()
+    {
+        Managers.Game.LifeUp();
     }
 
     public void Lasers(GameObject player, GameObject lazer)
@@ -94,5 +100,34 @@ public class BallSkillState : MonoBehaviour
     {
         var playerScale = Player.transform.localScale;
         Player.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public void Disruption()
+    {
+        var ball = Managers.Game.CurrentBalls[0];
+        Rigidbody2D BallRb = ball.GetComponent<Rigidbody2D>();
+        Vector2 BallVec = BallRb.velocity;
+
+        InstantiateBall(ball, BallRb, BallVec, false);
+        InstantiateBall(ball, BallRb, BallVec, true);
+    }
+
+    private void InstantiateBall(GameObject mainBall, Rigidbody2D BallRb, Vector2 BallVec, bool IsLeft)
+    {
+        float directionMultiplier = IsLeft ? -1f : 1f;
+        float seta = Mathf.Atan2(BallVec.y, BallVec.x);
+        Vector2 ballPos = mainBall.transform.position + new Vector3(directionMultiplier, 0, 0);
+        GameObject ball = Managers.Resource.Instantiate("BallPrefab", ballPos);
+        Managers.Game.CurrentBalls.Add(ball);
+        ball.GetComponent<Ball>().BallState = BallPreference.BALL_STATE.LAUNCH;
+        Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
+        if (BallVec.x == 0)
+        {
+            secondBallRb.velocity = new Vector2(directionMultiplier * BallVec.y * Mathf.Cos(45), BallVec.y * Mathf.Sin(45));
+        }
+        else
+        {
+            secondBallRb.velocity = new Vector2(directionMultiplier * BallVec.x, BallVec.x * Mathf.Tan(seta - 45));
+        }
     }
 }

@@ -139,11 +139,6 @@ public class Ball : BallPreference
             BallState = BALL_STATE.READY;
             _posX = transform.position.x - _paddleRbody.transform.position.x;
         }
-        else
-        {
-            BallState = BALL_STATE.LAUNCH;
-        }
-
     }
 
     
