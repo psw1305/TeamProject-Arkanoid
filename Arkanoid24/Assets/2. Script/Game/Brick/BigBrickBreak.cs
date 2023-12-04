@@ -21,7 +21,6 @@ public class BigBrickBreak : MonoBehaviour
         if (collision.gameObject.tag == "Ball")
         {
             _hp--;
-            Debug.Log($"현재 체력 {_hp}");
         }
         PhaseSpriteSetting();
         if (_hp <= 0)

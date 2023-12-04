@@ -41,6 +41,12 @@ public class ArkanoidBall : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Managers.Game.State == GameState.Pause)
+        {
+            ballBody.velocity = Vector3.zero;
+            return;
+        }
+
         if (!isLaunch || isCatch)
         {
             ReadyBall();
@@ -50,8 +56,6 @@ public class ArkanoidBall : MonoBehaviour
             LaunchBall();
         }
     }
-
-    
 
     #region Ball State
 
