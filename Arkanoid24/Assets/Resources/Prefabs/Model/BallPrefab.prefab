@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2536285222241789709}
   - component: {fileID: 7177243454387042273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2378783447064285875}
   - component: {fileID: 5430128590052235190}
   - component: {fileID: 8298654654367884946}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BallPrefab
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -198,6 +198,8 @@ MonoBehaviour:
   MaxSpeed: 16
   defaultSpeed: 7
   _currentSpeed: 0
+  ballHitCount: 0
+  ballIncreaseSpeedScope: 1.5
   ballMaxSpeed: 15
   ballDefaultMaxSpeed: 15
   isLaunch: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager
@@ -90,5 +91,12 @@ public class GameManager
         {
             PlayerPrefs.SetInt("LevelsUnlocked", CurrentLevel);
         }
+    }
+
+    public void LifeUp()
+    {
+        Life = Mathf.Clamp(Life, 0, 2);
+        MainUI.SetLifeUI(false, Life);
+        Life++;
     }
 }
