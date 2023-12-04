@@ -30,7 +30,7 @@ public class MainScene : MonoBehaviour
         Managers.Game.Life = 3;
 
         // #2. 스코어 0점으로 시작
-        Managers.Game.Score = 0;
+        //Managers.Game.Score = 0;
 
         // #3. 현재 레벨에 맞는 스테이지 생성
         CreateStage();
