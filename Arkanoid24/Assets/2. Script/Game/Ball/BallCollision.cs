@@ -17,7 +17,8 @@ public class BallCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player") &&
+            _ball.BallState != BallPreference.BALL_STATE.READY)
         {
             SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
             float paddleWidth = col.collider.bounds.size.x;

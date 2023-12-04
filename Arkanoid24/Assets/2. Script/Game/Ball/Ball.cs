@@ -3,25 +3,19 @@ using UnityEngine;
 
 public class Ball : BallPreference
 {
-    [SerializeField] public float ballMaxSpeed;
-    [SerializeField] private float ballDefaultMaxSpeed;
+    #region Member Variables
 
-    public bool isLaunch = false;
     public bool isCatchLaunch = false;
     public bool isCatch = false;
 
     public int _defaultPower = 1;
     public int _maxPower = 1;
 
-
     public float _posX;
     public float _paddleWidth;
 
+    #endregion
 
-    //public void SetMaxSpeed(float speed)
-    //{
-    //    ballMaxSpeed = ballDefaultMaxSpeed + speed;
-    //}
 
     #region Unity Flow
     protected override void Awake()
@@ -37,7 +31,6 @@ public class Ball : BallPreference
         Managers.Event.OnBallLaunch += BallToStart;
 
         SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
-        //SetMaxSpeed(Managers.Skill.BallExtraSpeed);
         SetPower(Managers.Skill.BallExtraPower);
     }
 
@@ -46,21 +39,9 @@ public class Ball : BallPreference
         base.FixedUpdate();
 
         BallStateUpdateMethod();
-        //if (!isLaunch || isCatch)
-        //{
-        //    BallToReady();
-        //}
-        //else if (isCatchLaunch)
-        //{
-        //    CatchLaunchBall();
-        //}
-        //else
-        //{
-        //    BallToLaunch();
-        //}
     }
-
     #endregion
+
 
     #region Ball State
 
@@ -79,7 +60,6 @@ public class Ball : BallPreference
     public void BallToStart()
     {
         if(isCatch) isCatchLaunch = true;
-        isLaunch = true;
         isCatch = false;
         BallState = BALL_STATE.LAUNCH;
 
@@ -90,7 +70,6 @@ public class Ball : BallPreference
             _ballRbody.velocity = dir * _currentSpeed;
         else
             _ballRbody.velocity = Vector2.up * defaultSpeed;
-        Managers.Event.PublishBallIsLaunch(isLaunch);
     }
 
     private void BallToReady()
@@ -116,16 +95,6 @@ public class Ball : BallPreference
             _ballRbody.velocity = _ballRbody.velocity.normalized * _currentSpeed;
         }
     }
-
-    private void CatchLaunchBall()
-    {
-        var x = _posX / _paddleWidth;
-        var dir = new Vector2(x, 1).normalized;
-        _ballRbody.velocity = dir * ballMaxSpeed;
-
-        isCatchLaunch = false;
-    }
-
     #endregion
 
 
@@ -159,7 +128,6 @@ public class Ball : BallPreference
     {
         if (Managers.Instance != null && Managers.Event != null)
         {
-            Managers.Event.PublishBallIsLaunch(false);
             Managers.Event.OnBallLaunch -= BallToStart;
         }
     }

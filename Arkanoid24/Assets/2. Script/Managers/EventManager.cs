@@ -12,7 +12,6 @@ public class EventManager
 
     /* Ball */
     public event Action OnBallLaunch;
-    public event Action<bool> OnBallIsLaunch;
 
     #endregion
 
@@ -34,11 +33,6 @@ public class EventManager
     public void PublishBallLaunch()
     {
         OnBallLaunch?.Invoke();
-    }
-
-    public void PublishBallIsLaunch(bool isLaunch)
-    {
-        OnBallIsLaunch?.Invoke(isLaunch);
     }
     #endregion
 }
