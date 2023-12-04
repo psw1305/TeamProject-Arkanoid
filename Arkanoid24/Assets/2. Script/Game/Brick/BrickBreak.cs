@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BrickBreak : MonoBehaviour
 {
-    [SerializeField] int _hp;
+    public int _hp;
 
     [Range(0f, 100f)]
-    [SerializeField] int _itemCreateRate;
+    public int _itemCreateRate;
 
     public GameObject _itemSpawner;
     //충돌이 발생하면 실행
@@ -35,7 +35,7 @@ public class BrickBreak : MonoBehaviour
     }
 
     //아이템 생성 로직
-    private void instantiateItem()
+    public void instantiateItem()
     {
         //_itemCreateRate 이하일 경우 아이템 생성
         if (Random.Range(0, 101) <= _itemCreateRate)
