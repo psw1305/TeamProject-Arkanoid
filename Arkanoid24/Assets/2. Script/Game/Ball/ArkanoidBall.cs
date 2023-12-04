@@ -10,7 +10,15 @@ public partial class ArkanoidBall : MonoBehaviour
     private Rigidbody2D paddleBody;
     private Rigidbody2D ballBody;
 
-    private bool isLaunch = false;
+
+
+    public bool isLaunch = false;
+    private bool isCatch = false;
+
+    private int _defaultPower = 1;
+    private int _maxPower = 1;
+    private float _posX;
+
 
     /// <summary>
     /// Ball 속도 설정 [임시]
