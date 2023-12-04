@@ -40,7 +40,7 @@ public class GameManager
     public void InstanceBall()
     {
         var paddle = GameObject.FindWithTag("Player");
-        var ballStartPos = new Vector2(paddle.transform.position.x, paddle.transform.position.y + 0.3f);
+        var ballStartPos = new Vector2(paddle.transform.position.x, paddle.transform.position.y + 0.5f);
         var ballClone = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
         CurrentBalls.Add(ballClone);
     }

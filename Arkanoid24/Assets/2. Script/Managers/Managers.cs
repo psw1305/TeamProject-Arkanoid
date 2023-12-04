@@ -7,6 +7,7 @@ public class Managers : SingletonBehaviour<Managers>
     private UIManager uiManager = new();
     private GameManager gameManager = new();
     private BallSkillState ballSkillManager = new();
+    private MultiManager multiManager = new();
 
     #endregion
 
@@ -17,6 +18,7 @@ public class Managers : SingletonBehaviour<Managers>
     public static UIManager UI => Instance != null ? Instance.uiManager : null;
     public static GameManager Game => Instance != null ? Instance.gameManager : null;
     public static BallSkillState Skill => Instance != null ? Instance.ballSkillManager : null;
+    public static MultiManager Multi => Instance != null ? Instance.multiManager : null;
 
     #endregion
 }
