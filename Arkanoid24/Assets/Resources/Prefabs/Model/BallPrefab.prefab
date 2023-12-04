@@ -194,3 +194,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballMaxSpeed: 15
+  ballDefaultMaxSpeed: 15
