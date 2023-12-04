@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1b1df8da47dad04694045506b2a0c5d, type: 3}
-  m_Name: Stage_3
+  m_Name: Stage_4
   m_EditorClassIdentifier: 
-  level: 3
-  stageMap: {fileID: 822799245282720320, guid: 15a5ef542ef7089459892dcfac058261, type: 3}
-  bricks: 28
+  level: 4
+  stageMap: {fileID: 2537844050744246621, guid: a463502be54ae1b4bbc6d6d0e36d2dc0, type: 3}
+  bricks: 55
