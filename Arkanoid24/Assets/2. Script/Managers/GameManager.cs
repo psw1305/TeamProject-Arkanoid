@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager
 {
@@ -15,6 +16,7 @@ public class GameManager
     public int CurrentLevel { get; set; }
     public int Bricks { get; set; }
     public float Score { get; set; }
+    public float BestScore { get; set; }
     public int Life { get; set; }
     
     #endregion

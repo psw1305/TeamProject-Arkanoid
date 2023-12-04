@@ -1,14 +1,21 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using Unity.VisualScripting;
+using UnityEngine.SocialPlatforms.Impl;
+using JetBrains.Annotations;
 
 public class MainSceneUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI BestscoreText;
     [SerializeField] private GameObject[] lifes;
 
     [Header("Popup")]
     [SerializeField] private GameObject gameOverPopup;
     [SerializeField] private GameObject nextStagePopup;
+    [SerializeField] private GameObject RankPopup;
+
 
     public void SetScoreUI(float score)
     {
@@ -40,4 +47,23 @@ public class MainSceneUI : MonoBehaviour
 
         nextStagePopup.SetActive(true);
     }
+
+    // 최고 기록 (유건희)
+    private string KeyName = "BestScore";
+    private float bestscore = 0;
+
+    void Start()
+    {
+        bestscore = PlayerPrefs.GetFloat(KeyName, 0);
+        BestscoreText.text = $"최고 기록 : {bestscore.ToString()}";
+    }
+
+    private void Update()
+    {
+        if (Managers.Game.Score > bestscore)
+        {
+            PlayerPrefs.SetFloat(KeyName, Managers.Game.Score);
+        }
+    }
+
 }

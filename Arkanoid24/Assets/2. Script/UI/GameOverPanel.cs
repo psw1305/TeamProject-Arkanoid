@@ -16,6 +16,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void Restart()
     {
+        Managers.Game.Score = 0;
         SceneManager.LoadScene("Main");
     }
 
