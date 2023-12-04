@@ -25,7 +25,7 @@ public class ArkanoidBall : MonoBehaviour
 
 
     /// <summary>
-    /// Ball ¼Óµµ ¼³Á¤ [ÀÓ½Ã]
+    /// Ball ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ [ï¿½Ó½ï¿½]
     /// </summary>
     /// <param name="speed"></param>
     public void SetMaxSpeed(float speed)
@@ -41,7 +41,7 @@ public class ArkanoidBall : MonoBehaviour
 
     private void Start()
     {
-        // ÀÎ½ºÅÏ½º °ü¸® ¼öÁ¤
+        // ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Managers.Event.OnBallLaunch += StartBall;
         SetMaxSpeed(Managers.Skill.BallExtraSpeed);
     }
@@ -115,11 +115,11 @@ public class ArkanoidBall : MonoBehaviour
     #region Ball Collision
 
     /// <summary>
-    /// °ø°ú ÆÐµéÀÇ xÁÂÇ¥¿¡ µû¶ó ¿Ü°¢ ¹éÅÍ Å©±â ºÎ¿©
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ðµï¿½ï¿½ï¿½ xï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½Î¿ï¿½
     /// </summary>
-    /// <param name="paddlePos">ÆÐµé Æ÷Áö¼Ç</param>
-    /// <param name="paddleWidth">ÆÐµé ÄÝ¶óÀÌ´õ ³Êºñ</param>
-    /// <returns>¼­·Î XÀ§Ä¡ »« ¸¸Å­ ¹éÅÍ x°ª ºÎ¿©</returns>
+    /// <param name="paddlePos">ï¿½Ðµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+    /// <param name="paddleWidth">ï¿½Ðµï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½Êºï¿½</param>
+    /// <returns>ï¿½ï¿½ï¿½ï¿½ Xï¿½ï¿½Ä¡ ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½ ï¿½Î¿ï¿½</returns>
     private float HitFactor(Vector2 paddlePos, float paddleWidth)
     {
         return (transform.position.x - paddlePos.x) / paddleWidth * 2f;
@@ -129,7 +129,9 @@ public class ArkanoidBall : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
             _paddleWidth = col.collider.bounds.size.x;
+
             CheckCatchActivation();
             if (!isCatch)
             {
