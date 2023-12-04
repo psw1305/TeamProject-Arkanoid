@@ -7,12 +7,12 @@ public class ArkanoidBall : MonoBehaviour
     [Header("Speed")]
     [SerializeField] public float ballMaxSpeed;
     [SerializeField] private float ballDefaultMaxSpeed;
-    private float _defaultSpeed = 8f;
+    //private float _defaultSpeed = 8f;
 
     private Rigidbody2D paddleBody;
     private Rigidbody2D ballBody;
 
-    private bool isLaunch = false;
+    public bool isLaunch = false;
     private bool isCatchLaunch = false;
     private bool isCatch = false;
 
@@ -44,6 +44,7 @@ public class ArkanoidBall : MonoBehaviour
         // �ν��Ͻ� ���� ����
         Managers.Event.OnBallLaunch += StartBall;
         SetMaxSpeed(Managers.Skill.BallExtraSpeed);
+        SetPower(Managers.Skill.BallExtraPower);
     }
 
     private void FixedUpdate()
@@ -172,6 +173,10 @@ public class ArkanoidBall : MonoBehaviour
     public void SetPower(int extraPower)
     {
         _maxPower = _defaultPower + extraPower;
+        if(Managers.Skill.CurrentSkill == Items.Power)
+        {
+            transform.localScale = transform.localScale * 2f;
+        }
     }
 
     #endregion
