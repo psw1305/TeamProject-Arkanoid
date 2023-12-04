@@ -29,11 +29,15 @@ public class MainSceneUI : MonoBehaviour
 
     public void ShowGameOver()
     {
+        BGM.Instance.Play(BGM.Instance.gameover, false);
+
         gameOverPopup.SetActive(true);
     }
 
     public void ShowNextStage()
     {
+        BGM.Instance.Play(BGM.Instance.nextstage, false);
+
         nextStagePopup.SetActive(true);
     }
 }

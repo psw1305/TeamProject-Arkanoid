@@ -18,6 +18,7 @@ public class BrickHit : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ball")
         {
+            SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
             BrickHitColor();
             Invoke("BrickNormalColor", 0.2f);
         }
