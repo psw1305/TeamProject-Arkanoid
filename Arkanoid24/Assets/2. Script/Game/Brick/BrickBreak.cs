@@ -16,7 +16,6 @@ public class BrickBreak : MonoBehaviour
         if(collision.gameObject.tag == "Ball")
         {
             _hp--;
-            Debug.Log($"현재 체력 {_hp}");
         }
         if(_hp <= 0)
         {

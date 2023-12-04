@@ -87,7 +87,7 @@ using UnityEngine;
 
     private void SlowItemUse()
     {
-        _mainBall = GameObject.Find("BallPrefab(Clone)").GetComponent<ArkanoidBall>();
+        _mainBall = Managers.Game.CurrentBalls[0].GetComponent<ArkanoidBall>();
         _originSpeed = _mainBall.ballMaxSpeed;
         _mainBall.SetMaxSpeed(_originSpeed / 2);
         StartCoroutine(OriginBallSpeed());
