@@ -7,6 +7,12 @@ TagManager:
   - Ball
   - Bullet
   - Item
+  - Brick
+  - Player1
+  - Player2
+  - UnCountBrick
+  - Ball1
+  - Ball2
   layers:
   - Default
   - TransparentFX

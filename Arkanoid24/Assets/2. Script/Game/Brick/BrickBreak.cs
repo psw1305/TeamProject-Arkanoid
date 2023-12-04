@@ -13,7 +13,7 @@ public class BrickBreak : MonoBehaviour
     //충돌이 발생하면 실행
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ball")
+        if(collision.gameObject.tag == "Ball" || collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
         {
             _hp--;
         }
