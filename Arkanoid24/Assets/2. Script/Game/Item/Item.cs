@@ -25,8 +25,14 @@ using UnityEngine;
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        if (Managers.Game.State == GameState.Pause)
+        {
+            _rb.velocity = Vector3.zero;
+            return;
+        }
+
         _rb.velocity = _dropSpeed * Vector3.down;
         //transform.position += new Vector3(0, -_dropSpeed, 0) * Time.deltaTime;
     }

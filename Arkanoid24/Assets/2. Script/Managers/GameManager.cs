@@ -46,7 +46,11 @@ public class GameManager
     {
         Bricks--;
         if (MainUI == null) return;
-        if (Bricks == 0) MainUI.ShowNextStage();
+        if (Bricks == 0)
+        {
+            State = GameState.Pause;
+            MainUI.ShowNextStage();
+        }
 
         Score += score;
         MainUI.SetScoreUI(Score);
