@@ -43,6 +43,8 @@ public class LobbySceneUI : MonoBehaviour
 
     private void OpenMenu(int menuIndex)
     {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
+
         foreach (var menu in menus) 
         {
             menu.SetActive(false);
@@ -53,6 +55,8 @@ public class LobbySceneUI : MonoBehaviour
 
     private void DataClear()
     {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
+
         PlayerPrefs.DeleteAll();
     }
 }

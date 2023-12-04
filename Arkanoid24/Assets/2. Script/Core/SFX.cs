@@ -33,6 +33,9 @@ public class SFX : AudioSystem<SFX>
 
     #endregion
 
+    [Header("UI")]
+    public AudioClip btnClick;
+
     [Header("Game")]
     public AudioClip brickHit;
     public AudioClip paddleHit;

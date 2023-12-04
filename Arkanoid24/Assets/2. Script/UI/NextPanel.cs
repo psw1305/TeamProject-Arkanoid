@@ -15,11 +15,13 @@ public class NextPanel : MonoBehaviour
 
     public void NextLevel()
     {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         SceneManager.LoadScene("Main");
     }
 
     public void Menu()
     {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         SceneManager.LoadScene("Lobby");
     }
 }
