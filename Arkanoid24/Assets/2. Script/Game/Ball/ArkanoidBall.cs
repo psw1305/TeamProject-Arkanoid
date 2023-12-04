@@ -12,7 +12,7 @@ public class ArkanoidBall : MonoBehaviour
     private Rigidbody2D paddleBody;
     private Rigidbody2D ballBody;
 
-    private bool isLaunch = false;
+    public bool isLaunch = false;
     private bool isCatchLaunch = false;
     private bool isCatch = false;
 

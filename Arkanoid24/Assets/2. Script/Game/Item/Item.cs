@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ using UnityEngine;
     [SerializeField] private GameObject balls;
     private ArkanoidBall _mainBall;
     private float _originSpeed;
+    private GameObject _firstBall;
 
 
 
@@ -89,7 +91,42 @@ using UnityEngine;
 
     private void DisruptionItemUse()
     {
-        Instantiate(balls);
+        _firstBall = Managers.Game.CurrentBalls[0];
+        Rigidbody2D firstBallRb = _firstBall.GetComponent<Rigidbody2D>();
+        Vector2 firstBallVec = firstBallRb.velocity;
+
+        float seta;
+        seta = Mathf.Atan2(firstBallVec.y, firstBallVec.x);
+
+        // 우측볼
+        GameObject secondBall = Instantiate(_firstBall, _firstBall.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        Managers.Game.CurrentBalls.Add(secondBall);
+        ArkanoidBall secondArkanoidBall = secondBall.GetComponent<ArkanoidBall>();
+        secondArkanoidBall.isLaunch = true;
+        Rigidbody2D secondBallRb = secondBall.GetComponent<Rigidbody2D>();
+        if (firstBallVec.x == 0)
+        {
+            secondBallRb.velocity = new Vector2(firstBallVec.y * Mathf.Cos(45), firstBallVec.y * Mathf.Sin(45));
+        }
+        else
+        {
+            secondBallRb.velocity = new Vector2(firstBallVec.x, firstBallVec.x * Mathf.Tan(seta - 45));
+        }
+
+        // 좌측볼
+        GameObject thirdBall = Instantiate(_firstBall, _firstBall.transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
+        Managers.Game.CurrentBalls.Add(thirdBall);
+        ArkanoidBall thirdArkanoidBall = thirdBall.GetComponent<ArkanoidBall>();
+        thirdArkanoidBall.isLaunch = true;
+        Rigidbody2D thirdBallRb = thirdBall.GetComponent<Rigidbody2D>();
+        if (firstBallVec.x == 0)
+        {
+            thirdBallRb.velocity = new Vector2(-firstBallVec.y * Mathf.Cos(45), firstBallVec.y * Mathf.Sin(45));
+        }
+        else
+        {
+            thirdBallRb.velocity = new Vector2(-firstBallVec.x, firstBallVec.x * Mathf.Tan(seta - 45));
+        }
     }
 
     private void SlowItemUse()
