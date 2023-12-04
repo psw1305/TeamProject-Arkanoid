@@ -104,7 +104,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
         // 우측볼
         GameObject secondBall = Instantiate(_firstBall, _firstBall.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
         Managers.Game.CurrentBalls.Add(secondBall);
-        ArkanoidBall secondArkanoidBall = secondBall.GetComponent<ArkanoidBall>();
+        Ball secondArkanoidBall = secondBall.GetComponent<Ball>();
         secondArkanoidBall.isLaunch = true;
         Rigidbody2D secondBallRb = secondBall.GetComponent<Rigidbody2D>();
         if (firstBallVec.x == 0)
@@ -119,7 +119,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
         // 좌측볼
         GameObject thirdBall = Instantiate(_firstBall, _firstBall.transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
         Managers.Game.CurrentBalls.Add(thirdBall);
-        ArkanoidBall thirdArkanoidBall = thirdBall.GetComponent<ArkanoidBall>();
+        Ball thirdArkanoidBall = thirdBall.GetComponent<Ball>();
         thirdArkanoidBall.isLaunch = true;
         Rigidbody2D thirdBallRb = thirdBall.GetComponent<Rigidbody2D>();
         if (firstBallVec.x == 0)
@@ -136,14 +136,14 @@ using static UnityEditor.Experimental.GraphView.GraphView;
     {
         _mainBall = Managers.Game.CurrentBalls[0].GetComponent<Ball>();
         _originSpeed = _mainBall.ballMaxSpeed;
-        _mainBall.SetMaxSpeed(_originSpeed / 2);
+        _mainBall.SetAdditionalCurrentSpeed(_originSpeed / 2);
         StartCoroutine(OriginBallSpeed());
     }
 
     IEnumerator OriginBallSpeed()
     {
         yield return new WaitForSeconds(2f);
-        _mainBall.SetMaxSpeed(_originSpeed);
+        _mainBall.SetAdditionalCurrentSpeed(_originSpeed);
     }
 
 

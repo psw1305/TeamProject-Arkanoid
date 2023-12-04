@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2584607189495704882}
   - component: {fileID: 2378783447064285875}
   - component: {fileID: 5430128590052235190}
+  - component: {fileID: 8298654654367884946}
   m_Layer: 0
   m_Name: BallPrefab
   m_TagString: Ball
@@ -193,5 +194,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ded96addcada54483518d489004f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinSpeed: 4
+  MaxSpeed: 16
+  defaultSpeed: 7
+  _currentSpeed: 0
   ballMaxSpeed: 15
   ballDefaultMaxSpeed: 15
+  isLaunch: 0
+  isCatchLaunch: 0
+  isCatch: 0
+  _defaultPower: 1
+  _maxPower: 1
+  _posX: 0
+  _paddleWidth: 0
+--- !u!114 &8298654654367884946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437285118980658944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58e1e0f4e2114a4e9c27f949e901dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

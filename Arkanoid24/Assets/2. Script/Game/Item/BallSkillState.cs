@@ -40,7 +40,7 @@ public class BallSkillState : MonoBehaviour
         BallExtraPower++;
         foreach (var ball in Managers.Game.CurrentBalls)
         {
-            ball.GetComponent<ArkanoidBall>().SetPower(BallExtraPower);
+            ball.GetComponent<Ball>().SetPower(BallExtraPower);
            
         }
     }
@@ -50,7 +50,7 @@ public class BallSkillState : MonoBehaviour
         BallExtraPower = 0;
         foreach (var ball in Managers.Game.CurrentBalls)
         {
-            ball.GetComponent<ArkanoidBall>().SetPower(BallExtraPower);
+            ball.GetComponent<Ball>().SetPower(BallExtraPower);
             ball.transform.localScale = new Vector3(1, 1, 1);
         }
     }
@@ -70,7 +70,7 @@ public class BallSkillState : MonoBehaviour
     {
         foreach (var ball in Managers.Game.CurrentBalls)
         {
-            ball.GetComponent<ArkanoidBall>().SetMaxSpeed(BallExtraSpeed);
+            ball.GetComponent<Ball>().SetAdditionalCurrentSpeed(BallExtraSpeed);
         }
     }
 

@@ -15,16 +15,15 @@ public class BallPreference : MonoBehaviour
     [Range(4f, 6f)] public float MinSpeed = 4f;
     [Range(14f, 16f)] public float MaxSpeed = 16f;
     // Ball Start Default Speed
-    [Range(7f, 9f)] public float defaultSpeed = 8f;
+    [Range(7f, 12f)] public float defaultSpeed = 7f;
 
     [SerializeField] protected float _currentSpeed;
-    [SerializeField] protected Vector2 _currentDirection;
 
     protected Rigidbody2D _paddleRbody;
     protected Rigidbody2D _ballRbody;
 
-    protected int _ballHitCount = 0;
-    protected float _ballIncreaseSpeedScope = 1.5f;
+    public int ballHitCount = 0;
+    public float ballIncreaseSpeedScope = 1.5f;
 
     public BALL_STATE BallState { get; set; } = BALL_STATE.READY;
 
@@ -32,14 +31,15 @@ public class BallPreference : MonoBehaviour
 
 
     #region Unity Flow
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _paddleRbody = ServiceLocator.GetService<PaddleController>().GetComponent<Rigidbody2D>();
         _ballRbody = GetComponent<Rigidbody2D>();
+    }
 
+    protected virtual void Start()
+    {
         _currentSpeed = defaultSpeed;
-        _currentDirection = Vector2.up;
-        // SetMaxSpeed(Managers.Skill.BallExtraSpeed);
     }
 
     protected virtual void FixedUpdate()
@@ -50,8 +50,6 @@ public class BallPreference : MonoBehaviour
             return;
         }
 
-        if(BallState != BALL_STATE.READY)
-            SetBallCurrentPhsyicsInfo();
     }
     #endregion
 
@@ -60,12 +58,25 @@ public class BallPreference : MonoBehaviour
     public void SetAdditionalCurrentSpeed(float additionalSpeed)
     {
         _currentSpeed = _currentSpeed + additionalSpeed;
+
+        if (_currentSpeed > MaxSpeed)
+            _currentSpeed = MaxSpeed;
+        else if(_currentSpeed < MinSpeed)
+            _currentSpeed = MinSpeed;
     }
 
-    private void SetBallCurrentPhsyicsInfo()
+    public void BallHitCounting()
     {
-        _currentSpeed = _ballRbody.velocity.magnitude;
-        _currentDirection = _ballRbody.velocity.normalized;
+        if(ballHitCount++ >= 3)
+        {
+            SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
+            ballHitCount = 0;
+        }
+    }
+
+    public bool InvalidCheckDirection(Vector2 direction)
+    {
+        return (direction == Vector2.zero) ? false : true;
     }
     #endregion
 }

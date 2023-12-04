@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Ball : BallPreference
@@ -6,29 +7,37 @@ public class Ball : BallPreference
     [SerializeField] private float ballDefaultMaxSpeed;
 
     public bool isLaunch = false;
-    private bool isCatchLaunch = false;
-    private bool isCatch = false;
+    public bool isCatchLaunch = false;
+    public bool isCatch = false;
 
-    private int _defaultPower = 1;
-    private int _maxPower = 1;
-
-
-    private float _posX;
-    private float _paddleWidth;
+    public int _defaultPower = 1;
+    public int _maxPower = 1;
 
 
-    public void SetMaxSpeed(float speed)
-    {
-        ballMaxSpeed = ballDefaultMaxSpeed + speed;
-    }
+    public float _posX;
+    public float _paddleWidth;
+
+
+    //public void SetMaxSpeed(float speed)
+    //{
+    //    ballMaxSpeed = ballDefaultMaxSpeed + speed;
+    //}
 
     #region Unity Flow
+    protected override void Awake()
+    {
+        // Get Component
+        base.Awake();
+    }
+
     protected override void Start()
     {
         base.Start();
 
-        Managers.Event.OnBallLaunch += StartBall;
-        SetMaxSpeed(Managers.Skill.BallExtraSpeed);
+        Managers.Event.OnBallLaunch += BallToStart;
+
+        SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
+        //SetMaxSpeed(Managers.Skill.BallExtraSpeed);
         SetPower(Managers.Skill.BallExtraPower);
     }
 
@@ -36,57 +45,75 @@ public class Ball : BallPreference
     {
         base.FixedUpdate();
 
-        if (!isLaunch || isCatch)
-        {
-            ReadyBall();
-        }
-        else if (isCatchLaunch)
-        {
-            CatchLaunchBall();
-        }
-        else
-        {
-            LaunchBall();
-        }
+        BallStateUpdateMethod();
+        //if (!isLaunch || isCatch)
+        //{
+        //    BallToReady();
+        //}
+        //else if (isCatchLaunch)
+        //{
+        //    CatchLaunchBall();
+        //}
+        //else
+        //{
+        //    BallToLaunch();
+        //}
     }
 
     #endregion
 
     #region Ball State
 
-    public void StartBall()
+    private void BallStateUpdateMethod()
+    {
+        Action ballAction = BallState switch
+        {
+            BALL_STATE.READY => () => BallToReady(),
+            BALL_STATE.LAUNCH => () => BallToLaunch(),
+            _ => () => { }
+        };
+
+        ballAction();
+    }
+
+    public void BallToStart()
     {
         if(isCatch) isCatchLaunch = true;
         isLaunch = true;
         isCatch = false;
-        _ballRbody.velocity = Vector2.up * defaultSpeed;
+        BallState = BALL_STATE.LAUNCH;
+
+        _paddleWidth = ServiceLocator.GetService<PaddleController>().GetComponent<BoxCollider2D>().bounds.size.x;
+        var posX = _posX / _paddleWidth;
+        var dir = new Vector2(posX, 1).normalized;
+        if (posX != 0)
+            _ballRbody.velocity = dir * _currentSpeed;
+        else
+            _ballRbody.velocity = Vector2.up * defaultSpeed;
         Managers.Event.PublishBallIsLaunch(isLaunch);
     }
 
-    private void ReadyBall()
+    private void BallToReady()
     {
-        if(isCatch) FollowThePaddle(_posX);
-        else FollowThePaddle();
+        FollowThePaddle(_posX);
     }
 
     private void FollowThePaddle(float posX = 0f)
     {
         Vector2 paddlePos = _paddleRbody.position;
-        Vector2 newBallPos = new Vector2(paddlePos.x, paddlePos.y + 0.3f);
+        Vector2 newBallPos = new Vector2(paddlePos.x, paddlePos.y + 0.5f);
+
         _ballRbody.position = newBallPos + new Vector2(posX, 0f);
         _ballRbody.velocity = Vector2.zero;
     }
 
-    private void LaunchBall()
+    private void BallToLaunch()
     {
-        if(_ballRbody.velocity.magnitude > _currentSpeed)
-        {
-            _ballRbody.velocity = _currentDirection * _currentSpeed;
-        }
+        var ballVelocitySpeed = _ballRbody.velocity.magnitude;
 
-        if (_ballRbody.velocity.magnitude > ballMaxSpeed)
+        if(ballVelocitySpeed > _currentSpeed || ballVelocitySpeed < _currentSpeed)
         {
-            _ballRbody.velocity = _ballRbody.velocity.normalized * ballMaxSpeed;
+            _ballRbody.velocity = _ballRbody.velocity.normalized * _currentSpeed;
         }
     }
 
@@ -101,56 +128,20 @@ public class Ball : BallPreference
 
     #endregion
 
-    #region Ball Collision
 
-    private float HitFactor(Vector2 paddlePos, float paddleWidth)
-    {
-        return (transform.position.x - paddlePos.x) / paddleWidth * 2f;
-    }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
-            _paddleWidth = col.collider.bounds.size.x;
-
-            CheckCatchActivation();
-            if (!isCatch)
-            {
-                var x = HitFactor(col.transform.position, _paddleWidth);
-                var dir = new Vector2(x, 1).normalized;
-                _ballRbody.velocity = dir * ballMaxSpeed;
-            }
-        }
-        else
-        {
-            SetAdditionalCurrentSpeed(1.5f);
-        }
-    }
-
-    #endregion
-
-    private void OnDestroy()
-    {
-        if (Managers.Instance != null && Managers.Event != null)
-        {
-            Managers.Event.PublishBallIsLaunch(false);
-            Managers.Event.OnBallLaunch -= StartBall;
-        }
-    }
     #region Item SKill
 
-    private void CheckCatchActivation()
+    public void CheckCatchActivation()
     {
         if (Managers.Skill.CurrentSkill == Items.Catch)
         {
-            isCatch = true;
+            BallState = BALL_STATE.READY;
             _posX = transform.position.x - _paddleRbody.transform.position.x;
         }
         else
         {
-            isCatch = false;
+            BallState = BALL_STATE.LAUNCH;
         }
 
     }
@@ -166,4 +157,15 @@ public class Ball : BallPreference
     }
 
     #endregion
+
+
+
+    private void OnDestroy()
+    {
+        if (Managers.Instance != null && Managers.Event != null)
+        {
+            Managers.Event.PublishBallIsLaunch(false);
+            Managers.Event.OnBallLaunch -= BallToStart;
+        }
+    }
 }
