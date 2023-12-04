@@ -41,6 +41,7 @@ using UnityEngine;
     {
         if (collision.CompareTag("Player"))
         {
+            SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
             ItemSkill(collision.gameObject);
 
             //Destroy(gameObject);
