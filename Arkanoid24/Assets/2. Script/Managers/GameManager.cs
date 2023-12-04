@@ -51,6 +51,7 @@ public class GameManager
         if (Bricks == 0)
         {
             State = GameState.Pause;
+            LevelClear();
             MainUI.ShowNextStage();
         }
 
@@ -80,6 +81,16 @@ public class GameManager
         else
         {
             InstanceBall();
+        }
+    }
+
+    public void LevelClear()
+    {
+        CurrentLevel++;
+
+        if (CurrentLevel > PlayerPrefs.GetInt("LevelsUnlocked", 0))
+        {
+            PlayerPrefs.SetInt("LevelsUnlocked", CurrentLevel);
         }
     }
 }
