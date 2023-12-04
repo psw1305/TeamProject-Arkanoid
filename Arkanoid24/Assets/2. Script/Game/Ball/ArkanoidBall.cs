@@ -6,16 +6,22 @@ public class ArkanoidBall : MonoBehaviour
 
     [Header("Speed")]
     [SerializeField] public float ballMaxSpeed;
+    [SerializeField] private float ballDefaultMaxSpeed;
+    private float _defaultSpeed = 8f;
 
     private Rigidbody2D paddleBody;
     private Rigidbody2D ballBody;
 
     private bool isLaunch = false;
+    private bool isCatchLaunch = false;
     private bool isCatch = false;
 
     private int _defaultPower = 1;
     private int _maxPower = 1;
+
+
     private float _posX;
+    private float _paddleWidth;
 
 
     /// <summary>
@@ -24,7 +30,7 @@ public class ArkanoidBall : MonoBehaviour
     /// <param name="speed"></param>
     public void SetMaxSpeed(float speed)
     {
-        ballMaxSpeed = speed;
+        ballMaxSpeed = ballDefaultMaxSpeed + speed;
     }
 
     private void Awake()
@@ -37,6 +43,7 @@ public class ArkanoidBall : MonoBehaviour
     {
         // 인스턴스 관리 수정
         Managers.Event.OnBallLaunch += StartBall;
+        SetMaxSpeed(Managers.Skill.BallExtraSpeed);
     }
 
     private void FixedUpdate()
@@ -51,6 +58,10 @@ public class ArkanoidBall : MonoBehaviour
         {
             ReadyBall();
         }
+        else if (isCatchLaunch)
+        {
+            CatchLaunchBall();
+        }
         else
         {
             LaunchBall();
@@ -61,7 +72,9 @@ public class ArkanoidBall : MonoBehaviour
 
     public void StartBall()
     {
+        if(isCatch) isCatchLaunch = true;
         isLaunch = true;
+        isCatch = false;
         ballBody.velocity = new Vector2(0, 10);
         Managers.Event.PublishBallIsLaunch(isLaunch);
     }
@@ -75,8 +88,8 @@ public class ArkanoidBall : MonoBehaviour
     private void FollowThePaddle(float posX = 0f)
     {
         Vector2 paddlePos = paddleBody.position;
-        Vector2 newBallPos = new Vector2(paddlePos.x, ballBody.position.y);
-        ballBody.position = newBallPos + new Vector2(posX, 0);
+        Vector2 newBallPos = new Vector2(paddlePos.x, paddlePos.y + 0.3f);
+        ballBody.position = newBallPos + new Vector2(posX, 0f);
         ballBody.velocity = Vector2.zero;
     }
 
@@ -86,6 +99,15 @@ public class ArkanoidBall : MonoBehaviour
         {
             ballBody.velocity = ballBody.velocity.normalized * ballMaxSpeed;
         }
+    }
+
+    private void CatchLaunchBall()
+    {
+        var x = _posX / _paddleWidth;
+        var dir = new Vector2(x, 1).normalized;
+        ballBody.velocity = dir * ballMaxSpeed;
+
+        isCatchLaunch = false;
     }
 
     #endregion
@@ -107,10 +129,11 @@ public class ArkanoidBall : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            _paddleWidth = col.collider.bounds.size.x;
             CheckCatchActivation();
             if (!isCatch)
             {
-                var x = HitFactor(col.transform.position, col.collider.bounds.size.x);
+                var x = HitFactor(col.transform.position, _paddleWidth);
                 var dir = new Vector2(x, 1).normalized;
                 ballBody.velocity = dir * ballMaxSpeed;
             }
@@ -143,13 +166,7 @@ public class ArkanoidBall : MonoBehaviour
 
     }
 
-    public void CatchBall()
-    {
-        //var ballPos = transform.position - paddleFire.transform.position;
-        //transform.position = paddleFire.transform.position + new Vector3(0f, 0.5f, 0f);
-        //ballBody.velocity = Vector3.zero;
-    }
-
+    
     public void SetPower(int extraPower)
     {
         _maxPower = _defaultPower + extraPower;

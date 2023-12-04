@@ -32,4 +32,18 @@ public class BallSkillState
     {
 
     }
+
+    public void SlowItemUse()
+    {
+        BallExtraSpeed -= 1f;
+        SetSpeed();
+    }
+
+    public void SetSpeed()
+    {
+        foreach (var ball in Managers.Game.CurrentBalls)
+        {
+            ball.GetComponent<ArkanoidBall>().SetMaxSpeed(BallExtraSpeed);
+        }
+    }
 }
