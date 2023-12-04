@@ -9,7 +9,7 @@ public partial class ArkanoidBall : MonoBehaviour
     //private bool isCatch = false;
 
     private int _power;
-    private int _maxPower;
+    //private int _maxPower;
 
     //private void CheckCatchActivation()
     //{
