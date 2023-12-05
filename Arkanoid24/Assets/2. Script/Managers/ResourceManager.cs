@@ -15,6 +15,9 @@ public class ResourceManager
         // 오브젝트 프리팹
         GameObject[] objs = Resources.LoadAll<GameObject>("Prefabs/Model");
         foreach (GameObject obj in objs) prefabs[obj.name] = obj;
+
+        GameObject laser = Resources.Load<GameObject>("Prefabs/Laser/Laser");
+        prefabs[laser.name] = laser;
     }
 
     /// <summary>

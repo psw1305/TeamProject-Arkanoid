@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using static BallPreference;
 
 public class BallCollision : MonoBehaviour
 {
