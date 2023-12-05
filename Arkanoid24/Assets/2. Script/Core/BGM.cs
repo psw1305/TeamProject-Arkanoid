@@ -40,7 +40,7 @@ public class BGM : AudioSystem<BGM>
 
     private void Start()
     {
-        Play(testBGM, true);
+        //Play(testBGM, true);
     }
 
     public void Play(AudioClip clip, bool isLoop)
