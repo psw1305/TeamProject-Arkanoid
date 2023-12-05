@@ -62,7 +62,6 @@ public class GameManager
         {
             State = GameState.Pause;
             LevelClear();
-            Managers.Skill.ResetSkill();
             MainUI.ShowNextStage();
         }
 
@@ -74,12 +73,12 @@ public class GameManager
     {
         CurrentBalls.Remove(ball);
 
-        if (CurrentBalls.Count != 0) return;
         if (MainUI == null)
         {
             InstanceBall();
             return;
         }
+        if (CurrentBalls.Count != 0) return;
 
         Life--;
         MainUI.SetLifeUI(true, Life);
@@ -88,7 +87,6 @@ public class GameManager
         {
             State = GameState.Pause;
             MainUI.ShowGameOver();
-            Managers.Skill.ResetSkill();
         }
         else
         {

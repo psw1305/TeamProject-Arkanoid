@@ -24,7 +24,7 @@ public class BigBrick : BrickBreak
         PhaseSpriteSetting();
         if (_hp <= 0)
         {
-            BrickDestroy();
+            BrickDestroy(collision.gameObject.name);
         }
     }
 

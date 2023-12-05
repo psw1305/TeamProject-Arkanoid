@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3344740612417414923}
   - component: {fileID: 2584607189495704882}
   - component: {fileID: 2378783447064285875}
-  - component: {fileID: -1976555514817851294}
+  - component: {fileID: 8868541370308499605}
   m_Layer: 0
   m_Name: BallPrefab(Player1)
   m_TagString: Ball1
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &-1976555514817851294
+--- !u!114 &8868541370308499605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

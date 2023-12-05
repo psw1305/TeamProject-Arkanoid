@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MultiPlayBall : MonoBehaviour
+public class VersusPlayBall : MonoBehaviour
 {
-    [SerializeField] private GameManager game;
+    [SerializeField] private VersusManager game;
 
     [Header("Speed")]
     [SerializeField] public float ballMaxSpeed;
@@ -17,7 +17,7 @@ public class MultiPlayBall : MonoBehaviour
     private bool isCatch = false;
 
     private int _defaultPower = 1;
-    private int _maxPower = 1;
+    public int _maxPower = 1;
 
 
     private float _posX;
