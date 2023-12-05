@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BrickBreak : MonoBehaviour
 {
@@ -13,9 +14,13 @@ public class BrickBreak : MonoBehaviour
     //충돌이 발생하면 실행
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ball" || collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
+        if(collision.gameObject.tag == "Ball")
         {
             _hp -= collision.gameObject.GetComponent<Ball>()._maxPower;
+        }
+        else if(collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
+        {
+            _hp -= collision.gameObject.GetComponent<MultiPlayBall>()._maxPower;
         }
         //레이저 충돌
         else if (collision.gameObject.tag == "Bullet")
@@ -28,16 +33,27 @@ public class BrickBreak : MonoBehaviour
         }
         if (_hp <= 0)
         {
-            BrickDestroy();
+            BrickDestroy(collision.gameObject.tag);
         }
     }
 
     //브릭을 삭제하는 메서드
-    public void BrickDestroy()
+    public void BrickDestroy(string ballType)
     {
-        // [박상원] 벽돌 파괴시 점수 100점 추가
-        // 점수는 추후 벽돌 종류에 따라 변경 가능
-        Managers.Game.AddScore(100);
+        if (ballType == "Ball" || ballType == "Bullet") 
+        {
+            // [박상원] 벽돌 파괴시 점수 100점 추가
+            // 점수는 추후 벽돌 종류에 따라 변경 가능
+            Managers.Game.AddScore(100);
+        }
+        else if(ballType =="Ball1")
+        {
+            Managers.Versus.Player1BrickCount();
+        }
+        else if(ballType == "Ball2")
+        {
+            Managers.Versus.Player2BrickCount();
+        }
 
         instantiateItem();
         Destroy(gameObject);
