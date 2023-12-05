@@ -64,7 +64,7 @@ public class Ball : BallPreference
         isCatch = false;
         BallState = BALL_STATE.LAUNCH;
 
-        _paddleWidth = ServiceLocator.GetService<PaddleController>().GetComponent<BoxCollider2D>().bounds.size.x;
+        _paddleWidth = ServiceLocator.GetService<PaddleInputController>().GetComponent<BoxCollider2D>().bounds.size.x;
         var posX = _posX / _paddleWidth;
         var dir = new Vector2(posX, 1).normalized;
         if (posX != 0)

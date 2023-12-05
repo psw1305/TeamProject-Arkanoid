@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PaddleInputController : MonoBehaviour
+public class PaddleInputController : PaddleController
 {
     #region Member Variables
 
@@ -12,8 +12,14 @@ public class PaddleInputController : MonoBehaviour
 
 
     #region Unity Flow
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+    }
+    protected override void Start()
+    {
+        base.Start();
+
         // Data Caching
         _mainCamera = Camera.main;
     }

@@ -93,8 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2744793287459857437}
-  - component: {fileID: 8361202274355599277}
   - component: {fileID: 2185704083393057313}
+  - component: {fileID: 8899824995910866556}
+  - component: {fileID: 4461057982904232956}
   - component: {fileID: 6996380670935850066}
   - component: {fileID: 4191919945878495410}
   m_Layer: 0
@@ -120,20 +121,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8361202274355599277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8399632320138629234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a8ffe12eaf4d0f4994d4efdf4438f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _paddleCamera: {fileID: 0}
-  isMulti: 1
 --- !u!114 &2185704083393057313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,9 +148,34 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: SoloPaddle
+  m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8899824995910866556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399632320138629234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220a2d30c8b61aa4294883b12114a6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _paddleCamera: {fileID: 0}
+--- !u!114 &4461057982904232956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399632320138629234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cff55d50737e354caea4e22c496d5c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &6996380670935850066
 Rigidbody2D:
   serializedVersion: 4

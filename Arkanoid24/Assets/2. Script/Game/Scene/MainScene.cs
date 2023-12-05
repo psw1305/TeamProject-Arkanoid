@@ -35,6 +35,8 @@ public class MainScene : MonoBehaviour
         // #3. 현재 레벨에 맞는 스테이지 생성
         CreateStage();
 
+        Managers.Player.PlayerSpawn();
+
         // #4. 공 생성 후 대기
         Managers.Game.InstanceBall();
     }

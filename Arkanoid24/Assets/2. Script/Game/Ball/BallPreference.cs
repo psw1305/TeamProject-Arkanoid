@@ -33,12 +33,13 @@ public class BallPreference : MonoBehaviour
     #region Unity Flow
     protected virtual void Awake()
     {
-        _paddleRbody = ServiceLocator.GetService<PaddleController>().GetComponent<Rigidbody2D>();
         _ballRbody = GetComponent<Rigidbody2D>();
     }
 
     protected virtual void Start()
     {
+        _paddleRbody = ServiceLocator.GetService<PaddleInputController>().GetComponent<Rigidbody2D>();
+
         _currentSpeed = defaultSpeed;
     }
 

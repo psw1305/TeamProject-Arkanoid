@@ -18,6 +18,9 @@ public class GameManager
     public float Score { get; set; }
     public float BestScore { get; set; }
     public int Life { get; set; }
+
+    // Multi Play Flag
+    public bool IsMulti { get; set; } = false; // Test : true
     
     #endregion
 
