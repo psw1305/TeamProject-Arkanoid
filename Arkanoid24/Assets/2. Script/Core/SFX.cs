@@ -40,6 +40,7 @@ public class SFX : AudioSystem<SFX>
     public AudioClip brickHit;
     public AudioClip paddleHit;
     public AudioClip itemPickup;
+    public AudioClip ballDeath;
 
     public void PlayOneShot(AudioClip clip, float volumeScale = 1.0f)
     {

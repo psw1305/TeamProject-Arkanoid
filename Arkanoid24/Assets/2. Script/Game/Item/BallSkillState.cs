@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-public class BallSkillState : MonoBehaviour 
+public class BallSkillState
 {
     public int BallExtraPower = 0;
     public float BallExtraSpeed = 0f;
@@ -27,7 +27,7 @@ public class BallSkillState : MonoBehaviour
     }
     
 
-    private void ResetSkill()
+    public void ResetSkill()
     {
         _currnetSkill = Items.None;
         UnPowerUp();
@@ -82,9 +82,9 @@ public class BallSkillState : MonoBehaviour
 
     public void Lasers(GameObject player, GameObject lazer)
     {
-        var bullet1 = Instantiate(lazer, player.transform.position, Quaternion.identity);
+        var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
         bullet1.transform.position += new Vector3(-0.5f, 1f, 0f);
-        var bullet2 = Instantiate(lazer, player.transform.position, Quaternion.identity);
+        var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
         bullet2.transform.position += new Vector3(0.5f, 1f, 0f);
     }
 
@@ -118,8 +118,8 @@ public class BallSkillState : MonoBehaviour
         float seta = Mathf.Atan2(BallVec.y, BallVec.x);
         Vector2 ballPos = mainBall.transform.position + new Vector3(directionMultiplier, 0, 0);
         GameObject ball = Managers.Resource.Instantiate("BallPrefab", ballPos);
-        Managers.Game.CurrentBalls.Add(ball);
         ball.GetComponent<Ball>().BallState = BallPreference.BALL_STATE.LAUNCH;
+        Managers.Game.CurrentBalls.Add(ball);
         Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
         if (BallVec.x == 0)
         {

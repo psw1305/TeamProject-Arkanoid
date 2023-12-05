@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BigBrick : BrickBreak
@@ -15,6 +16,10 @@ public class BigBrick : BrickBreak
         if (collision.gameObject.tag == "Ball")
         {
             _hp--;
+        }
+        else if (collision.gameObject.tag == "Bullet")
+        {
+            _hp -= collision.gameObject.GetComponent<Laser>()._power;
         }
         PhaseSpriteSetting();
         if (_hp <= 0)
