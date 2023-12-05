@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MultiPlayBall : MonoBehaviour
+public class VersusPlayBall : MonoBehaviour
 {
     [SerializeField] private VersusManager game;
 

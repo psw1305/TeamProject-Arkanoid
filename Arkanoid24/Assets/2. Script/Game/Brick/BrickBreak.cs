@@ -11,6 +11,14 @@ public class BrickBreak : MonoBehaviour
     public int _itemCreateRate;
 
     public GameObject _itemSpawner;
+
+    private void Start()
+    {
+        if(SceneManager.GetActiveScene().name == "VersusMode")
+        {
+            _itemCreateRate = 0;
+        }
+    }
     //충돌이 발생하면 실행
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -20,7 +28,7 @@ public class BrickBreak : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
         {
-            _hp -= collision.gameObject.GetComponent<MultiPlayBall>()._maxPower;
+            _hp -= collision.gameObject.GetComponent<VersusPlayBall>()._maxPower;
         }
         //레이저 충돌
         else if (collision.gameObject.tag == "Bullet")

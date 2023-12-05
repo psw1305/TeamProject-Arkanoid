@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MultiPlayBallDestroyer : MonoBehaviour
+public class VersusPlayBallDestroyer : MonoBehaviour
 {
     [SerializeField] private ParticleSystem player1particle;
     [SerializeField] private ParticleSystem player2particle;
