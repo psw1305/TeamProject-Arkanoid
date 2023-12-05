@@ -27,7 +27,7 @@ public class Ball : BallPreference
     protected override void Start()
     {
         base.Start();
-
+        
         Managers.Event.OnBallLaunch += BallToStart;
 
         SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
@@ -59,6 +59,7 @@ public class Ball : BallPreference
 
     public void BallToStart()
     {
+        if (BallState != BALL_STATE.READY) return;
         if(isCatch) isCatchLaunch = true;
         isCatch = false;
         BallState = BALL_STATE.LAUNCH;

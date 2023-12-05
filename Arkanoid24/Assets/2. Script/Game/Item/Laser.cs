@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    [SerializeField] float _laserSpeed = 5f;
+    [SerializeField] private float _laserSpeed = 5f;
 
+    public int _power = 1;
 
-    void Start()
-    {
-        
-    }
 
   
     void Update()
@@ -19,5 +16,13 @@ public class Laser : MonoBehaviour
 
         if (transform.position.y > 6)
             Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Brick"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
