@@ -17,11 +17,18 @@ public class BigBrick : BrickBreak
         {
             _hp--;
         }
-        else if (collision.gameObject.tag == "Bullet")
+        PhaseSpriteSetting();
+        if (_hp <= 0)
+        {
+            BrickDestroy();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
         {
             _hp -= collision.gameObject.GetComponent<Laser>()._power;
         }
-        PhaseSpriteSetting();
         if (_hp <= 0)
         {
             BrickDestroy(collision.gameObject.name);
