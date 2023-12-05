@@ -5,12 +5,27 @@ using UnityEngine.InputSystem;
 
 public class PaddleController : MonoBehaviour
 {
+    #region Events
+
+    public event Action<Vector2> OnMoveEvent;
+    public event Action OnFireEvent;
+
+    #endregion
+
+
+
     #region STATE
     public enum PADDLE_STATE
     {
         READY,
         MOVEMENT
     }
+    #endregion
+
+
+
+    #region Properties
+    public PADDLE_STATE PaddleState { get; set; } = PADDLE_STATE.READY;
     #endregion
 
 
@@ -28,12 +43,6 @@ public class PaddleController : MonoBehaviour
     // Camera
     [SerializeField] protected Camera _paddleCamera;
 
-    #endregion
-
-
-
-    #region Properties
-    public PADDLE_STATE PaddleState {  get; set; } = PADDLE_STATE.READY;
     #endregion
 
 
@@ -76,6 +85,20 @@ public class PaddleController : MonoBehaviour
             _playerInput.SwitchCurrentActionMap(MultiMaps1);
         else if (gameObject.CompareTag(PlayerManager.TagPlayer2))
             _playerInput.SwitchCurrentActionMap(MultiMaps2);
+    }
+    #endregion
+
+
+
+    #region Call Event
+    public void CallMoveEvent(Vector2 axis)
+    {
+        OnMoveEvent?.Invoke(axis);
+    }
+
+    public void CallFireEvent()
+    {
+        OnFireEvent?.Invoke();
     }
     #endregion
 

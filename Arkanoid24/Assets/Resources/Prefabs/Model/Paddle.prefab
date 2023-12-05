@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2185704083393057313}
   - component: {fileID: 8899824995910866556}
   - component: {fileID: 4461057982904232956}
+  - component: {fileID: 9151341998151473308}
   - component: {fileID: 6996380670935850066}
   - component: {fileID: 4191919945878495410}
   m_Layer: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: SoloPaddle
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &8899824995910866556
@@ -174,6 +175,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cff55d50737e354caea4e22c496d5c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9151341998151473308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399632320138629234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf4649ee87d1314c9e350398ea5fb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &6996380670935850066

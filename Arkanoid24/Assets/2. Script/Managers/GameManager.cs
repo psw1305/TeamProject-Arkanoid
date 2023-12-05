@@ -5,7 +5,13 @@ using UnityEngine.UI;
 
 public class GameManager
 {
+    #region Member Variables
+
     public List<GameObject> CurrentBalls = new();
+
+    #endregion
+
+
 
     #region Properties
 
@@ -20,7 +26,7 @@ public class GameManager
     public int Life { get; set; }
 
     // Multi Play Flag
-    public bool IsMulti { get; set; } = false; // Test : true
+    public bool IsMulti { get; set; } = true; // Test : true
     
     #endregion
 

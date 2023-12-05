@@ -8,9 +8,14 @@ public class PlayerManager
     #region Member Variables
 
     private List<GameObject> _players = new();
+    private List<GameObject> _cameras = new();
+
+    private Vector2 playerSpawnPoint;
 
     // Literals
     public const string PlayerPrefabName = "Paddle";
+    public const string CameraPrefabName = "MainCamera";
+
     public const string TagPlayer = "Player";
     public const string TagPlayer1 = "Player1";
     public const string TagPlayer2 = "Player2";
@@ -18,7 +23,7 @@ public class PlayerManager
     #endregion
 
 
-    #region Spawner
+    #region Player Spawner
     
     public void PlayerSpawn()
     {
@@ -49,6 +54,26 @@ public class PlayerManager
         _players.Add(player);
     }
 
+    #endregion
+
+
+
+    #region Camera Spawner
+    public void CameraSpawn()
+    {
+
+    }
+
+    private void MultiCameraSpawn()
+    {
+        var player1Camera = Managers.Resource.Instantiate(CameraPrefabName, new Vector2(-10, 0));
+        var player2Camera = Managers.Resource.Instantiate(CameraPrefabName, new Vector2(10, 0));
+    }
+
+    private void SoloCameraSpawn()
+    {
+
+    }
     #endregion
 
 
