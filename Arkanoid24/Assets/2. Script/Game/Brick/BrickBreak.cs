@@ -17,7 +17,15 @@ public class BrickBreak : MonoBehaviour
         {
             _hp--;
         }
-        else if (collision.gameObject.tag == "Bullet")
+        if (_hp <= 0)
+        {
+            BrickDestroy();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
         {
             _hp -= collision.gameObject.GetComponent<Laser>()._power;
         }

@@ -22,3 +22,13 @@ public enum Items
     Disruption,
     Power,
 }
+
+/// <summary>
+/// 게임 모드 나타내는 타입
+/// </summary>
+public enum GameMode
+{
+    None,
+    Main,
+    TimeAttack,
+}
