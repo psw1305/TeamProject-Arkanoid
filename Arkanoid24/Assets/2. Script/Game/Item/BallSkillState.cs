@@ -32,6 +32,8 @@ public class BallSkillState
         if (CurrentSkill == Items.Enlarge) UnEnalarge();
         _currnetSkill = Items.None;
         UnPowerUp();
+        BallExtraPower = 0;
+        BallExtraSpeed = 0f;
     }
 
     public void PowerUp()

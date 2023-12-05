@@ -70,20 +70,24 @@ public class TimeAttackSceneUI : MonoBehaviour
         {
             PlayerPrefs.SetFloat(KeyName, Managers.Game.Score);
         }
+
     }
 
     private IEnumerator TimerStart()
     {
         while (_timer > 0)
         {
+            if (Managers.Game.State == GameState.Pause) break;
             Debug.Log(_timer);
             _timer -= Time.deltaTime;
             timerText.text = string.Format(_timer.ToString("F2"));
             yield return null;
         }
-
-        _timer = 0;
-        timerText.text = string.Format(_timer.ToString("F2"));
-        Managers.Game.GameOver();
+        if (_timer <= 0)
+        {
+            _timer = 0;
+            timerText.text = string.Format(_timer.ToString("F2"));
+            Managers.Game.GameOver();
+        }
     }
 }
