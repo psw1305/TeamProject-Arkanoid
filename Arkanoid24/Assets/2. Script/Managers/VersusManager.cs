@@ -49,7 +49,7 @@ public class VersusManager
     public void Player1BrickCount()
     {
         Player1Bricks--;
-        Debug.Log("1플레이어 브릭 감소");
+
         if(Player1Bricks == 0)
         {
             VersusUI.ShowGameOver("Player1");
@@ -58,7 +58,7 @@ public class VersusManager
     public void Player2BrickCount()
     {
         Player2Bricks--;
-        Debug.Log("2플레이어 브릭 감소");
+
         if (Player2Bricks == 0)
         {
             VersusUI.ShowGameOver("Player2");
