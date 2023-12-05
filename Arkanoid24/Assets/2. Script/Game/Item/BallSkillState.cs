@@ -126,7 +126,7 @@ public class BallSkillState
         Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
         if (BallVec.x == 0)
         {
-            secondBallRb.velocity = new Vector2(directionMultiplier * BallVec.y * Mathf.Cos(45), BallVec.y * Mathf.Sin(45));
+            secondBallRb.velocity = new Vector2(directionMultiplier * 1f * Mathf.Cos(45), 1f * Mathf.Sin(45));
         }
         else
         {
