@@ -36,6 +36,12 @@ public class ResourceManager
         return GameObject.Instantiate(prefab, startPos, Quaternion.identity);
     }
 
+    public GameObject Instantiate(string prefabName)
+    {
+        if (!prefabs.TryGetValue(prefabName, out GameObject prefab)) return null;
+        return GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+    }
+
     public StageBlueprint[] GetStages()
     {
         return stages.ToArray();

@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220a2d30c8b61aa4294883b12114a6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _paddleCamera: {fileID: 0}
+  paddleCamera: {fileID: 5079212559161242321, guid: c6085c381497e0842bf5cd8c0121d7d7, type: 3}
 --- !u!114 &4461057982904232956
 MonoBehaviour:
   m_ObjectHideFlags: 0

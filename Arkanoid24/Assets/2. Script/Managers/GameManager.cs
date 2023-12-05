@@ -26,7 +26,7 @@ public class GameManager
     public int Life { get; set; }
 
     // Multi Play Flag
-    public bool IsMulti { get; set; } = true; // Test : true
+    public bool IsMulti { get; set; } = false; // Test : true
     
     #endregion
 

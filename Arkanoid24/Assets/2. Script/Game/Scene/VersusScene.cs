@@ -29,6 +29,8 @@ public class VersusScene : MonoBehaviour
         // #1. 현재 레벨에 맞는 스테이지 생성
         CreateStage();
 
+        Managers.Player.PlayerSpawn();
+
         // #2. 공 생성 후 대기
         Managers.Versus.InstanceBall();
     }

@@ -14,7 +14,6 @@ public class MainScene : MonoBehaviour
         Managers.Game.Initialize();
 
         screenEdge = GetComponent<EdgeCollider2D>();
-        screenEdge.GenerateCameraBounds();
     }
 
     private void Start()
@@ -31,6 +30,8 @@ public class MainScene : MonoBehaviour
 
         // #2. 스코어 0점으로 시작
         //Managers.Game.Score = 0;
+
+        Managers.Player.CameraSpawn();
 
         // #3. 현재 레벨에 맞는 스테이지 생성
         CreateStage();

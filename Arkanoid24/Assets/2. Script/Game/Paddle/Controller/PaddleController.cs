@@ -40,9 +40,6 @@ public class PaddleController : MonoBehaviour
     // Input Field
     protected PlayerInput _playerInput;
 
-    // Camera
-    [SerializeField] protected Camera _paddleCamera;
-
     #endregion
 
 
