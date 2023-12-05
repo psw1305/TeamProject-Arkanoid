@@ -1,5 +1,5 @@
 {
-    "name": "ArkanoidInputHandle",
+    "name": "PaddleInputHandle",
     "maps": [
         {
             "name": "Paddle",
@@ -8,7 +8,7 @@
                 {
                     "name": "Movement",
                     "type": "Value",
-                    "id": "1fcdb7fd-5514-47e9-a9ce-812ffb223f3e",
+                    "id": "46ff3738-91ba-4f7e-9604-2a93ae2e57af",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -17,7 +17,7 @@
                 {
                     "name": "Fire",
                     "type": "Button",
-                    "id": "fac52c56-f78a-4b00-bff3-5b41a2cdbe89",
+                    "id": "5669ab6d-b271-49b7-a148-97c4a2663168",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -27,7 +27,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "6aac72d4-c112-4c97-a87b-ee614a56c2eb",
+                    "id": "1f240690-bae3-4d34-ad70-b909f88c4a7d",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
@@ -37,45 +37,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "53db17be-33f6-48a1-9d7a-15049c0866d9",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Player1",
-            "id": "33f2a27e-fe88-4e6d-8066-b2f92fd8c861",
-            "actions": [
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "2e6f7525-4935-482f-942d-abbcf0b13fef",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "52f69ffb-ef95-478f-8253-21ef8a57b076",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "2D Vector",
-                    "id": "846630d9-39ca-4524-8c96-06b3a644fc68",
+                    "name": "1P",
+                    "id": "a6ce8620-5893-436c-8efa-b5443a79cfad",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -86,7 +49,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "9efb54ee-b8a0-4fb6-af9f-21144bf6c517",
+                    "id": "117de6b6-eb24-4f10-9d12-bd694d1bb325",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -97,7 +60,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "a3f23c6d-236b-476a-8755-11a522b763b5",
+                    "id": "f0d56004-c031-4658-b266-592d51db481e",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -107,45 +70,41 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "98960cff-d4ab-4153-b82c-effdd1f09436",
-                    "path": "<Keyboard>/space",
+                    "name": "2P",
+                    "id": "7d1daee7-8fc7-43c9-9f23-cd88542747ff",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "1a206f5a-6b54-4a87-b9f2-fa01890907ea",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Fire",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Player2",
-            "id": "61f03306-ce5e-4858-9169-13acdd7e4a39",
-            "actions": [
-                {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "30032483-4e8c-47aa-827d-95908f29f0f0",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "d1440c15-81bc-40fd-a818-ecef6f2229b3",
-                    "expectedControlType": "Button",
-                    "processors": "",
+                    "name": "right",
+                    "id": "e2a19ddd-9560-49ed-99d7-aac7a11ee71d",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
                 {
                     "name": "",
-                    "id": "867d19c7-a81e-43f9-b02f-ef0be86ff674",
+                    "id": "13a896a0-d7c9-45cf-acff-85cb75cec5e7",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -156,12 +115,23 @@
                 },
                 {
                     "name": "",
-                    "id": "56fde593-ba09-45ee-8c08-ed3748cabe27",
-                    "path": "<Mouse>/position",
+                    "id": "8dbad024-1c1d-4f83-80bb-8ad08a58aaf9",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Mouse",
-                    "action": "Movement",
+                    "groups": "Keyboard",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dbadb5c-fe9c-43a7-a949-6dc4ecd5d15c",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -170,22 +140,22 @@
     ],
     "controlSchemes": [
         {
-            "name": "Mouse",
-            "bindingGroup": "Mouse",
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
             "devices": [
                 {
-                    "devicePath": "<Mouse>",
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }
             ]
         },
         {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
             "devices": [
                 {
-                    "devicePath": "<Keyboard>",
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
