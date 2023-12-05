@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class LevelButton : MonoBehaviour
 {
@@ -36,6 +35,6 @@ public class LevelButton : MonoBehaviour
 
         Managers.Game.CurrentLevel = level;
         Managers.Game.Mode = GameMode.Main;
-        SceneManager.LoadScene("Main");
+        SceneLoader.Instance.ChangeScene("Main");
     }
 }

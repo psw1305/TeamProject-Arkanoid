@@ -10,7 +10,12 @@ public class BallDestroyer : MonoBehaviour
         if (col.CompareTag("Ball"))
         {
             StartCoroutine(DelaySpawn(col));
-        }        
+        }
+
+        if (col.CompareTag("Item"))
+        {
+            Destroy(col.gameObject);
+        }
     }
 
     private IEnumerator DelaySpawn(Collider2D col)

@@ -82,12 +82,12 @@ public class BallSkillState
         Managers.Game.LifeUp();
     }
 
-    public void Lasers(GameObject player, GameObject lazer)
+    public void Lasers(GameObject player)
     {
         var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
-        bullet1.transform.position += new Vector3(-0.5f, 1f, 0f);
+        bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
         var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
-        bullet2.transform.position += new Vector3(0.5f, 1f, 0f);
+        bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
     }
 
     public void Enalarge(GameObject player)

@@ -6,7 +6,15 @@ public enum GameState
 {
     Play,
     Pause,
+    Loading,
 }
+
+public enum ModelState
+{
+    Live,
+    Dead,
+}
+
 
 /// <summary>
 /// 게임 아이템 타입

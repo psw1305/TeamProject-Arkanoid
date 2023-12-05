@@ -38,14 +38,14 @@ public class TimeAttackSceneUI : MonoBehaviour
 
     public void ShowGameOver()
     {
-        BGM.Instance.Play(BGM.Instance.gameover, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.gameover);
 
         gameOverPopup.SetActive(true);
     }
 
     public void ShowNextStage()
     {
-        BGM.Instance.Play(BGM.Instance.nextstage, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.nextstage);
 
         nextStagePopup.SetActive(true);
     }

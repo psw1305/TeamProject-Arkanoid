@@ -27,7 +27,7 @@ public class BrickBreak : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            _hp -= collision.gameObject.GetComponent<Laser>()._power;
+            _hp -= collision.gameObject.GetComponent<Laser>().Power;
         }
         if (_hp <= 0)
         {
