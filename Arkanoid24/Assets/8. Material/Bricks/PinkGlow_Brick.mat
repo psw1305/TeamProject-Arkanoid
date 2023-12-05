@@ -59,7 +59,7 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     m_Colors:
-    - Color_FA3D27B2: {r: 44.07547, g: 0, b: 20.133358, a: 1}
+    - Color_FA3D27B2: {r: 23.96863, g: 0, b: 10.948698, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

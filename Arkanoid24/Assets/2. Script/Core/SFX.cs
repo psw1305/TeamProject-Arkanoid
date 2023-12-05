@@ -42,6 +42,10 @@ public class SFX : AudioSystem<SFX>
     public AudioClip itemPickup;
     public AudioClip ballDeath;
 
+    [Header("End")]
+    public AudioClip gameover;
+    public AudioClip nextstage;
+
     public void PlayOneShot(AudioClip clip, float volumeScale = 1.0f)
     {
         this.AudioSource.PlayOneShot(clip, volumeScale);

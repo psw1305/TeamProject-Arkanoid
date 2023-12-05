@@ -99,7 +99,6 @@ public class Ball : BallPreference
     #endregion
 
 
-
     #region Item SKill
 
     public void CheckCatchActivation()
@@ -122,7 +121,6 @@ public class Ball : BallPreference
     }
 
     #endregion
-
 
 
     private void OnDestroy()

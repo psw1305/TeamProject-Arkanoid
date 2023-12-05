@@ -13,8 +13,8 @@ public class MainScene : MonoBehaviour
         Managers.Resource.Initialize();
         Managers.Game.Initialize();
 
-        screenEdge = GetComponent<EdgeCollider2D>();
-        screenEdge.GenerateCameraBounds();
+        //screenEdge = GetComponent<EdgeCollider2D>();
+        //screenEdge.GenerateCameraBounds();
     }
 
     private void Start()
@@ -26,6 +26,9 @@ public class MainScene : MonoBehaviour
 
     private void InitMainGame()
     {
+        // #0. 씬 로딩
+        SceneLoader.Instance.OnSceneLoaded();
+
         // #1. 라이프 3개로 설정 
         Managers.Game.Life = 3;
 

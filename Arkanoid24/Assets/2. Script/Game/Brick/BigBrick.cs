@@ -1,8 +1,13 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class BigBrick : BrickBreak
+public class BigBrick : MonoBehaviour
 {
+    [SerializeField] private int hp;
+
+    [Range(0f, 100f)]
+    public int itemCreateRate;
+    public GameObject itemSpawner;
 
     public Sprite _phaseHealthSprite1;
     public Sprite _phaseHealthSprite2;
@@ -10,51 +15,51 @@ public class BigBrick : BrickBreak
     public Sprite _phaseHealthSprite4;
     public Sprite _phaseHealthSprite5;
 
-    //Ãæµ¹ÀÌ ¹ß»ýÇÏ¸é ½ÇÇà
+    //ï¿½æµ¹ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ball")
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            _hp--;
+            hp--;
         }
+
         PhaseSpriteSetting();
-        if (_hp <= 0)
+        
+        if (hp <= 0)
         {
             BrickDestroy();
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public void BrickDestroy()
     {
-        if (collision.gameObject.tag == "Bullet")
+        Managers.Game.AddScore(100);
+
+        InstantiateItem();
+        Destroy(gameObject);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void InstantiateItem()
+    {
+        //_itemCreateRate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (Random.Range(0, 101) <= itemCreateRate)
         {
-            _hp -= collision.gameObject.GetComponent<Laser>()._power;
-        }
-        if (_hp <= 0)
-        {
-            BrickDestroy();
+            itemSpawner.transform.position = transform.position;
+            Instantiate(itemSpawner);
+            itemSpawner.transform.position = Vector2.zero;
         }
     }
 
     private void PhaseSpriteSetting()
     {
-        switch (_hp)
+        GetComponent<SpriteRenderer>().sprite = hp switch
         {
-            case 1:
-                GetComponent<SpriteRenderer>().sprite = _phaseHealthSprite5;
-                break;
-            case 2:
-                GetComponent<SpriteRenderer>().sprite = _phaseHealthSprite4;
-                break;
-            case 3:
-                GetComponent<SpriteRenderer>().sprite = _phaseHealthSprite3;
-                break;
-            case 4:
-                GetComponent<SpriteRenderer>().sprite = _phaseHealthSprite2;
-                break;
-            default:
-                GetComponent<SpriteRenderer>().sprite = _phaseHealthSprite1;
-                break;
-
-        }
+            1 => _phaseHealthSprite5,
+            2 => _phaseHealthSprite4,
+            3 => _phaseHealthSprite3,
+            4 => _phaseHealthSprite2,
+            _ => _phaseHealthSprite1,
+        };
     }
 }

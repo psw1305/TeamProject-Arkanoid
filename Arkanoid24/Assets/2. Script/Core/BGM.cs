@@ -34,8 +34,6 @@ public class BGM : AudioSystem<BGM>
     #endregion
 
     [Header("Game")]
-    public AudioClip gameover;
-    public AudioClip nextstage;
     public AudioClip testBGM;
 
     private void Start()

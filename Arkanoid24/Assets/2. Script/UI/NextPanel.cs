@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class NextPanel : MonoBehaviour
 {
@@ -16,12 +15,12 @@ public class NextPanel : MonoBehaviour
     public void NextLevel()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-        SceneManager.LoadScene("Main");
+        SceneLoader.Instance.ChangeScene("Main");
     }
 
     public void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-        SceneManager.LoadScene("Lobby");
+        SceneLoader.Instance.ChangeScene("Lobby");
     }
 }
