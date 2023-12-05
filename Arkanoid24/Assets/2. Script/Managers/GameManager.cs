@@ -28,6 +28,11 @@ public class GameManager
     // Multi Play Flag
     public bool IsMulti { get; set; } = false; // Test : true
     
+    public List<float> Time {  get; set; }
+    public GameMode Mode { get; set; } = GameMode.Main;
+    public TimeAttackSceneUI TimeAttackUI { get; private set; }
+
+    
     #endregion
 
     public void Initialize()
@@ -39,6 +44,8 @@ public class GameManager
         State = GameState.Play;
         Stages = Managers.Resource.GetStages();
         Bricks = Stages[CurrentLevel].Bricks;
+        TimeAttackUI = Object.FindAnyObjectByType<TimeAttackSceneUI>();
+        Time = new List<float> { 40f, 60f, 100f, 120f };
     }
 
     public StageBlueprint CurrentStage()
@@ -57,23 +64,35 @@ public class GameManager
     public void AddScore(float score)
     {
         Bricks--;
-        if (MainUI == null) return;
+        if ((Mode == GameMode.Main && MainUI == null) || (Mode == GameMode.TimeAttack && TimeAttackUI == null)) return;
         if (Bricks == 0)
         {
             State = GameState.Pause;
+
+            Managers.Skill.ResetSkill();
+
             LevelClear();
-            MainUI.ShowNextStage();
+            // MainUI.ShowNextStage();
+            if (Mode == GameMode.TimeAttack) TimeAttackUI.ShowNextStage();
+            else if (Mode == GameMode.Main) MainUI.ShowNextStage();
+        
+
         }
 
         Score += score;
-        MainUI.SetScoreUI(Score);
+
+        //MainUI.SetScoreUI(Score);
+        if (Mode == GameMode.TimeAttack) TimeAttackUI.SetScoreUI(Score);
+        else MainUI.SetScoreUI(Score);
     }
 
     public void LifeDown(GameObject ball)
     {
         CurrentBalls.Remove(ball);
 
-        if (MainUI == null)
+        if (CurrentBalls.Count != 0) return;
+        if ((Mode == GameMode.Main && MainUI == null) || (Mode == GameMode.TimeAttack && TimeAttackUI == null))
+
         {
             InstanceBall();
             return;
@@ -81,12 +100,15 @@ public class GameManager
         if (CurrentBalls.Count != 0) return;
 
         Life--;
-        MainUI.SetLifeUI(true, Life);
+        //MainUI.SetLifeUI(true, Life);
+        if (Mode == GameMode.TimeAttack) TimeAttackUI.SetLifeUI(true, Life);
+        else if (Mode == GameMode.Main) MainUI.SetLifeUI(true, Life);
 
         if (Life == 0)
         {
-            State = GameState.Pause;
-            MainUI.ShowGameOver();
+
+            GameOver();
+
         }
         else
         {
@@ -94,11 +116,20 @@ public class GameManager
         }
     }
 
+    public void GameOver()
+    {
+        State = GameState.Pause;
+        // MainUI.ShowGameOver();
+        if (Mode == GameMode.TimeAttack) TimeAttackUI.ShowGameOver();
+        else if (Mode == GameMode.Main) MainUI.ShowGameOver();
+        Managers.Skill.ResetSkill();
+    }
+
     public void LevelClear()
     {
         CurrentLevel++;
 
-        if (CurrentLevel > PlayerPrefs.GetInt("LevelsUnlocked", 0))
+        if (Mode == GameMode.Main && CurrentLevel > PlayerPrefs.GetInt("LevelsUnlocked", 0))
         {
             PlayerPrefs.SetInt("LevelsUnlocked", CurrentLevel);
         }
@@ -107,7 +138,9 @@ public class GameManager
     public void LifeUp()
     {
         Life = Mathf.Clamp(Life, 0, 2);
-        MainUI.SetLifeUI(false, Life);
+        //MainUI.SetLifeUI(false, Life);
+        if (Mode == GameMode.TimeAttack) TimeAttackUI.SetLifeUI(false, Life);
+        else if (Mode == GameMode.Main) MainUI.SetLifeUI(false, Life);
         Life++;
     }
 }

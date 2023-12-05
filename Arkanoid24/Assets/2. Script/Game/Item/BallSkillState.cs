@@ -29,9 +29,11 @@ public class BallSkillState
 
     public void ResetSkill()
     {
+        if (CurrentSkill == Items.Enlarge) UnEnalarge();
         _currnetSkill = Items.None;
         UnPowerUp();
-        UnEnalarge();
+        BallExtraPower = 0;
+        BallExtraSpeed = 0f;
     }
 
     public void PowerUp()
@@ -94,6 +96,7 @@ public class BallSkillState
         CurrentSkill = Items.Enlarge;
         var playerScale = player.transform.localScale;
         player.transform.localScale = new Vector3(playerScale.x * 1.5f, playerScale.y, playerScale.z);
+        Player = player;
     }
     
     public void UnEnalarge()

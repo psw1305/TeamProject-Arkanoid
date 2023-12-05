@@ -35,6 +35,7 @@ public class LevelButton : MonoBehaviour
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
 
         Managers.Game.CurrentLevel = level;
+        Managers.Game.Mode = GameMode.Main;
         SceneManager.LoadScene("Main");
     }
 }
