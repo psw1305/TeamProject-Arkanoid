@@ -6,11 +6,16 @@ public class ResourceManager
     private List<StageBlueprint> stages = new();
     private Dictionary<string, GameObject> prefabs = new();
 
+    private List<VersusLevelBlueprint> versusStages = new();
     public void Initialize()
     {
         // 스테이지 SO 파일
         StageBlueprint[] stages = Resources.LoadAll<StageBlueprint>("Blueprint/Stage");
         foreach (StageBlueprint stage in stages) this.stages.Add(stage);
+
+        //대전 스테이지 SO파일
+        VersusLevelBlueprint[] versusStages = Resources.LoadAll<VersusLevelBlueprint>("Blueprint/VersusStage");
+        foreach (VersusLevelBlueprint vStage in versusStages) this.versusStages.Add(vStage);
 
         // 오브젝트 프리팹
         GameObject[] objs = Resources.LoadAll<GameObject>("Prefabs/Model");
@@ -34,6 +39,11 @@ public class ResourceManager
     public StageBlueprint[] GetStages()
     {
         return stages.ToArray();
+    }
+
+    public VersusLevelBlueprint[] GetVersusStages()
+    {
+        return versusStages.ToArray();
     }
 }
 
