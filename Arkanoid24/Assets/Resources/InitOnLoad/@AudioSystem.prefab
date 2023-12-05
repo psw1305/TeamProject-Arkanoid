@@ -142,8 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 462699daa0223b3448030b41ad4f5244, type: 2}
-  gameover: {fileID: 8300000, guid: 6fc352da0cae3a347b49e30316a3cbd0, type: 3}
-  nextstage: {fileID: 8300000, guid: 1f7930847259e4746a5bb3df86e92ae3, type: 3}
   testBGM: {fileID: 8300000, guid: b9aa2fd2b2b7d864d9388e5cf41c5ae5, type: 3}
 --- !u!1 &5427125117502161968
 GameObject:
@@ -292,6 +290,8 @@ MonoBehaviour:
   paddleHit: {fileID: 8300000, guid: bdd2ca4525fe0b74eb641fae9d7b67b6, type: 3}
   itemPickup: {fileID: 8300000, guid: 647819ee451477843939a14f8bf8b5c7, type: 3}
   ballDeath: {fileID: 8300000, guid: 03a1ff442dc4a224c911d3b3f021b408, type: 3}
+  gameover: {fileID: 8300000, guid: 6fc352da0cae3a347b49e30316a3cbd0, type: 3}
+  nextstage: {fileID: 8300000, guid: 1f7930847259e4746a5bb3df86e92ae3, type: 3}
 --- !u!1 &7580983574363506155
 GameObject:
   m_ObjectHideFlags: 0

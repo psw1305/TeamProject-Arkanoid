@@ -38,14 +38,14 @@ public class TimeAttackSceneUI : MonoBehaviour
 
     public void ShowGameOver()
     {
-        BGM.Instance.Play(BGM.Instance.gameover, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.gameover);
 
         gameOverPopup.SetActive(true);
     }
 
     public void ShowNextStage()
     {
-        BGM.Instance.Play(BGM.Instance.nextstage, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.nextstage);
 
         nextStagePopup.SetActive(true);
     }
@@ -78,7 +78,6 @@ public class TimeAttackSceneUI : MonoBehaviour
         while (_timer > 0)
         {
             if (Managers.Game.State == GameState.Pause) break;
-            Debug.Log(_timer);
             _timer -= Time.deltaTime;
             timerText.text = string.Format(_timer.ToString("F2"));
             yield return null;

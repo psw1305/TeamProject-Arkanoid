@@ -82,12 +82,12 @@ public class BallSkillState
         Managers.Game.LifeUp();
     }
 
-    public void Lasers(GameObject player, GameObject lazer)
+    public void Lasers(GameObject player)
     {
         var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
-        bullet1.transform.position += new Vector3(-0.5f, 1f, 0f);
+        bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
         var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
-        bullet2.transform.position += new Vector3(0.5f, 1f, 0f);
+        bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
     }
 
     public void Enalarge(GameObject player)
@@ -126,7 +126,7 @@ public class BallSkillState
         Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
         if (BallVec.x == 0)
         {
-            secondBallRb.velocity = new Vector2(directionMultiplier * BallVec.y * Mathf.Cos(45), BallVec.y * Mathf.Sin(45));
+            secondBallRb.velocity = new Vector2(directionMultiplier * 1f * Mathf.Cos(45), 1f * Mathf.Sin(45));
         }
         else
         {

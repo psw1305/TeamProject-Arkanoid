@@ -1,21 +1,16 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-using Unity.VisualScripting;
-using UnityEngine.SocialPlatforms.Impl;
-using JetBrains.Annotations;
 
 public class MainSceneUI : MonoBehaviour
 {
+    [SerializeField] private GameObject[] lifes;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI BestscoreText;
-    [SerializeField] private GameObject[] lifes;
 
     [Header("Popup")]
     [SerializeField] private GameObject gameOverPopup;
     [SerializeField] private GameObject nextStagePopup;
     [SerializeField] private GameObject RankPopup;
-
 
     public void SetScoreUI(float score)
     {
@@ -36,29 +31,29 @@ public class MainSceneUI : MonoBehaviour
 
     public void ShowGameOver()
     {
-        BGM.Instance.Play(BGM.Instance.gameover, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.gameover);
 
         gameOverPopup.SetActive(true);
     }
 
     public void ShowNextStage()
     {
-        BGM.Instance.Play(BGM.Instance.nextstage, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.nextstage);
 
         nextStagePopup.SetActive(true);
     }
 
-    // 최고 기록 (유건희)
+    // 클래식 모드_Main_우측 상단의 최고 기록
     private string KeyName = "BestScore";
     private float bestscore = 0;
 
     void Start()
     {
         bestscore = PlayerPrefs.GetFloat(KeyName, 0);
-        BestscoreText.text = $"최고 기록 : {bestscore.ToString()}";
+        BestscoreText.text = $"최고 기록 : {bestscore}";
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Managers.Game.Score > bestscore)
         {

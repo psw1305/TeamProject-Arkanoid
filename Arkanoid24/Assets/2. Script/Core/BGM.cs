@@ -34,13 +34,11 @@ public class BGM : AudioSystem<BGM>
     #endregion
 
     [Header("Game")]
-    public AudioClip gameover;
-    public AudioClip nextstage;
     public AudioClip testBGM;
 
     private void Start()
     {
-        Play(testBGM, true);
+        //Play(testBGM, true);
     }
 
     public void Play(AudioClip clip, bool isLoop)

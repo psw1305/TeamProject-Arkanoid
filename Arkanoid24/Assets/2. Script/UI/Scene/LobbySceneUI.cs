@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +16,13 @@ public class LobbySceneUI : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private Button dataClearButton;
+    [SerializeField] private AudioSliderSetting SFXAudioSliderSetting;
+    [SerializeField] private AudioSliderSetting BGMAudioSliderSetting;
 
     [Header("Others")]
     [SerializeField] private Button[] backButtons;
+
+    AudioSliderSetting audioSliderSetting;
 
     private void Awake()
     {
@@ -38,6 +43,25 @@ public class LobbySceneUI : MonoBehaviour
         if (!PlayerPrefs.HasKey("LevelsUnlocked"))
         {
             PlayerPrefs.SetInt("LevelsUnlocked", 0);
+        }
+    }
+
+    private void Start()
+    {
+        // 오디오볼륨 저장 데이터 확인
+        if (!PlayerPrefs.HasKey("SFXSoundValue"))
+        {
+            PlayerPrefs.SetFloat("SFXSoundValue", 1f);
+        }
+        else
+        {
+            //SFX
+            SFXAudioSliderSetting.audioSlider.value = PlayerPrefs.GetFloat("SFXSoundValue");
+            SFXAudioSliderSetting.SFXAuidoControl(SFXAudioSliderSetting.audioSlider.value);
+
+            //BGM
+            BGMAudioSliderSetting.audioSlider.value = PlayerPrefs.GetFloat("BGMSoundValue");
+            BGMAudioSliderSetting.BGMAuidoControl(BGMAudioSliderSetting.audioSlider.value);
         }
     }
 
