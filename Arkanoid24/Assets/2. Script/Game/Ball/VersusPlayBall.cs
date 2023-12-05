@@ -1,179 +1,136 @@
+using System;
 using UnityEngine;
 
-public class VersusPlayBall : MonoBehaviour
+public class VersusPlayBall : VersusPlayBallPreference
 {
-    [SerializeField] private VersusManager game;
+    #region Member Variables
 
-    [Header("Speed")]
-    [SerializeField] public float ballMaxSpeed;
-    [SerializeField] private float ballDefaultMaxSpeed;
-    private float _defaultSpeed = 8f;
+    public bool isCatchLaunch = false;
+    public bool isCatch = false;
 
-    private Rigidbody2D paddleBody;
-    private Rigidbody2D ballBody;
-
-    private bool isLaunch = false;
-    private bool isCatchLaunch = false;
-    private bool isCatch = false;
-
-    private int _defaultPower = 1;
+    public int _defaultPower = 1;
     public int _maxPower = 1;
 
+    public float _posX;
+    public float _paddleWidth;
 
-    private float _posX;
-    private float _paddleWidth;
+    #endregion
 
-    [SerializeField] private string _playerTag;
 
-    /// <summary>
-    /// Ball �ӵ� ���� [�ӽ�]
-    /// </summary>
-    /// <param name="speed"></param>
-    public void SetMaxSpeed(float speed)
+    #region Unity Flow
+    protected override void Awake()
     {
-        ballMaxSpeed = ballDefaultMaxSpeed + speed;
+        // Get Component
+        base.Awake();
     }
 
-    private void Awake()
+    protected override void Start()
     {
-        ballBody = GetComponent<Rigidbody2D>();
-        paddleBody = GameObject.FindWithTag(_playerTag).GetComponent<Rigidbody2D>();
+        base.Start();
+
+        Managers.Event.OnBallLaunch += BallToStart;
+
+        SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
+        SetPower(Managers.Skill.BallExtraPower);
     }
 
-    private void Start()
+    protected override void FixedUpdate()
     {
-        // �ν��Ͻ� ���� ����
-        Managers.Event.OnBallLaunch += StartBall;
-        SetMaxSpeed(Managers.Skill.BallExtraSpeed);
-    }
+        base.FixedUpdate();
 
-    private void FixedUpdate()
-    {
-        if (Managers.Game.State == GameState.Pause)
-        {
-            ballBody.velocity = Vector3.zero;
-            return;
-        }
-
-        if (!isLaunch || isCatch)
-        {
-            ReadyBall();
-        }
-        else if (isCatchLaunch)
-        {
-            CatchLaunchBall();
-        }
-        else
-        {
-            LaunchBall();
-        }
+        BallStateUpdateMethod();
     }
+    #endregion
+
 
     #region Ball State
 
-    public void StartBall()
+    private void BallStateUpdateMethod()
     {
-        if(isCatch) isCatchLaunch = true;
-        isLaunch = true;
-        isCatch = false;
-        ballBody.velocity = new Vector2(0, 10);
-       //Managers.Event.PublishBallIsLaunch(isLaunch);
+        Action ballAction = BallState switch
+        {
+            BALL_STATE.READY => () => BallToReady(),
+            BALL_STATE.LAUNCH => () => BallToLaunch(),
+            _ => () => { }
+        };
+
+        ballAction();
     }
 
-    private void ReadyBall()
+    public void BallToStart()
     {
-        if(isCatch) FollowThePaddle(_posX);
-        else FollowThePaddle();
+        if (BallState != BALL_STATE.READY) return;
+        if (isCatch) isCatchLaunch = true;
+        isCatch = false;
+        BallState = BALL_STATE.LAUNCH;
+
+        _paddleWidth = _paddleObj.GetComponent<BoxCollider2D>().bounds.size.x;
+        var posX = _posX / _paddleWidth;
+        var dir = new Vector2(posX, 1).normalized;
+        if (posX != 0)
+            _ballRbody.velocity = dir * _currentSpeed;
+        else
+            _ballRbody.velocity = Vector2.up * defaultSpeed;
+    }
+
+    private void BallToReady()
+    {
+        FollowThePaddle(_posX);
     }
 
     private void FollowThePaddle(float posX = 0f)
     {
-        Vector2 paddlePos = paddleBody.position;
-        Vector2 newBallPos = new Vector2(paddlePos.x, paddlePos.y + 0.3f);
-        ballBody.position = newBallPos + new Vector2(posX, 0f);
-        ballBody.velocity = Vector2.zero;
+        Vector2 paddlePos = _paddleRbody.position;
+        Vector2 newBallPos = new Vector2(paddlePos.x, paddlePos.y + 0.5f);
+
+        _ballRbody.position = newBallPos + new Vector2(posX, 0f);
+        _ballRbody.velocity = Vector2.zero;
     }
 
-    private void LaunchBall()
+    private void BallToLaunch()
     {
-        if (ballBody.velocity.magnitude > ballMaxSpeed)
+        var ballVelocitySpeed = _ballRbody.velocity.magnitude;
+
+        if (ballVelocitySpeed > _currentSpeed || ballVelocitySpeed < _currentSpeed)
         {
-            ballBody.velocity = ballBody.velocity.normalized * ballMaxSpeed;
+            _ballRbody.velocity = _ballRbody.velocity.normalized * _currentSpeed;
+        }
+    }
+    #endregion
+
+
+
+    #region Item SKill
+
+    public void CheckCatchActivation()
+    {
+        if (Managers.Skill.CurrentSkill == Items.Catch)
+        {
+            BallState = BALL_STATE.READY;
+            _posX = transform.position.x - _paddleRbody.transform.position.x;
         }
     }
 
-    private void CatchLaunchBall()
+
+    public void SetPower(int extraPower)
     {
-        var x = _posX / _paddleWidth;
-        var dir = new Vector2(x, 1).normalized;
-        ballBody.velocity = dir * ballMaxSpeed;
-
-        isCatchLaunch = false;
-    }
-
-    #endregion
-
-    #region Ball Collision
-
-    /// <summary>
-    /// ���� �е��� x��ǥ�� ���� �ܰ� ���� ũ�� �ο�
-    /// </summary>
-    /// <param name="paddlePos">�е� ������</param>
-    /// <param name="paddleWidth">�е� �ݶ��̴� �ʺ�</param>
-    /// <returns>���� X��ġ �� ��ŭ ���� x�� �ο�</returns>
-    private float HitFactor(Vector2 paddlePos, float paddleWidth)
-    {
-        return (transform.position.x - paddlePos.x) / paddleWidth * 2f;
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
+        _maxPower = _defaultPower + extraPower;
+        if (Managers.Skill.CurrentSkill == Items.Power)
         {
-            SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
-            _paddleWidth = col.collider.bounds.size.x;
-
-            CheckCatchActivation();
-            if (!isCatch)
-            {
-                var x = HitFactor(col.transform.position, _paddleWidth);
-                var dir = new Vector2(x, 1).normalized;
-                ballBody.velocity = dir * ballMaxSpeed;
-            }
+            transform.localScale = transform.localScale * 2f;
         }
     }
 
     #endregion
+
+
 
     private void OnDestroy()
     {
         if (Managers.Instance != null && Managers.Event != null)
         {
-            //Managers.Event.PublishBallIsLaunch(false);
-            Managers.Event.OnBallLaunch -= StartBall;
+            Managers.Event.OnBallLaunch -= BallToStart;
         }
     }
-    #region Item SKill
-
-    private void CheckCatchActivation()
-    {
-        if (Managers.Skill.CurrentSkill == Items.Catch)
-        {
-            isCatch = true;
-            _posX = transform.position.x - paddleBody.transform.position.x;
-        }
-        else
-        {
-            isCatch = false;
-        }
-
-    }
-
-    
-    public void SetPower(int extraPower)
-    {
-        _maxPower = _defaultPower + extraPower;
-    }
-
-    #endregion
 }
+

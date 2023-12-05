@@ -10,10 +10,10 @@ public class BrickHit : MonoBehaviour
         //_spriteRenderer = GetComponent<SpriteRenderer>();
         //_color = _spriteRenderer.color;
     }
-    
+
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ball")
+        if (collision.gameObject.tag == "Ball" || collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
         {
             SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
             BrickHitColor();

@@ -37,7 +37,7 @@ public class BrickBreak : MonoBehaviour
         }
         if (_hp <= 0)
         {
-            BrickDestroy();
+            BrickDestroy(collision.gameObject.tag);
         }
     }
 

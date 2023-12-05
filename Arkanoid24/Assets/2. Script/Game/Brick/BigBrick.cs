@@ -20,7 +20,7 @@ public class BigBrick : BrickBreak
         PhaseSpriteSetting();
         if (_hp <= 0)
         {
-            BrickDestroy();
+            BrickDestroy(collision.gameObject.tag);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
