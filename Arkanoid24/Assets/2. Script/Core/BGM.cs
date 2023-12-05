@@ -36,12 +36,18 @@ public class BGM : AudioSystem<BGM>
     [Header("Game")]
     public AudioClip gameover;
     public AudioClip nextstage;
+    public AudioClip testBGM;
+
+    private void Start()
+    {
+        Play(testBGM, true);
+    }
 
     public void Play(AudioClip clip, bool isLoop)
     {
         this.AudioSource.loop = isLoop;
         this.AudioSource.clip = clip;
-        this.AudioSource.Play();
+        this.AudioSource.Play();       
     }
 }
 
