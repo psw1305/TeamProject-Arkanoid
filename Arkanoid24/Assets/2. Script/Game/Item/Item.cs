@@ -1,10 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
  public class Item : MonoBehaviour
 {
@@ -14,13 +9,14 @@ using static UnityEditor.Experimental.GraphView.GraphView;
     public float GetSpeed => (_dropSpeed);
 
     [SerializeField] private Items itemType;
-
     [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject sprite;
+    [SerializeField] private ParticleSystem particle;
+
+    private bool isPickup = false;
     private Ball _mainBall;
     private float _originSpeed;
     private GameObject _firstBall;
-
-
 
     void Start()
     {
@@ -42,13 +38,22 @@ using static UnityEditor.Experimental.GraphView.GraphView;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Managers.Skill.Player = collision.gameObject;
-        if (collision.CompareTag("Player"))
+        
+        if (collision.CompareTag("Player") && !isPickup)
         {
+            isPickup = true;
             SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
             ItemSkill(collision.gameObject);
-
-            Destroy(gameObject);
+            StartCoroutine(DeathCoroutine());
         }
+    }
+
+    private IEnumerator DeathCoroutine()
+    {
+        sprite.SetActive(false);
+        particle.Play();
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 
     private void ItemSkill(GameObject player)

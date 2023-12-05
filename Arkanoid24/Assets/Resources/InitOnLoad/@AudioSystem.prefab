@@ -290,6 +290,7 @@ MonoBehaviour:
   brickHit: {fileID: 8300000, guid: 7c64718d01fd0fa43a1a4c32721ec652, type: 3}
   paddleHit: {fileID: 8300000, guid: bdd2ca4525fe0b74eb641fae9d7b67b6, type: 3}
   itemPickup: {fileID: 8300000, guid: 647819ee451477843939a14f8bf8b5c7, type: 3}
+  ballDeath: {fileID: 8300000, guid: 03a1ff442dc4a224c911d3b3f021b408, type: 3}
 --- !u!1 &7580983574363506155
 GameObject:
   m_ObjectHideFlags: 0
