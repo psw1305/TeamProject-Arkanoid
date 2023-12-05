@@ -53,6 +53,7 @@ public class GameManager
         {
             State = GameState.Pause;
             LevelClear();
+            Managers.Skill.ResetSkill();
             MainUI.ShowNextStage();
         }
 
@@ -78,6 +79,7 @@ public class GameManager
         {
             State = GameState.Pause;
             MainUI.ShowGameOver();
+            Managers.Skill.ResetSkill();
         }
         else
         {
