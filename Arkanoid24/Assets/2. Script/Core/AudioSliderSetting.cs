@@ -7,20 +7,19 @@ using UnityEngine.UI;
 
 public class AudioSliderSetting : MonoBehaviour
 {
-    //[SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider audioSlider;
+    public Slider audioSlider;
 
-    public void SFXAuidoControl()
+    public void SFXAuidoControl(float sound)
     {
-        float sound = audioSlider.value; // 0.0001 ~ 1
-
+        sound = audioSlider.value; // 0.0001 ~ 1
         AudioSystem<SFX>.Instance.VolumeScale = sound;
+        PlayerPrefs.SetFloat("SFXSoundValue", sound);
     }
 
-    public void BGMAuidoControl()
+    public void BGMAuidoControl(float sound)
     {
-        float sound = audioSlider.value; // 0.0001 ~ 1
-
+        sound = audioSlider.value; // 0.0001 ~ 1
         AudioSystem<BGM>.Instance.VolumeScale = sound;
+        PlayerPrefs.SetFloat("BGMSoundValue", sound);
     }
 }
