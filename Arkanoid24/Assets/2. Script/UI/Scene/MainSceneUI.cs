@@ -48,7 +48,7 @@ public class MainSceneUI : MonoBehaviour
         nextStagePopup.SetActive(true);
     }
 
-    // 최고 기록 (유건희)
+    // 클래식 모드_Main_우측 상단의 최고 기록
     private string KeyName = "BestScore";
     private float bestscore = 0;
 
@@ -58,7 +58,7 @@ public class MainSceneUI : MonoBehaviour
         BestscoreText.text = $"최고 기록 : {bestscore.ToString()}";
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Managers.Game.Score > bestscore)
         {
