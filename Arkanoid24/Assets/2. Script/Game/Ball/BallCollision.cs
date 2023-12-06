@@ -38,7 +38,7 @@ public class BallCollision : MonoBehaviour
             }
             else if (col.gameObject.CompareTag("Brick"))
             {
-                _ball.BallHitCounting();
+                _ball.BallHitBrick();
             }
         }
     }

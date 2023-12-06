@@ -22,7 +22,6 @@ public class BallPreference : MonoBehaviour
     protected Rigidbody2D _paddleRbody;
     protected Rigidbody2D _ballRbody;
 
-    public int ballHitCount = 0;
     public float ballIncreaseSpeedScope = 0.5f;
 
     // Player Depend, Reference
@@ -81,15 +80,9 @@ public class BallPreference : MonoBehaviour
             _currentSpeed = MinSpeed;
     }
 
-    public void BallHitCounting()
+    public void BallHitBrick()
     {
-        if(ballHitCount++ >= 3)
-        {
-            //SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
-            Managers.Skill.BallIncreaseSpeed += ballIncreaseSpeedScope;
-            Managers.Skill.SetSpeed(BallOwner);
-            ballHitCount = 0;
-        }
+        Managers.Skill.SetSpeed(BallOwner);
     }
 
     public bool InvalidCheckDirection(Vector2 direction)

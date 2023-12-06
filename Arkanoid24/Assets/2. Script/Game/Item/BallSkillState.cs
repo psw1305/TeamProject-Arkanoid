@@ -37,7 +37,11 @@ public class BallSkillState
     public void ResetSkill(bool isHardReset)
     {
         if (CurrentSkill == Items.Enlarge) UnEnalarge();
-        if (isHardReset) BallExtraSpeed = 0f;
+        if (isHardReset) 
+        { 
+            BallExtraSpeed = 0f;
+            BallIncreaseSpeed = 0f;
+        }
         _currnetSkill = Items.None;
         UnPowerUp();
         BallExtraPower = 0;
