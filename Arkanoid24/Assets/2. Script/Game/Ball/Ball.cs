@@ -14,6 +14,9 @@ public class Ball : BallPreference
     public float _posX;
     public float _paddleWidth;
 
+    // Event
+    private event Action OnBallLaunch;
+
     #endregion
 
 
@@ -28,7 +31,7 @@ public class Ball : BallPreference
     {
         base.Start();
         
-        Managers.Event.OnBallLaunch += BallToStart;
+        OnBallLaunch += BallToStart;
 
         SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
         SetPower(Managers.Skill.BallExtraPower);
@@ -57,7 +60,7 @@ public class Ball : BallPreference
         ballAction();
     }
 
-    public void BallToStart()
+    private void BallToStart()
     {
         if (BallState != BALL_STATE.READY) return;
         if(isCatch) isCatchLaunch = true;
@@ -123,11 +126,13 @@ public class Ball : BallPreference
     #endregion
 
 
+    public void CallBallLaunch()
+    {
+        OnBallLaunch?.Invoke();
+    }
+
     private void OnDestroy()
     {
-        if (Managers.Instance != null && Managers.Event != null)
-        {
-            Managers.Event.OnBallLaunch -= BallToStart;
-        }
+        OnBallLaunch -= BallToStart;
     }
 }

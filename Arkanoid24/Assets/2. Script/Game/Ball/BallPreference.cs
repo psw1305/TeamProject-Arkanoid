@@ -38,7 +38,7 @@ public class BallPreference : MonoBehaviour
 
     protected virtual void Start()
     {
-        _paddleRbody = ServiceLocator.GetService<PaddleInputController>().GetComponent<Rigidbody2D>();
+        GameModeSyncGetComponent();
 
         _currentSpeed = defaultSpeed;
     }
@@ -56,6 +56,27 @@ public class BallPreference : MonoBehaviour
 
 
     #region Utility
+    private void GameModeSyncGetComponent()
+    {
+        var activePlayer = Managers.Player.GetActivePlayers();
+
+        if (Managers.Game.IsMulti)
+        {
+            if(gameObject.CompareTag("Ball1"))
+            {
+                
+            }
+            else
+            {
+                _paddleRbody = GameObject.FindWithTag("Player2").GetComponent<Rigidbody2D>();
+            }
+        }
+        else
+        {
+            _paddleRbody = ServiceLocator.GetService<PaddleInputController>().GetComponent<Rigidbody2D>();
+        }
+    }
+
     public void SetAdditionalCurrentSpeed(float additionalSpeed)
     {
         _currentSpeed = defaultSpeed + additionalSpeed;

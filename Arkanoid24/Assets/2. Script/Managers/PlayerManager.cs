@@ -115,6 +115,31 @@ public class PlayerManager
 
 
     #region Utilites
+    // 현재 활성화된 플레이어(들)을 반환하는 메서드
+    public List<GameObject> GetActivePlayers()
+    {
+        // 멀티플레이 모드일 경우
+        if (Managers.Game.IsMulti)
+        {
+            return _players;
+        }
+        // 솔로 플레이 모드일 경우
+        else
+        {
+            // 리스트에 하나의 플레이어만 포함되어 있는지 확인
+            if (_players.Count > 0)
+            {
+                // 첫 번째 플레이어만 반환
+                return new List<GameObject> { _players[0] };
+            }
+            else
+            {
+                // 플레이어가 없을 경우, 빈 리스트 반환
+                return new List<GameObject>();
+            }
+        }
+    }
+
     public void ReleasePlayerObject()
     {
         _players.Clear();

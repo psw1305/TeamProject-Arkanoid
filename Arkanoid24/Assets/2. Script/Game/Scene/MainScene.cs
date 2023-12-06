@@ -26,6 +26,8 @@ public class MainScene : MonoBehaviour
         SceneLoader.Instance.OnSceneLoaded();
 
         // #2. 현재 레벨에 맞는 스테이지 생성
+        Managers.Player.PlayerSpawn();
+        Managers.Player.CameraSpawn();
         CreateStage();
 
         // #3. 게임 모드 세팅

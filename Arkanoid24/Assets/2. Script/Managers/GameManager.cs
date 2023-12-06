@@ -17,6 +17,8 @@ public class GameManager
     public int Life { get; set; }
     public float Score { get; set; }
 
+    public bool IsMulti { get; set; } = true;
+
     #endregion
 
     #region Properties - Mode
@@ -73,6 +75,14 @@ public class GameManager
     #endregion
 
     #region Game Play Methods
+
+    public void CreateBall(GameObject player)
+    {
+        var ballStartPos = new Vector2(player.transform.position.x, player.transform.position.y + 0.5f);
+        var ball = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
+
+        Managers.Ball.AssignBallToPlayer(player, ball);
+    }
 
     public void InstanceBall()
     {
@@ -174,4 +184,5 @@ public class GameManager
     }
 
     #endregion
+
 }

@@ -28,8 +28,6 @@ public class VersusPlayBall : VersusPlayBallPreference
     {
         base.Start();
 
-        Managers.Event.OnBallLaunch += BallToStart;
-
         SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
         SetPower(Managers.Skill.BallExtraPower);
     }
@@ -127,10 +125,10 @@ public class VersusPlayBall : VersusPlayBallPreference
 
     private void OnDestroy()
     {
-        if (Managers.Instance != null && Managers.Event != null)
-        {
-            Managers.Event.OnBallLaunch -= BallToStart;
-        }
+        //if (Managers.Instance != null && Managers.Event != null)
+        //{
+        //    Managers.Event.OnBallLaunch -= BallToStart;
+        //}
     }
 }
 
