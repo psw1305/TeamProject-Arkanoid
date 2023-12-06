@@ -75,21 +75,6 @@ public class Brick : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball") || collision.gameObject.CompareTag("Ball1") || collision.gameObject.CompareTag("Ball2"))
         {
             SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
-            Damaged(1);
-
-            /* �ӽ� �׽�Ʈ�� */
-            var ballPreference = collision.gameObject.GetComponent<BallPreference>();
-            var ballOwner = ballPreference.BallOwner;
-
-            if(ballOwner == Managers.Player.GetActivePlayers()[0])
-            {
-                Managers.Versus.Player1BrickCount();
-            }
-            else
-            {
-                Managers.Versus.Player2BrickCount();
-            }
-            
             Damaged(collision.gameObject.GetComponent<Ball>()._maxPower);
         }
     }
