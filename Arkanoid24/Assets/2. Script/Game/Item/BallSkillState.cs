@@ -96,6 +96,7 @@ public class BallSkillState
         {
             var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
             bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
+            yield return new WaitForSeconds(_laserFireDelay/2);
             var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
             bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
             yield return new WaitForSeconds(_laserFireDelay);
