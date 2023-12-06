@@ -135,6 +135,7 @@ public class BallSkillState
         Vector2 ballPos = mainBall.transform.position + new Vector3(directionMultiplier, 0, 0);
         GameObject ball = Managers.Resource.Instantiate("BallPrefab", ballPos);
         ball.GetComponent<Ball>().BallState = BallPreference.BALL_STATE.LAUNCH;
+        ball.GetComponent<Ball>().AssignPlayer(player);
         Managers.Ball.AssignBallToPlayer(player, ball);
         Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
         if (BallVec.x == 0)
