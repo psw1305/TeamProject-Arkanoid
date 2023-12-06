@@ -7,16 +7,9 @@ public class VersusScene : MonoBehaviour
 
     #region MonoBehaviour
 
-    private void Awake()
-    {
-        Managers.Resource.Initialize();
-        Managers.Versus.Initialize();
-
-
-    }
-
     private void Start()
     {
+        ReleasePrevData();
         InitMainGame();
     }
 
@@ -24,24 +17,25 @@ public class VersusScene : MonoBehaviour
 
     private void InitMainGame()
     {
-        // #0. 씬 로딩
-        SceneLoader.Instance.OnSceneLoaded();
-
-        // # 1. Setting (카메라, 플레이어, 스테이지)
+        // #1. Manager / Player Setting
+        Managers.Versus.InitScene();
         Managers.Player.CameraSpawn();
         Managers.Player.PlayerSpawn();
+
+        // #2. Scene Loading
+        SceneLoader.Instance.OnSceneLoaded();
+
+        // #3. Create Current Level
         CreateStage();
 
-
-        // # 2. Ball Create To Assgin Player
+        // # 4. Ball Create To Assgin Player
         Managers.Ball.CreateBalls();
+    }
 
-        // #2. 공 생성 후 대기
-        // Managers.Versus.InstanceBall();
-        //Managers.Versus.InstanceBall(VersusManager.player1Index);
-        //Managers.Versus.InstanceBall(VersusManager.player2Index);
-
-        Managers.Game.Mode = GameMode.Versus;
+    private void ReleasePrevData()
+    {
+        Managers.Player.ReleasePlayerObject();
+        Managers.Ball.ReleaseAll();
     }
 
     /// <summary>

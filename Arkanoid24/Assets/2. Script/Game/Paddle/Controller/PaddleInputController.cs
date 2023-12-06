@@ -5,12 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PaddleInputController : PaddleController
 {
-    #region Member Variables
-
-    private bool _isMultiplay;
-
-    #endregion
-
 
     #region Unity Flow
     protected override void Awake()
@@ -20,8 +14,6 @@ public class PaddleInputController : PaddleController
     protected override void Start()
     {
         base.Start();
-
-        _isMultiplay = Managers.Game.IsMulti;
     }
     #endregion
 
@@ -33,13 +25,15 @@ public class PaddleInputController : PaddleController
         if (Managers.Game.State != GameState.Play) return;
 
         Action<InputValue> movementAction = 
-            (_isMultiplay == true) ? KeyboardMovementToMulti : MouseMovementToSolo;
+            (Managers.Game.Mode == GameMode.Versus) ? KeyboardMovementToMulti : MouseMovementToSolo;
 
         movementAction?.Invoke(inputValue);
     }
 
     private void OnFire(InputValue inputValue)
     {
+        if (Managers.Game.State != GameState.Play) return;
+
         CallFireEvent();
     }
 

@@ -26,10 +26,6 @@ public class BrickBreak : MonoBehaviour
         {
             _hp -= collision.gameObject.GetComponent<Ball>()._maxPower;
         }
-        else if(collision.gameObject.tag == "Ball1" || collision.gameObject.tag == "Ball2")
-        {
-            _hp -= collision.gameObject.GetComponent<VersusPlayBall>()._maxPower;
-        }
         //레이저 충돌
         else if (collision.gameObject.tag == "Bullet")
         {

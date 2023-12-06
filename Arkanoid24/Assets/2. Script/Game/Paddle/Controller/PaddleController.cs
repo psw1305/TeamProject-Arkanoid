@@ -65,7 +65,7 @@ public class PaddleController : MonoBehaviour
     #region Swtich Action Maps
     private void PaddleMapsSetting()
     {
-        Action paddleMaps = (Managers.Game.IsMulti == true) ?
+        Action paddleMaps = (Managers.Game.Mode == GameMode.Versus) ?
             EnableMultiPaddle : EnableSoloPaddle;
 
         paddleMaps?.Invoke();

@@ -37,7 +37,7 @@ public class PlayerManager
     
     public void PlayerSpawn()
     {
-        Action playerSpawn = (Managers.Game.IsMulti == true) ?
+        Action playerSpawn = (Managers.Game.Mode == GameMode.Versus) ?
             MultiPlayerSpawn : SoloPlayerSpawn;
 
         playerSpawn?.Invoke();
@@ -76,7 +76,7 @@ public class PlayerManager
     #region Camera Spawner
     public void CameraSpawn()
     {
-        Action cameraSpawn = (Managers.Game.IsMulti == true) ?
+        Action cameraSpawn = (Managers.Game.Mode == GameMode.Versus) ?
             MultiCameraSpawn : SoloCameraSpawn;
 
         cameraSpawn?.Invoke();
@@ -121,7 +121,7 @@ public class PlayerManager
     public List<GameObject> GetActivePlayers()
     {
         // 멀티플레이 모드일 경우
-        if (Managers.Game.IsMulti)
+        if (Managers.Game.Mode == GameMode.Versus)
         {
             return _players;
         }
