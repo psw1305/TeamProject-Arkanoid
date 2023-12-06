@@ -15,7 +15,15 @@ public class NextStagePanel : MonoBehaviour
     public void NextLevel()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-        SceneLoader.Instance.ChangeScene("Main");
+
+        if (Managers.Game.CurrentLevel >= 10)
+        {
+            SceneLoader.Instance.ChangeScene("Lobby");
+        }
+        else
+        {
+            SceneLoader.Instance.ChangeScene("Main");
+        }
     }
 
     public void Menu()

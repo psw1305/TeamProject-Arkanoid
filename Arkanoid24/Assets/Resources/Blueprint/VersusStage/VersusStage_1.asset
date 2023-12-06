@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   stageMap: {fileID: 6601096686457239642, guid: 1cb9e31472bc7c046b9cf836194e9087, type: 3}
-  player1Bricks: 1
-  player2Bricks: 1
+  player1Bricks: 30
+  player2Bricks: 30

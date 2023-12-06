@@ -41,6 +41,7 @@ public class SFX : AudioSystem<SFX>
     public AudioClip paddleHit;
     public AudioClip itemPickup;
     public AudioClip ballDeath;
+    public AudioClip laser;
 
     [Header("End")]
     public AudioClip gameover;
