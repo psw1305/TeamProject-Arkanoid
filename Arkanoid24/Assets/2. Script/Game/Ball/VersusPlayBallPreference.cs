@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class BallPreference : MonoBehaviour
+public class VersusPlayBallPreference : MonoBehaviour
 {
     public enum BALL_STATE
     {
@@ -19,19 +19,14 @@ public class BallPreference : MonoBehaviour
 
     [SerializeField] protected float _currentSpeed;
 
+    [SerializeField] protected GameObject _paddleObj;
     protected Rigidbody2D _paddleRbody;
-    protected Rigidbody2D _ballRbody;
+    [SerializeField] protected Rigidbody2D _ballRbody;
 
     public int ballHitCount = 0;
-    public float ballIncreaseSpeedScope = 0.5f;
-
-    // Player Depend, Reference
-    protected GameObject _playerObject;
+    public float ballIncreaseSpeedScope = 1.5f;
 
     public BALL_STATE BallState { get; set; } = BALL_STATE.READY;
-    
-    // Getter
-    public GameObject BallOwner { get { return _playerObject; } }
 
     #endregion
 
@@ -39,6 +34,17 @@ public class BallPreference : MonoBehaviour
     #region Unity Flow
     protected virtual void Awake()
     {
+        if (gameObject.tag == "Ball1")
+        {
+            _paddleObj = GameObject.FindWithTag("Player1");
+            _paddleRbody = _paddleObj.GetComponent<Rigidbody2D>();
+        }
+        else  if (gameObject.tag == "Ball2")
+        {
+            _paddleObj = GameObject.FindWithTag("Player2");
+            _paddleRbody = _paddleObj.GetComponent<Rigidbody2D>();
+        }
+
         _ballRbody = GetComponent<Rigidbody2D>();
     }
 
@@ -49,28 +55,17 @@ public class BallPreference : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if(Managers.Game.State != GameState.Play)
+        if(Managers.Game.State == GameState.Pause)
         {
             _ballRbody.velocity = Vector2.zero;
             return;
         }
+
     }
     #endregion
 
 
     #region Utility
-    public void AssignPlayer(GameObject player)
-    {
-        _playerObject = player;
-
-        GetPlayerComponent();
-    }
-
-    private void GetPlayerComponent()
-    {
-        _paddleRbody = _playerObject.GetComponent<Rigidbody2D>();
-    }
-
     public void SetAdditionalCurrentSpeed(float additionalSpeed)
     {
         _currentSpeed = defaultSpeed + additionalSpeed;
@@ -85,9 +80,7 @@ public class BallPreference : MonoBehaviour
     {
         if(ballHitCount++ >= 3)
         {
-            //SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
-            Managers.Skill.BallIncreaseSpeed += ballIncreaseSpeedScope;
-            Managers.Skill.SetSpeed();
+            SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
             ballHitCount = 0;
         }
     }

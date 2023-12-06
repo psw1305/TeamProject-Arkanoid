@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
 
-public class Ball : BallPreference
+public class VersusPlayBall : VersusPlayBallPreference
 {
     #region Member Variables
 
     public bool isCatchLaunch = false;
+    public bool isCatch = false;
 
     public int _defaultPower = 1;
     public int _maxPower = 1;
 
     public float _posX;
-
-    // Event
-    private event Action OnBallLaunch;
+    public float _paddleWidth;
 
     #endregion
 
@@ -28,8 +27,6 @@ public class Ball : BallPreference
     protected override void Start()
     {
         base.Start();
-        
-        OnBallLaunch += BallToStart;
 
         SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
         SetPower(Managers.Skill.BallExtraPower);
@@ -58,29 +55,20 @@ public class Ball : BallPreference
         ballAction();
     }
 
-    private void BallToStart()
+    public void BallToStart()
     {
         if (BallState != BALL_STATE.READY) return;
-        if(Managers.Skill.CurrentSkill == Items.Catch) isCatchLaunch = true;
+        if (isCatch) isCatchLaunch = true;
+        isCatch = false;
         BallState = BALL_STATE.LAUNCH;
 
-        CalculateBallPosToPaddle();
-    }
-
-    private void CalculateBallPosToPaddle()
-    {
-        var paddleWidth = _playerObject.GetComponent<BoxCollider2D>().bounds.size.x;
-        var posX = _ballRbody.position.x - _paddleRbody.position.x;
-
-        posX = posX / paddleWidth;
-        
-        var direction = new Vector2(posX, 1).normalized;
-
+        _paddleWidth = _paddleObj.GetComponent<BoxCollider2D>().bounds.size.x;
+        var posX = _posX / _paddleWidth;
+        var dir = new Vector2(posX, 1).normalized;
         if (posX != 0)
-            _ballRbody.velocity = direction * _currentSpeed;
+            _ballRbody.velocity = dir * _currentSpeed;
         else
             _ballRbody.velocity = Vector2.up * defaultSpeed;
-        isCatchLaunch = false;
     }
 
     private void BallToReady()
@@ -101,12 +89,13 @@ public class Ball : BallPreference
     {
         var ballVelocitySpeed = _ballRbody.velocity.magnitude;
 
-        if(ballVelocitySpeed > _currentSpeed || ballVelocitySpeed < _currentSpeed)
+        if (ballVelocitySpeed > _currentSpeed || ballVelocitySpeed < _currentSpeed)
         {
             _ballRbody.velocity = _ballRbody.velocity.normalized * _currentSpeed;
         }
     }
     #endregion
+
 
 
     #region Item SKill
@@ -120,11 +109,11 @@ public class Ball : BallPreference
         }
     }
 
-    
+
     public void SetPower(int extraPower)
     {
         _maxPower = _defaultPower + extraPower;
-        if(Managers.Skill.CurrentSkill == Items.Power)
+        if (Managers.Skill.CurrentSkill == Items.Power)
         {
             transform.localScale = transform.localScale * 2f;
         }
@@ -133,13 +122,13 @@ public class Ball : BallPreference
     #endregion
 
 
-    public void CallBallLaunch()
-    {
-        OnBallLaunch?.Invoke();
-    }
 
     private void OnDestroy()
     {
-        OnBallLaunch -= BallToStart;
+        //if (Managers.Instance != null && Managers.Event != null)
+        //{
+        //    Managers.Event.OnBallLaunch -= BallToStart;
+        //}
     }
 }
+

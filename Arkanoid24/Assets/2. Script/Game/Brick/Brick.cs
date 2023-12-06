@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour
 {
@@ -14,10 +15,18 @@ public class Brick : MonoBehaviour
     [SerializeField] 
     private GameObject itemSpawner;
 
+    private void Start()
+    {
+        if(SceneManager.GetActiveScene().name == "TEST_Versus")
+        {
+            itemCreateRate = 0;
+        }
+    }
+
     /// <summary>
-    /// ºê¸¯ µ¥¹ÌÁö °è»ê ¸Þ¼Òµå
+    /// ï¿½ê¸¯ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
     /// </summary>
-    /// <param name="damaged">µ¥¹ÌÁö ¼öÄ¡</param>
+    /// <param name="damaged">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡</param>
     public void Damaged(int damaged)
     {
         hp -= damaged;
@@ -35,7 +44,7 @@ public class Brick : MonoBehaviour
     }
 
     /// <summary>
-    /// ºê¸¯ ÆÄ±« ¸Þ¼Òµå
+    /// ï¿½ê¸¯ ï¿½Ä±ï¿½ ï¿½Þ¼Òµï¿½
     /// </summary>
     /// <returns></returns>
     public IEnumerator DeathCoroutine()
@@ -48,10 +57,10 @@ public class Brick : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // ¾ÆÀÌÅÛ »ý¼º ·ÎÁ÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void InstantiateItem()
     {
-        // itemCreateRate ÀÌÇÏÀÏ °æ¿ì ¾ÆÀÌÅÛ »ý¼º
+        // itemCreateRate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (Random.Range(0, 101) <= itemCreateRate)
         {
             itemSpawner.transform.position = transform.position;
@@ -60,12 +69,27 @@ public class Brick : MonoBehaviour
         }
     }
 
-    // Ãæµ¹ÀÌ ¹ß»ýÇÏ¸é ½ÇÇà
+    // ï¿½æµ¹ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ball"))
+        if (collision.gameObject.CompareTag("Ball") || collision.gameObject.CompareTag("Ball1") || collision.gameObject.CompareTag("Ball2"))
         {
             SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
+            Damaged(1);
+
+            /* ï¿½Ó½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ */
+            var ballPreference = collision.gameObject.GetComponent<BallPreference>();
+            var ballOwner = ballPreference.BallOwner;
+
+            if(ballOwner == Managers.Player.GetActivePlayers()[0])
+            {
+                Managers.Versus.Player1BrickCount();
+            }
+            else
+            {
+                Managers.Versus.Player2BrickCount();
+            }
+            
             Damaged(collision.gameObject.GetComponent<Ball>()._maxPower);
         }
     }

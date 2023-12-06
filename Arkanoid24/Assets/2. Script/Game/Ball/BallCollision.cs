@@ -18,24 +18,28 @@ public class BallCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player") &&
-            _ball.BallState != BallPreference.BALL_STATE.READY)
-        {
-            SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
-            float paddleWidth = col.collider.bounds.size.x;
+        var activePlayer = Managers.Player.GetActivePlayers();
 
-            _ball.CheckCatchActivation();
-            if (Managers.Skill.CurrentSkill != Items.Catch)
+        foreach (var player in activePlayer)
+        {
+            if (col.gameObject == player && _ball.BallState != BALL_STATE.READY)
             {
-                var posX = HitFactor(col.transform.position, paddleWidth);
-                var direction = new Vector2(posX, 1).normalized;
+                SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
+                float paddleWidth = col.collider.bounds.size.x;
 
-                _ballRbody.velocity = _ballRbody.velocity.magnitude * direction;
+                _ball.CheckCatchActivation();
+                if (Managers.Skill.CurrentSkill != Items.Catch)
+                {
+                    var posX = HitFactor(col.transform.position, paddleWidth);
+                    var direction = new Vector2(posX, 1).normalized;
+
+                    _ballRbody.velocity = _ballRbody.velocity.magnitude * direction;
+                }
             }
-        }
-        else if(col.gameObject.CompareTag("Brick"))
-        {
-            _ball.BallHitCounting();
+            else if (col.gameObject.CompareTag("Brick"))
+            {
+                _ball.BallHitCounting();
+            }
         }
     }
 

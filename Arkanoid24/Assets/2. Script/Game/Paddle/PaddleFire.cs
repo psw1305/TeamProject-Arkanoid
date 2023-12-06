@@ -3,19 +3,27 @@ using UnityEngine;
 
 public class PaddleFire : MonoBehaviour
 {
+    private PaddleController _paddleController;
+
     private void Start()
     {
-        // ¡¬≈¨∏Ø ¿Ã∫•∆Æ µÓ∑œ
-        Managers.Event.OnFireEvent += OnBallFire;
+        _paddleController = GetComponent<PaddleController>();
+
+        // ÔøΩÃ∫ÔøΩ∆Æ ÔøΩÔøΩÔøΩ
+        _paddleController.OnFireEvent += OnBallFire;
     }
 
     private void OnBallFire()
     {
-        // ≥≤æ∆ ¿÷¥¬ ∫º¿ª ∞°¡Æø¬¥Ÿ.
-        //var remainBall = Managers.Game.CurrentBalls.Find(ball => ball != null).GetComponent<Ball>();
+        var balls = Managers.Ball.GetBallsForPlayer(gameObject);
+        foreach (var ball in balls)
+        {
+            ball.GetComponent<Ball>().CallBallLaunch();
+        }
+    }
 
-        //if (remainBall.BallState != BallPreference.BALL_STATE.READY) return;
-
-        Managers.Event.PublishBallLaunch();
+    private void OnDisable()
+    {
+        _paddleController.OnFireEvent -= OnBallFire;
     }
 }
