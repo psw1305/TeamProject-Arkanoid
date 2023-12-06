@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NextPanel : MonoBehaviour
+public class NextStagePanel : MonoBehaviour
 {
     [SerializeField] private Button nextButton;
     [SerializeField] private Button menuButton;

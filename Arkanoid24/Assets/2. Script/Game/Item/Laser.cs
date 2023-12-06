@@ -20,7 +20,7 @@ public class Laser : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (state == ModelState.Dead || Managers.Game.State == GameState.Pause)
+        if (state == ModelState.Dead || Managers.Game.State != GameState.Play)
         {
             _rb.velocity = Vector3.zero;
             return;

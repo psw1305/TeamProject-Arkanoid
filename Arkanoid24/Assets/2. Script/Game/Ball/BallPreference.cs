@@ -44,7 +44,7 @@ public class BallPreference : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if(Managers.Game.State == GameState.Pause)
+        if(Managers.Game.State != GameState.Play)
         {
             _ballRbody.velocity = Vector2.zero;
             return;
