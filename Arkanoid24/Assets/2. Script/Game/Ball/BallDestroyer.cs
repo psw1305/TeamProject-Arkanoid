@@ -24,7 +24,14 @@ public class BallDestroyer : MonoBehaviour
         yield return new WaitForSeconds(0.19f);
         particle.Play();
         yield return new WaitForSeconds(0.06f);
-        Managers.Game.LifeDown(col.gameObject);
+
+        // 볼 삭제처리
+        GameObject ball = col.gameObject;
+        GameObject playerOwner = ball.GetComponent<BallPreference>().BallOwner;
+        Managers.Ball.RemoveBallFromPlayer(playerOwner, ball);
+
+        Managers.Game.LifeDown(playerOwner);
+
         Destroy(col.gameObject);
     }
 }

@@ -40,22 +40,21 @@ public class BallSkillState
         BallExtraPower = 0;
     }
 
-    public void PowerUp()
+    public void PowerUp(GameObject player)
     {
         //if (CurrentSkill == Items.Power) return; 
         CurrentSkill = Items.Power;
         BallExtraPower++;
-        foreach (var ball in Managers.Game.CurrentBalls)
+        foreach (var ball in Managers.Ball.GetBallsForPlayer(player))
         {
             ball.GetComponent<Ball>().SetPower(BallExtraPower);
-           
         }
     }
 
     private void UnPowerUp()
     {
         BallExtraPower = 0;
-        foreach (var ball in Managers.Game.CurrentBalls)
+        foreach (var ball in Managers.Ball.GetAllBalls())
         {
             ball.GetComponent<Ball>().SetPower(BallExtraPower);
             ball.transform.localScale = new Vector3(1, 1, 1);
@@ -67,15 +66,15 @@ public class BallSkillState
         CurrentSkill = Items.Catch;
     }
 
-    public void Slow()
+    public void Slow(GameObject player)
     {
         BallExtraSpeed -= 1f;
-        SetSpeed();
+        SetSpeed(player);
     }
 
-    public void SetSpeed()
+    public void SetSpeed(GameObject player)
     {
-        foreach (var ball in Managers.Game.CurrentBalls)
+        foreach (var ball in Managers.Ball.GetBallsForPlayer(player))
         {
             ball.GetComponent<Ball>().SetAdditionalCurrentSpeed(BallExtraSpeed + BallIncreaseSpeed);
         }
@@ -119,24 +118,24 @@ public class BallSkillState
         Player.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public void Disruption()
+    public void Disruption(GameObject player)
     {
-        var ball = Managers.Game.CurrentBalls[0];
+        var ball = Managers.Ball.GetBallsForPlayer(player)[0];
         Rigidbody2D BallRb = ball.GetComponent<Rigidbody2D>();
         Vector2 BallVec = BallRb.velocity;
 
-        InstantiateBall(ball, BallRb, BallVec, false);
-        InstantiateBall(ball, BallRb, BallVec, true);
+        InstantiateBall(ball, player, BallVec, false);
+        InstantiateBall(ball, player, BallVec, true);
     }
 
-    private void InstantiateBall(GameObject mainBall, Rigidbody2D BallRb, Vector2 BallVec, bool IsLeft)
+    private void InstantiateBall(GameObject mainBall, GameObject player, Vector2 BallVec, bool IsLeft)
     {
         float directionMultiplier = IsLeft ? -1f : 1f;
         float seta = Mathf.Atan2(BallVec.y, BallVec.x);
         Vector2 ballPos = mainBall.transform.position + new Vector3(directionMultiplier, 0, 0);
         GameObject ball = Managers.Resource.Instantiate("BallPrefab", ballPos);
         ball.GetComponent<Ball>().BallState = BallPreference.BALL_STATE.LAUNCH;
-        Managers.Game.CurrentBalls.Add(ball);
+        Managers.Ball.AssignBallToPlayer(player, ball);
         Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
         if (BallVec.x == 0)
         {

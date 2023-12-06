@@ -39,7 +39,7 @@ public class TimeAttackScene : MonoBehaviour
         CreateStage();
 
         // #4. 공 생성 후 대기
-        Managers.Game.InstanceBall();
+        Managers.Ball.CreateBalls();
     }
 
     /// <summary>

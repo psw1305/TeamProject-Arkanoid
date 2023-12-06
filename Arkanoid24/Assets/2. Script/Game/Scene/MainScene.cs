@@ -9,6 +9,7 @@ public class MainScene : MonoBehaviour
 
     private void Start()
     {
+        ReleasePrevData();
         InitMainGame();
     }
 
@@ -18,6 +19,8 @@ public class MainScene : MonoBehaviour
     {
         // #1. 매니저 세팅
         Managers.Game.InitScene();
+        Managers.Player.CameraSpawn();      // 카메라 스폰
+        Managers.Player.PlayerSpawn();        // 플레이어 스폰
 
         // #2. 씬 로딩
         SceneLoader.Instance.OnSceneLoaded();
@@ -29,7 +32,13 @@ public class MainScene : MonoBehaviour
         GameModeSetting();
 
         // #5. 공 생성 후 대기
-        Managers.Game.InstanceBall();
+        Managers.Ball.CreateBalls();
+    }
+
+    private void ReleasePrevData()
+    {
+        Managers.Player.ReleasePlayerObject();
+        Managers.Ball.ReleaseAll();
     }
 
     /// <summary>

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class GameManager
 {
-    public List<GameObject> CurrentBalls = new();
-
     #region Properties
 
     public MainScene Main { get; private set; }
@@ -15,6 +13,8 @@ public class GameManager
     public int CurrentLevel { get; set; }
     public int Bricks { get; set; }
     public int Life { get; set; }
+
+    public bool IsMulti { get; set; } = false;
 
     #endregion
 
@@ -47,7 +47,9 @@ public class GameManager
         Main = Object.FindObjectOfType<MainScene>();
         MainUI = Object.FindObjectOfType<MainSceneUI>();
 
-        CurrentBalls.Clear();
+        //Managers.Player.ReleasePlayerObject();
+        //Managers.Ball.ReleaseAll();
+
         State = GameState.Play;
         Bricks = Stages[CurrentLevel].Bricks;
 
@@ -87,14 +89,6 @@ public class GameManager
 
     #region Game Play Methods
 
-    public void InstanceBall()
-    {
-        var paddle = GameObject.FindWithTag("Player");
-        var ballStartPos = new Vector2(paddle.transform.position.x, paddle.transform.position.y + 0.3f);
-        var ballClone = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
-        CurrentBalls.Add(ballClone);
-    }
-
     public void AddScore(float score)
     {
         Bricks--;
@@ -127,15 +121,14 @@ public class GameManager
         Life++;
     }
 
-    public void LifeDown(GameObject ball)
+    public void LifeDown(GameObject player)
     {
-        CurrentBalls.Remove(ball);
-
-        if (CurrentBalls.Count != 0) return;
+        if (Managers.Ball.GetBallsForPlayer(player).Count != 0) return;
         Managers.Skill.BallIncreaseSpeed = 0f;
+
         if (MainUI == null)
         {
-            InstanceBall();
+            Managers.Ball.CreateBallForPlayer(player);
             return;
         }
 
@@ -148,7 +141,7 @@ public class GameManager
         }
         else
         {
-            InstanceBall();
+            Managers.Ball.CreateBallForPlayer(player);
         }
     }
 

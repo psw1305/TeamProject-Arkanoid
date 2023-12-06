@@ -87,7 +87,7 @@ public class BallPreference : MonoBehaviour
         {
             //SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
             Managers.Skill.BallIncreaseSpeed += ballIncreaseSpeedScope;
-            Managers.Skill.SetSpeed();
+            Managers.Skill.SetSpeed(BallOwner);
             ballHitCount = 0;
         }
     }

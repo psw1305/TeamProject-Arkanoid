@@ -81,16 +81,16 @@ using UnityEngine;
 
             case Items.Slow:
                 // 공 속도 감소
-                Managers.Skill.Slow();
+                Managers.Skill.Slow(player);
                 break;
 
             case Items.Disruption:
                 // 공 2개 추가
-                Managers.Skill.Disruption();
+                Managers.Skill.Disruption(player);
                 break;
 
             case Items.Power:
-                Managers.Skill.PowerUp();
+                Managers.Skill.PowerUp(player);
             break;
 
         }
