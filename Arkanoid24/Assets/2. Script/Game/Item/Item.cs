@@ -24,7 +24,7 @@ using UnityEngine;
     void FixedUpdate()
     {
         if (transform.position.y < -6) Destroy(gameObject);
-        if (Managers.Game.State == GameState.Pause)
+        if (Managers.Game.State != GameState.Play)
         {
             _rb.velocity = Vector3.zero;
             return;

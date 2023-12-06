@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c958ec1694bc1dc4f98d5c97f3da3eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
+  hp: 1
   sprite: {fileID: 4356232454355045520}
   particle: {fileID: 7486551714261674406}
   itemCreateRate: 30

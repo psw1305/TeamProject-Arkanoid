@@ -9,6 +9,18 @@ public enum GameState
     Loading,
 }
 
+/// <summary>
+/// 게임 모드 나타내는 타입
+/// </summary>
+public enum GameMode
+{
+    None,
+    Main,
+    Infinity,
+    TimeAttack,
+    Versus,
+}
+
 public enum ModelState
 {
     Live,
@@ -29,14 +41,4 @@ public enum Items
     Slow,
     Disruption,
     Power,
-}
-
-/// <summary>
-/// 게임 모드 나타내는 타입
-/// </summary>
-public enum GameMode
-{
-    None,
-    Main,
-    TimeAttack,
 }
