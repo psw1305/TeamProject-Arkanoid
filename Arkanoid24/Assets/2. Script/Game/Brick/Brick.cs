@@ -17,7 +17,7 @@ public class Brick : MonoBehaviour
 
     private void Start()
     {
-        if(Managers.Game.Mode == GameMode.Versus)
+        if(SceneManager.GetActiveScene().name == "TEST_Versus")
         {
             itemCreateRate = 0;
         }
@@ -61,7 +61,7 @@ public class Brick : MonoBehaviour
     public void InstantiateItem()
     {
         // itemCreateRate 이하일 경우 아이템 생성
-        if (Random.Range(0, 101) < itemCreateRate)
+        if (Random.Range(0, 101) <= itemCreateRate)
         {
             itemSpawner.transform.position = transform.position;
             Instantiate(itemSpawner);

@@ -36,6 +36,8 @@ public class VersusScene : MonoBehaviour
         // Managers.Versus.InstanceBall();
         Managers.Versus.InstanceBall(VersusManager.player1Index);
         Managers.Versus.InstanceBall(VersusManager.player2Index);
+
+        Managers.Game.Mode = GameMode.Versus;
     }
 
     /// <summary>
