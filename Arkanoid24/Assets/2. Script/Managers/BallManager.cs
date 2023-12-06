@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class BallManager
 {
-    private Dictionary<GameObject, List<GameObject>> playerBallMap =
+    private Dictionary<GameObject, List<GameObject>> _playerBallMap =
         new Dictionary<GameObject, List<GameObject>>();
 
 
     public void AssignBallToPlayer(GameObject player, GameObject ball)
     {
         // 해당 플레이어에 대한 볼 리스트가 없다면?
-        if (!playerBallMap.ContainsKey(player))
+        if (!_playerBallMap.ContainsKey(player))
         {
-            playerBallMap[player] = new List<GameObject>();
+            _playerBallMap[player] = new List<GameObject>();
         }
 
         // 볼 리스트에 추가
-        playerBallMap[player].Add(ball);
+        _playerBallMap[player].Add(ball);
     }
 
     public List<GameObject> GetBallsForPlayer(GameObject player)
     {
-        if(playerBallMap.TryGetValue(player, out List<GameObject> balls))
+        if(_playerBallMap.TryGetValue(player, out List<GameObject> balls))
         {
             return balls;
         }
@@ -32,17 +32,22 @@ public class BallManager
 
     public void RemovePlayer(GameObject player)
     {
-        if(playerBallMap.ContainsKey(player))
+        if(_playerBallMap.ContainsKey(player))
         {
-            playerBallMap.Remove(player);
+            _playerBallMap.Remove(player);
         }
     }
 
     public void RemoveBallFromPlayer(GameObject player, GameObject ball)
     {
-        if(playerBallMap.ContainsKey(player))
+        if(_playerBallMap.ContainsKey(player))
         {
-            playerBallMap[player].Remove(ball);
+            _playerBallMap[player].Remove(ball);
         }
+    }
+
+    public void ReleaseAll()
+    {
+        _playerBallMap.Clear();
     }
 }

@@ -17,6 +17,8 @@ public class VersusGameOverPanel : MonoBehaviour
     public void Restart()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
+        Managers.Player.ReleasePlayerObject();
+        Managers.Ball.ReleaseAll();
         Managers.Game.Score = 0;
         SceneLoader.Instance.ChangeScene(SceneManager.GetActiveScene().name);
     }
@@ -24,6 +26,8 @@ public class VersusGameOverPanel : MonoBehaviour
     public void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
+        Managers.Player.ReleasePlayerObject();
+        Managers.Ball.ReleaseAll();
         SceneManager.LoadScene("Lobby");
     }
 }
