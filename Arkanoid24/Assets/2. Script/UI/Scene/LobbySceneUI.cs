@@ -69,6 +69,11 @@ public class LobbySceneUI : MonoBehaviour
             PlayerPrefs.SetInt(Data.LevelUnlock, 0);
         }
 
+        if (!PlayerPrefs.HasKey(Data.BestScore))
+        {
+            PlayerPrefs.SetFloat(Data.BestScore, 0);
+        }
+
         if (!PlayerPrefs.HasKey(Data.TimeRecord))
         {
             PlayerPrefs.SetFloat(Data.TimeRecord, 0);
@@ -91,8 +96,6 @@ public class LobbySceneUI : MonoBehaviour
     private void DataClear()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-
-        Debug.Log("data clear");
         PlayerPrefs.DeleteAll();
     }
 
