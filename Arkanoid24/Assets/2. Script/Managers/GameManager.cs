@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class GameManager
 {
+    #region Member Variables
+
     public List<GameObject> CurrentBalls = new();
+
+    #endregion
+
+
 
     #region Properties
 
@@ -17,6 +23,15 @@ public class GameManager
     public int Life { get; set; }
     public float Score { get; set; }
 
+
+    // Multi Play Flag
+    public bool IsMulti { get; set; } = true; // Test : true
+    
+    public List<float> Time {  get; set; }
+    public GameMode Mode { get; set; } = GameMode.Main;
+    public TimeAttackSceneUI TimeAttackUI { get; private set; }
+
+    
     #endregion
 
     #region Properties - Mode

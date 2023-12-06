@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PaddleFire : MonoBehaviour
 {
+    private PaddleController _paddleController;
+
     private void Start()
     {
-        // 좌클릭 이벤트 등록
-        Managers.Event.OnFireEvent += OnBallFire;
+        _paddleController = GetComponent<PaddleController>();
+
+        // 이벤트 등록
+        _paddleController.OnFireEvent += OnBallFire;
     }
 
     private void OnBallFire()
@@ -24,11 +28,17 @@ public class PaddleFire : MonoBehaviour
         else
         {
             // 남아 있는 볼을 가져온다.
-            var remainBall = Managers.Versus.PlayersBalls.Find(ball => ball != null).GetComponent<VersusPlayBall>();
+            var remainBall = Managers.Versus.PlayersBalls["Player1"].Find(ball => ball != null).GetComponent<VersusPlayBall>();
+            //var remainBall = Managers.Versus.PlayersBalls["Player2"].Find(ball => ball != null).GetComponent<VersusPlayBall>();
 
             //if (remainBall.BallState != BallPreference.BALL_STATE.READY) return;
 
             Managers.Event.PublishBallLaunch();
         }
+    }
+
+    private void OnDisable()
+    {
+        _paddleController.OnFireEvent -= OnBallFire;
     }
 }

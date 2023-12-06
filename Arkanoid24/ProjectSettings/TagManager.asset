@@ -8,12 +8,12 @@ TagManager:
   - Bullet
   - Item
   - Brick
+  - UnCountBrick
+  - Wall
+  - Ball2
+  - Ball1
   - Player1
   - Player2
-  - UnCountBrick
-  - Ball1
-  - Ball2
-  - Wall
   layers:
   - Default
   - TransparentFX

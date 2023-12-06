@@ -15,7 +15,9 @@ public class VersusSceneUI : MonoBehaviour
 
     public void ShowGameOver(string winPlayer)
     {
+
         SFX.Instance.PlayOneShot(SFX.Instance.gameover);
+
 
         if (winPlayer == "Player1")
         {

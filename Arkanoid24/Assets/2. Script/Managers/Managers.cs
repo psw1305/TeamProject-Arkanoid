@@ -11,12 +11,10 @@ public class Managers : SingletonBehaviour<Managers>
     private UIManager uiManager = new();
     private GameManager gameManager = new();
     private BallSkillState ballSkillManager = new();
-    #endregion
-
-    #region Versus Managers Variables
-
+    private PlayerManager playerManager = new();
     private VersusManager versusManager = new();
     #endregion
+    
 
     #region Properties
     
@@ -25,10 +23,8 @@ public class Managers : SingletonBehaviour<Managers>
     public static UIManager UI => Instance != null ? Instance.uiManager : null;
     public static GameManager Game => Instance != null ? Instance.gameManager : null;
     public static BallSkillState Skill => Instance != null ? Instance.ballSkillManager : null;
-    #endregion
-
-    #region VersusProperties
+    public static PlayerManager Player => Instance != null ? Instance.playerManager : null;
     public static VersusManager Versus => Instance != null ? Instance.versusManager : null;
-
+    
     #endregion
 }

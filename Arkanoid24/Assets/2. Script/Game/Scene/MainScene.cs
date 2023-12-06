@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-
 public class MainScene : MonoBehaviour
 {
     private StageBlueprint stageBlueprint;
@@ -25,11 +22,25 @@ public class MainScene : MonoBehaviour
         // #1. 씬 로딩
         SceneLoader.Instance.OnSceneLoaded();
 
+//<<<<<<< HEAD
         // #2. 현재 레벨에 맞는 스테이지 생성
         CreateStage();
 
         // #3. 게임 모드 세팅
         GameModeSetting();
+//=======
+//         #1. 라이프 3개로 설정 
+//        Managers.Game.Life = 3;
+
+//         #2. 스코어 0점으로 시작
+//        Managers.Game.Score = 0;
+//        Managers.Player.CameraSpawn();
+
+//         #3. 현재 레벨에 맞는 스테이지 생성
+//        CreateStage();
+
+//        Managers.Player.PlayerSpawn();
+//>>>>>>> Multi_Versus
 
         // #4. 공 생성 후 대기
         Managers.Game.InstanceBall();
