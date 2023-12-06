@@ -236,6 +236,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -350,6 +354,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8089784621516496658, guid: cafb388e72ba0744e827b68661b44365, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -368,6 +376,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -500,6 +512,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -614,6 +630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrickBluePrefab (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7048618539213828208, guid: b1e9b9656933c054faefd0316ada27c4, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -683,6 +703,10 @@ PrefabInstance:
     - target: {fileID: 6377236260180479811, guid: cafb388e72ba0744e827b68661b44365, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089784621516496658, guid: cafb388e72ba0744e827b68661b44365, type: 3}
+      propertyPath: hp
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1032,6 +1056,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1215,6 +1243,10 @@ PrefabInstance:
     - target: {fileID: 3052477053134121657, guid: b1e9b9656933c054faefd0316ada27c4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048618539213828208, guid: b1e9b9656933c054faefd0316ada27c4, type: 3}
+      propertyPath: hp
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1545,6 +1577,10 @@ PrefabInstance:
     - target: {fileID: 6377236260180479811, guid: cafb388e72ba0744e827b68661b44365, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089784621516496658, guid: cafb388e72ba0744e827b68661b44365, type: 3}
+      propertyPath: hp
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2026,6 +2062,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2092,6 +2132,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2558,6 +2602,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6578821802387772843}
     m_Modifications:
+    - target: {fileID: 1862600762572299113, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
+      propertyPath: hp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2073288580000484582, guid: 87a83bc94c06e5445b88ccb71ab0364e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2675,6 +2723,10 @@ PrefabInstance:
     - target: {fileID: 3052477053134121657, guid: b1e9b9656933c054faefd0316ada27c4, type: 3}
       propertyPath: m_Name
       value: BrickBluePrefab (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048618539213828208, guid: b1e9b9656933c054faefd0316ada27c4, type: 3}
+      propertyPath: hp
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
