@@ -175,6 +175,7 @@ public class GameManager
             // 무한 모드 => 팝업 생성 없이 바로 다음 레벨 진행
             case GameMode.Infinity:
                 LevelClear();
+                if (CurrentLevel >= 10) CurrentLevel = 0;
                 SceneLoader.Instance.ChangeScene("Main");
                 break;
             case GameMode.Versus:
@@ -207,7 +208,6 @@ public class GameManager
     public void LevelClear()
     {
         CurrentLevel++;
-
         if (Mode != GameMode.Main) return;
         if (CurrentLevel > PlayerPrefs.GetInt(Data.LevelUnlock, 0))
         {
