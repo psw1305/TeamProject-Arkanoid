@@ -15,7 +15,7 @@ public class VersusSceneUI : MonoBehaviour
 
     public void ShowGameOver(string winPlayer)
     {
-        BGM.Instance.Play(BGM.Instance.gameover, false);
+        SFX.Instance.PlayOneShot(SFX.Instance.gameover);
 
         if (winPlayer == "Player1")
         {
@@ -29,5 +29,6 @@ public class VersusSceneUI : MonoBehaviour
         }
 
         gameOverPopup.SetActive(true);
+        Managers.Versus.State = GameState.Pause;
     }
 }

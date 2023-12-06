@@ -55,7 +55,7 @@ public class VersusPlayBallPreference : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if(Managers.Game.State == GameState.Pause)
+        if(Managers.Versus.State == GameState.Pause)
         {
             _ballRbody.velocity = Vector2.zero;
             return;
