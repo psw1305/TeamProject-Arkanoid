@@ -1,5 +1,4 @@
 
-using System;
 using UnityEngine;
 
 public class PaddleFire : MonoBehaviour
@@ -10,7 +9,7 @@ public class PaddleFire : MonoBehaviour
     {
         _paddleController = GetComponent<PaddleController>();
 
-        // ÀÌº¥Æ® µî·Ï
+        // ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½
         _paddleController.OnFireEvent += OnBallFire;
     }
 

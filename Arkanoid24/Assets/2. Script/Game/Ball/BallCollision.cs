@@ -20,9 +20,9 @@ public class BallCollision : MonoBehaviour
     {
         var activePlayer = Managers.Player.GetActivePlayers();
 
-        foreach(var player in activePlayer)
+        foreach (var player in activePlayer)
         {
-            if(col.gameObject == player && _ball.BallState != BALL_STATE.READY)
+            if (col.gameObject == player && _ball.BallState != BALL_STATE.READY)
             {
                 SFX.Instance.PlayOneShot(SFX.Instance.paddleHit);
                 float paddleWidth = col.collider.bounds.size.x;
@@ -36,7 +36,7 @@ public class BallCollision : MonoBehaviour
                     _ballRbody.velocity = _ballRbody.velocity.magnitude * direction;
                 }
             }
-            else
+            else if (col.gameObject.CompareTag("Brick"))
             {
                 _ball.BallHitCounting();
             }

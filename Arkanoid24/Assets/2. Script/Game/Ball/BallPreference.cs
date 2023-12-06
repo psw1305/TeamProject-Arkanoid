@@ -23,7 +23,7 @@ public class BallPreference : MonoBehaviour
     protected Rigidbody2D _ballRbody;
 
     public int ballHitCount = 0;
-    public float ballIncreaseSpeedScope = 1.5f;
+    public float ballIncreaseSpeedScope = 0.5f;
 
     // Player Depend, Reference
     protected GameObject _playerObject;
@@ -85,7 +85,9 @@ public class BallPreference : MonoBehaviour
     {
         if(ballHitCount++ >= 3)
         {
-            SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
+            //SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
+            Managers.Skill.BallIncreaseSpeed += ballIncreaseSpeedScope;
+            Managers.Skill.SetSpeed();
             ballHitCount = 0;
         }
     }

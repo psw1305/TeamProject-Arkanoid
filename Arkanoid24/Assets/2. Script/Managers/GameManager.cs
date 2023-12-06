@@ -3,13 +3,7 @@ using UnityEngine;
 
 public class GameManager
 {
-    #region Member Variables
-
     public List<GameObject> CurrentBalls = new();
-
-    #endregion
-
-
 
     #region Properties
 
@@ -23,15 +17,6 @@ public class GameManager
     public int Life { get; set; }
     public float Score { get; set; }
 
-
-    // Multi Play Flag
-    public bool IsMulti { get; set; } = true; // Test : true
-    
-    public List<float> Time {  get; set; }
-    //public GameMode Mode { get; set; } = GameMode.Main;
-    public TimeAttackSceneUI TimeAttackUI { get; private set; }
-
-    
     #endregion
 
     #region Properties - Mode
@@ -44,33 +29,42 @@ public class GameManager
     #region Initialize
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+    /// °ÔÀÓ ¸Å´ÏÀú ÃÊ±âÈ­
     /// </summary>
     public void Initialize()
     {
-        CurrentBalls.Clear();
+        Stages = Managers.Resource.GetStages();
+    }
 
+    /// <summary>
+    /// ¸ÞÀÎ ¾À OnStart ÃÊ±âÈ­
+    /// </summary>
+    public void InitScene()
+    {
         Main = Object.FindObjectOfType<MainScene>();
         MainUI = Object.FindObjectOfType<MainSceneUI>();
+
+        CurrentBalls.Clear();
         State = GameState.Play;
-        Stages = Managers.Resource.GetStages();
         Bricks = Stages[CurrentLevel].Bricks;
 
         InitMode();
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+    /// °ÔÀÓ ¸ðµå¿¡ µû¸¥ ÃÊ±âÈ­
     /// </summary>
     private void InitMode()
     {
+        MainUI.StartModeUI(Mode);
+
         switch (Mode) 
         {
             case GameMode.TimeAttack:
                 Timer = 20;
                 MainUI.SetTimerUI(Timer);
                 break;
-            // ï¿½ï¿½ï¿½Ñ¸ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ¹«ÇÑ¸ðµå => Á¡¼ö, ¶óÀÌÇÁ À¯Áö
             case GameMode.Infinity:
                 MainUI.SetScoreUI(Score);
                 MainUI.SetCurrentLifeUI(Life);
@@ -89,18 +83,10 @@ public class GameManager
 
     #region Game Play Methods
 
-    public GameObject CreateBall(GameObject player)
-    {
-        var ballStartPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f);
-        var ball = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
-
-        return ball;
-    }
-
     public void InstanceBall()
     {
         var paddle = GameObject.FindWithTag("Player");
-        var ballStartPos = new Vector2(paddle.transform.position.x, paddle.transform.position.y + 0.5f);
+        var ballStartPos = new Vector2(paddle.transform.position.x, paddle.transform.position.y + 0.3f);
         var ballClone = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
         CurrentBalls.Add(ballClone);
     }
@@ -112,8 +98,7 @@ public class GameManager
         if (Bricks == 0)
         {
             State = GameState.Pause;
-
-            Managers.Skill.ResetSkill();
+            Managers.Skill.ResetSkill(true);
             GameClearMode();
         }
 
@@ -133,21 +118,19 @@ public class GameManager
         CurrentBalls.Remove(ball);
 
         if (CurrentBalls.Count != 0) return;
+        Managers.Skill.BallIncreaseSpeed = 0f;
         if (MainUI == null)
         {
             InstanceBall();
             return;
         }
-        if (CurrentBalls.Count != 0) return;
 
         Life--;
         MainUI.SetLifeUI(true, Life);
 
         if (Life == 0)
         {
-
             GameOver();
-
         }
         else
         {
@@ -160,7 +143,7 @@ public class GameManager
     #region Game Result Methods
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    /// °ÔÀÓ ¸ðµå¿¡ µû¸¥ Å¬¸®¾î ¼³Á¤
     /// </summary>
     private void GameClearMode()
     {
@@ -173,7 +156,7 @@ public class GameManager
             case GameMode.TimeAttack:
                 MainUI.ShowTimeAttack();
                 break;
-            // Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½Ë¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // Å¬¸®¾î ½Ã, ÆË¾÷ ¾È ¶ç¿ì°í ¹Ù·Î, ´ÙÀ½ ½ºÅ×ÀÌÁö
             case GameMode.Infinity:
                 LevelClear();
                 SceneLoader.Instance.ChangeScene("Main");
@@ -187,7 +170,7 @@ public class GameManager
     {
         State = GameState.Pause;
         MainUI.ShowGameOver();
-        Managers.Skill.ResetSkill();
+        Managers.Skill.ResetSkill(true);
     }
 
     public void LevelClear()

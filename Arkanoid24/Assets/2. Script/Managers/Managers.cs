@@ -27,4 +27,12 @@ public class Managers : SingletonBehaviour<Managers>
     public static VersusManager Versus => Instance != null ? Instance.versusManager : null;
     
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Resource.Initialize();
+        Game.Initialize();
+    }
 }

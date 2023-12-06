@@ -272,7 +272,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5572097824672968054, guid: c1dbd38097de191438b3f9b0a631c74a, type: 3}
       propertyPath: m_Name
-      value: Arkanoid_Test
+      value: Play Board
       objectReference: {fileID: 0}
     - target: {fileID: 7478770119738287496, guid: c1dbd38097de191438b3f9b0a631c74a, type: 3}
       propertyPath: m_RootOrder

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResourceManager
@@ -44,7 +45,7 @@ public class ResourceManager
 
     public StageBlueprint[] GetStages()
     {
-        return stages.ToArray();
+        return stages.OrderBy(s => s.Level).ToArray();
     }
 
     public VersusLevelBlueprint[] GetVersusStages()

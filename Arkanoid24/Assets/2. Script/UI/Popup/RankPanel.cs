@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class RankPanel : MonoBehaviour
 {
@@ -26,7 +21,7 @@ public class RankPanel : MonoBehaviour
     {
         float rankscore = 0;
         rankscore = Managers.Game.Score;
-        PlayerPrefs.SetFloat("Ranks", rankscore) ;
+        PlayerPrefs.SetFloat("Ranks", rankscore);
         float tmpScore = 0f;
 
         for (int i = 0; i < 4; i++)
