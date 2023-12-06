@@ -8,10 +8,11 @@ public class MainSceneUI : MonoBehaviour
 
     [Header("Time Attack")]
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI bestTimerText;
 
     [Header("Score Board")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI BestscoreText;
+    [SerializeField] private TextMeshProUGUI bestScoreText;
     private string KeyName = "BestScore";
     private float bestscore = 0;
 
@@ -42,7 +43,7 @@ public class MainSceneUI : MonoBehaviour
     public void SetBestScoreUI()
     {
         bestscore = PlayerPrefs.GetFloat(KeyName, 0);
-        BestscoreText.text = $"최고 기록 : {bestscore}";
+        bestScoreText.text = $"최고 기록 : {bestscore}";
 
         if (Managers.Game.Score > bestscore)
         {
@@ -75,6 +76,29 @@ public class MainSceneUI : MonoBehaviour
     #endregion
 
     #region Mode Method
+
+    /// <summary>
+    /// 모드에 따라 UI 변경
+    /// </summary>
+    public void StartModeUI(GameMode mode)
+    {
+        switch (mode) 
+        {
+            case GameMode.Main:
+                scoreText.gameObject.SetActive(true); 
+                break;
+
+            case GameMode.Infinity:
+                scoreText.gameObject.SetActive(true);
+                bestScoreText.gameObject.SetActive(true);
+                break;
+
+            case GameMode.TimeAttack:
+                timerText.gameObject.SetActive(true);
+                bestTimerText.gameObject.SetActive(true);
+                break;
+        }
+    }
 
     /// <summary>
     /// [타임 어택] 타이머 UI 세팅

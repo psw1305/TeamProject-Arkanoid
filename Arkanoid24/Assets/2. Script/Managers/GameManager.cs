@@ -33,12 +33,19 @@ public class GameManager
     /// </summary>
     public void Initialize()
     {
-        CurrentBalls.Clear();
+        Stages = Managers.Resource.GetStages();
+    }
 
+    /// <summary>
+    /// 메인 씬 OnStart 초기화
+    /// </summary>
+    public void InitScene()
+    {
         Main = Object.FindObjectOfType<MainScene>();
         MainUI = Object.FindObjectOfType<MainSceneUI>();
+
+        CurrentBalls.Clear();
         State = GameState.Play;
-        Stages = Managers.Resource.GetStages();
         Bricks = Stages[CurrentLevel].Bricks;
 
         InitMode();
@@ -49,6 +56,8 @@ public class GameManager
     /// </summary>
     private void InitMode()
     {
+        MainUI.StartModeUI(Mode);
+
         switch (Mode) 
         {
             case GameMode.TimeAttack:

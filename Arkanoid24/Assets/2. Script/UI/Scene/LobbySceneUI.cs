@@ -36,13 +36,16 @@ public class LobbySceneUI : MonoBehaviour
 
         // #3. 저장 데이터 체크
         DataCheck();
+    }
 
-        // #4. 오디오 시스템 체크
+    private void Start()
+    {
+        dataClearButton.onClick.AddListener(DataClear);
         AudioCheck();
     }
 
     #region Menu
-    
+
     private void OpenMenu(int menuIndex)
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
@@ -61,9 +64,6 @@ public class LobbySceneUI : MonoBehaviour
 
     private void DataCheck()
     {
-        // 데이터 초기화 버튼 리스너 추가
-        dataClearButton.onClick.AddListener(DataClear);
-
         if (!PlayerPrefs.HasKey(Data.LevelUnlock))
         {
             PlayerPrefs.SetInt(Data.LevelUnlock, 0);
@@ -71,7 +71,7 @@ public class LobbySceneUI : MonoBehaviour
 
         if (!PlayerPrefs.HasKey(Data.TimeRecord))
         {
-            PlayerPrefs.SetFloat(Data.LevelUnlock, 0);
+            PlayerPrefs.SetFloat(Data.TimeRecord, 0);
         }
 
         if (!PlayerPrefs.HasKey(Data.BGM))

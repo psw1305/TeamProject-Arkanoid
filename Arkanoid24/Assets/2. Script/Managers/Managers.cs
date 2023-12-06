@@ -19,4 +19,12 @@ public class Managers : SingletonBehaviour<Managers>
     public static BallSkillState Skill => Instance != null ? Instance.ballSkillManager : null;
 
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Resource.Initialize();
+        Game.Initialize();
+    }
 }
