@@ -26,7 +26,7 @@ public class RankPanel : MonoBehaviour
     {
         float rankscore = 0;
         rankscore = Managers.Game.Score;
-        PlayerPrefs.SetFloat("Ranks", rankscore) ;
+        PlayerPrefs.SetFloat("Ranks", rankscore);
         float tmpScore = 0f;
 
         for (int i = 0; i < 4; i++)
