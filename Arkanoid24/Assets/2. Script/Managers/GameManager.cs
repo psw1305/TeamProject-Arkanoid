@@ -118,6 +118,7 @@ public class GameManager
         CurrentBalls.Remove(ball);
 
         if (CurrentBalls.Count != 0) return;
+        Managers.Skill.BallIncreaseSpeed = 0f;
         if (MainUI == null)
         {
             InstanceBall();

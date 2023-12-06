@@ -33,7 +33,7 @@ public class BallCollision : MonoBehaviour
                 _ballRbody.velocity = _ballRbody.velocity.magnitude * direction;
             }
         }
-        else
+        else if(col.gameObject.CompareTag("Brick"))
         {
             _ball.BallHitCounting();
         }
