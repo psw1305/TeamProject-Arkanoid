@@ -10,6 +10,7 @@ public class BallSkillState
 
     public int BallExtraPower = 0;
     public float BallExtraSpeed = 0f;
+    public float BallIncreaseSpeed = 0f;
 
     public GameObject Player;
 
@@ -76,7 +77,7 @@ public class BallSkillState
     {
         foreach (var ball in Managers.Game.CurrentBalls)
         {
-            ball.GetComponent<Ball>().SetAdditionalCurrentSpeed(BallExtraSpeed);
+            ball.GetComponent<Ball>().SetAdditionalCurrentSpeed(BallExtraSpeed + BallIncreaseSpeed);
         }
     }
 

@@ -57,7 +57,7 @@ public class BallPreference : MonoBehaviour
     #region Utility
     public void SetAdditionalCurrentSpeed(float additionalSpeed)
     {
-        _currentSpeed = _currentSpeed + additionalSpeed;
+        _currentSpeed = defaultSpeed + additionalSpeed;
 
         if (_currentSpeed > MaxSpeed)
             _currentSpeed = MaxSpeed;
@@ -70,7 +70,7 @@ public class BallPreference : MonoBehaviour
         if(ballHitCount++ >= 3)
         {
             //SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
-            Managers.Skill.BallExtraSpeed += ballIncreaseSpeedScope;
+            Managers.Skill.BallIncreaseSpeed += ballIncreaseSpeedScope;
             Managers.Skill.SetSpeed();
             ballHitCount = 0;
         }

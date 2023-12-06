@@ -199,9 +199,8 @@ MonoBehaviour:
   defaultSpeed: 7
   _currentSpeed: 0
   ballHitCount: 0
-  ballIncreaseSpeedScope: 1.5
+  ballIncreaseSpeedScope: 0.5
   isCatchLaunch: 0
-  isCatch: 0
   _defaultPower: 1
   _maxPower: 1
   _posX: 0
