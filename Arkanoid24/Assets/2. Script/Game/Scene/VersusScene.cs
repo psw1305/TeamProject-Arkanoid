@@ -1,10 +1,9 @@
+
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class VersusScene : MonoBehaviour
 {
     private VersusLevelBlueprint versusLevelBlueprint;
-    private EdgeCollider2D screenEdge;
 
     #region MonoBehaviour
 
@@ -13,8 +12,7 @@ public class VersusScene : MonoBehaviour
         Managers.Resource.Initialize();
         Managers.Versus.Initialize();
 
-        screenEdge = GetComponent<EdgeCollider2D>();
-        screenEdge.GenerateCameraBounds();
+
     }
 
     private void Start()
@@ -26,13 +24,18 @@ public class VersusScene : MonoBehaviour
 
     private void InitMainGame()
     {
-        // #1. 현재 레벨에 맞는 스테이지 생성
+        // #0. 씬 로딩
+        SceneLoader.Instance.OnSceneLoaded();
+
+        // # 1. Setting (카메라, 플레이어, 스테이지)
+        Managers.Player.CameraSpawn();
+        Managers.Player.PlayerSpawn();
         CreateStage();
 
-        Managers.Player.PlayerSpawn();
-
         // #2. 공 생성 후 대기
-        Managers.Versus.InstanceBall();
+        // Managers.Versus.InstanceBall();
+        Managers.Versus.InstanceBall(VersusManager.player1Index);
+        Managers.Versus.InstanceBall(VersusManager.player2Index);
     }
 
     /// <summary>

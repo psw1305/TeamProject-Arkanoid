@@ -15,7 +15,7 @@ public class VersusSceneUI : MonoBehaviour
 
     public void ShowGameOver(string winPlayer)
     {
-        BGM.Instance.Play(BGM.Instance.gameover, false);
+        //BGM.Instance.Play(BGM.Instance.gameover, false);
 
         if (winPlayer == "Player1")
         {

@@ -28,7 +28,8 @@ public class PaddleFire : MonoBehaviour
         else
         {
             // 남아 있는 볼을 가져온다.
-            var remainBall = Managers.Versus.PlayersBalls.Find(ball => ball != null).GetComponent<VersusPlayBall>();
+            var remainBall = Managers.Versus.PlayersBalls["Player1"].Find(ball => ball != null).GetComponent<VersusPlayBall>();
+            //var remainBall = Managers.Versus.PlayersBalls["Player2"].Find(ball => ball != null).GetComponent<VersusPlayBall>();
 
             //if (remainBall.BallState != BallPreference.BALL_STATE.READY) return;
 
