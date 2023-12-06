@@ -32,10 +32,22 @@ public class VersusScene : MonoBehaviour
         Managers.Player.PlayerSpawn();
         CreateStage();
 
+
+        // # 2. Ball Create To Assgin Player
+        foreach (var player in Managers.Player.GetActivePlayers())
+        {
+            GameObject ball = Managers.Game.CreateBall(player);
+
+            var ballPreference = ball.GetComponent<BallPreference>();
+            ballPreference.AssignPlayer(player); // 플레이어 할당
+
+            Managers.Ball.AssignBallToPlayer(player, ball); // 볼 매니저에 등록
+        }
+
         // #2. 공 생성 후 대기
         // Managers.Versus.InstanceBall();
-        Managers.Versus.InstanceBall(VersusManager.player1Index);
-        Managers.Versus.InstanceBall(VersusManager.player2Index);
+        //Managers.Versus.InstanceBall(VersusManager.player1Index);
+        //Managers.Versus.InstanceBall(VersusManager.player2Index);
 
         Managers.Game.Mode = GameMode.Versus;
     }

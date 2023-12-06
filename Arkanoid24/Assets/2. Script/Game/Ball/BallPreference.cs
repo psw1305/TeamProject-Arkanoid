@@ -29,6 +29,9 @@ public class BallPreference : MonoBehaviour
     protected GameObject _playerObject;
 
     public BALL_STATE BallState { get; set; } = BALL_STATE.READY;
+    
+    // Getter
+    public GameObject BallOwner { get { return _playerObject; } }
 
     #endregion
 

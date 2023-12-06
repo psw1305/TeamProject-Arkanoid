@@ -84,8 +84,9 @@ public class VersusManager
     public void Player1BrickCount()
     {
         Player1Bricks--;
+        Debug.Log(Player1Bricks);
 
-        if(Player1Bricks == 0)
+        if (Player1Bricks == 0)
         {
             VersusUI.ShowGameOver("Player1");
         }
@@ -93,6 +94,7 @@ public class VersusManager
     public void Player2BrickCount()
     {
         Player2Bricks--;
+        Debug.Log(Player2Bricks);
 
         if (Player2Bricks == 0)
         {

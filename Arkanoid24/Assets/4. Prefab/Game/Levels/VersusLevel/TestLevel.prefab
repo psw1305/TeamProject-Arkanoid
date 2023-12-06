@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4045674707167592061}
   m_Layer: 0
-  m_Name: Versus_Level_1_Bricks
+  m_Name: TestLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

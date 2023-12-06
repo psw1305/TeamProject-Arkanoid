@@ -18,7 +18,7 @@ public class VersusGameOverPanel : MonoBehaviour
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         Managers.Game.Score = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneLoader.Instance.ChangeScene(SceneManager.GetActiveScene().name);
     }
 
     public void Menu()
