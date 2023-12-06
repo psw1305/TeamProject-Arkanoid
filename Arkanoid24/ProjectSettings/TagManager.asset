@@ -13,6 +13,7 @@ TagManager:
   - UnCountBrick
   - Ball1
   - Ball2
+  - Wall
   layers:
   - Default
   - TransparentFX

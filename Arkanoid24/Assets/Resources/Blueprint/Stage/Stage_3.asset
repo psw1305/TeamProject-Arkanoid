@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 3
   stageMap: {fileID: 822799245282720320, guid: 15a5ef542ef7089459892dcfac058261, type: 3}
-  bricks: 28
+  bricks: 22

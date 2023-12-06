@@ -5,18 +5,16 @@ using UnityEngine;
 {
     private float _dropSpeed = 3f;
     private Rigidbody2D _rb;
-
     public float GetSpeed => (_dropSpeed);
 
     [SerializeField] private Items itemType;
-    [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject sprite;
     [SerializeField] private ParticleSystem particle;
 
-    private bool isPickup = false;
-    private Ball _mainBall;
-    private float _originSpeed;
-    private GameObject _firstBall;
+    private ModelState state = ModelState.Live;
+    //private Ball _mainBall;
+    //private float _originSpeed;
+    //private GameObject _firstBall;
 
     void Start()
     {
@@ -25,9 +23,8 @@ using UnityEngine;
 
     void FixedUpdate()
     {
-        if (transform.position.y < -6)
-            Destroy(gameObject);
-        if (Managers.Game.State == GameState.Pause)
+        if (transform.position.y < -6) Destroy(gameObject);
+        if (Managers.Game.State != GameState.Play)
         {
             _rb.velocity = Vector3.zero;
             return;
@@ -41,9 +38,9 @@ using UnityEngine;
     {
         Managers.Skill.Player = collision.gameObject;
         
-        if (collision.CompareTag("Player") && !isPickup)
+        if (collision.CompareTag("Player") && state != ModelState.Dead)
         {
-            isPickup = true;
+            state = ModelState.Dead;
             SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
             ItemSkill(collision.gameObject);
             StartCoroutine(DeathCoroutine());
@@ -69,7 +66,7 @@ using UnityEngine;
 
             case Items.Lasers:
                 // 2발씩 발사
-                Managers.Skill.Lasers(player, bullet);
+                Managers.Skill.Lasers(player);
                 break;
 
             case Items.Enlarge:

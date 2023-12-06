@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimeAttackButton : MonoBehaviour
 {
     [SerializeField] private int level;
     [SerializeField] private Button button;
+    [SerializeField] private TextMeshProUGUI recordText;
 
     private void Awake()
     {
@@ -20,6 +19,6 @@ public class TimeAttackButton : MonoBehaviour
 
         Managers.Game.CurrentLevel = 0;
         Managers.Game.Mode = GameMode.TimeAttack;
-        SceneManager.LoadScene("TimeAttack");
+        SceneLoader.Instance.ChangeScene("Main");
     }
 }

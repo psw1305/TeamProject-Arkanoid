@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager
 {
@@ -12,19 +10,27 @@ public class GameManager
     public MainScene Main { get; private set; }
     public MainSceneUI MainUI { get; private set; }
     public GameState State { get; set; }
+    public GameMode Mode { get; set; } = GameMode.Main;
     public StageBlueprint[] Stages { get; private set; }
     public int CurrentLevel { get; set; }
     public int Bricks { get; set; }
-    public float Score { get; set; }
-    public float BestScore { get; set; }
     public int Life { get; set; }
-    public List<float> Time {  get; set; }
-    public GameMode Mode { get; set; } = GameMode.Main;
-    public TimeAttackSceneUI TimeAttackUI { get; private set; }
-
+    public float Score { get; set; }
 
     #endregion
 
+    #region Properties - Mode
+
+    public float Timer { get; set; }
+    public float BestScore { get; set; }
+
+    #endregion
+
+    #region Initialize
+
+    /// <summary>
+    /// ���� �Ŵ��� �ʱ�ȭ
+    /// </summary>
     public void Initialize()
     {
         CurrentBalls.Clear();
@@ -34,14 +40,39 @@ public class GameManager
         State = GameState.Play;
         Stages = Managers.Resource.GetStages();
         Bricks = Stages[CurrentLevel].Bricks;
-        TimeAttackUI = Object.FindAnyObjectByType<TimeAttackSceneUI>();
-        Time = new List<float> { 40f, 60f, 100f, 120f };
+
+        InitMode();
     }
 
-    public StageBlueprint CurrentStage()
+    /// <summary>
+    /// ���� ��忡 ���� �ʱ�ȭ
+    /// </summary>
+    private void InitMode()
+    {
+        switch (Mode) 
+        {
+            case GameMode.TimeAttack:
+                Timer = 20;
+                MainUI.SetTimerUI(Timer);
+                break;
+            // ���Ѹ�� => ����, ������ ����
+            case GameMode.Infinity:
+                MainUI.SetScoreUI(Score);
+                MainUI.SetCurrentLifeUI(Life);
+                break;
+            case GameMode.Versus:
+                break;
+        }
+    }
+
+    public StageBlueprint GetCurrentStage()
     {
         return Stages[CurrentLevel];
     }
+
+    #endregion
+
+    #region Game Play Methods
 
     public void InstanceBall()
     {
@@ -54,26 +85,24 @@ public class GameManager
     public void AddScore(float score)
     {
         Bricks--;
-        if ((Mode == GameMode.Main && MainUI == null) || (Mode == GameMode.TimeAttack && TimeAttackUI == null)) return;
+        if (MainUI == null) return;
         if (Bricks == 0)
         {
             State = GameState.Pause;
 
             Managers.Skill.ResetSkill();
-
-            LevelClear();
-            // MainUI.ShowNextStage();
-            if (Mode == GameMode.TimeAttack) TimeAttackUI.ShowNextStage();
-            else if (Mode == GameMode.Main) MainUI.ShowNextStage();
-        
-
+            GameClearMode();
         }
 
         Score += score;
+        MainUI.SetScoreUI(Score);
+    }
 
-        //MainUI.SetScoreUI(Score);
-        if (Mode == GameMode.TimeAttack) TimeAttackUI.SetScoreUI(Score);
-        else MainUI.SetScoreUI(Score);
+    public void LifeUp()
+    {
+        Life = Mathf.Clamp(Life, 0, 2);
+        MainUI.SetLifeUI(false, Life);
+        Life++;
     }
 
     public void LifeDown(GameObject ball)
@@ -81,8 +110,7 @@ public class GameManager
         CurrentBalls.Remove(ball);
 
         if (CurrentBalls.Count != 0) return;
-        if ((Mode == GameMode.Main && MainUI == null) || (Mode == GameMode.TimeAttack && TimeAttackUI == null))
-
+        if (MainUI == null)
         {
             InstanceBall();
             return;
@@ -90,9 +118,7 @@ public class GameManager
         if (CurrentBalls.Count != 0) return;
 
         Life--;
-        //MainUI.SetLifeUI(true, Life);
-        if (Mode == GameMode.TimeAttack) TimeAttackUI.SetLifeUI(true, Life);
-        else if (Mode == GameMode.Main) MainUI.SetLifeUI(true, Life);
+        MainUI.SetLifeUI(true, Life);
 
         if (Life == 0)
         {
@@ -106,12 +132,38 @@ public class GameManager
         }
     }
 
+    #endregion
+
+    #region Game Result Methods
+
+    /// <summary>
+    /// ���� ��忡 ���� Ŭ���� ����
+    /// </summary>
+    private void GameClearMode()
+    {
+        switch (Mode)
+        {
+            case GameMode.Main:
+                LevelClear();
+                MainUI.ShowNextStage();
+                break;
+            case GameMode.TimeAttack:
+                MainUI.ShowTimeAttack();
+                break;
+            // Ŭ���� ��, �˾� �� ���� �ٷ�, ���� ��������
+            case GameMode.Infinity:
+                LevelClear();
+                SceneLoader.Instance.ChangeScene("Main");
+                break;
+            case GameMode.Versus:
+                break;
+        }
+    }
+
     public void GameOver()
     {
         State = GameState.Pause;
-        // MainUI.ShowGameOver();
-        if (Mode == GameMode.TimeAttack) TimeAttackUI.ShowGameOver();
-        else if (Mode == GameMode.Main) MainUI.ShowGameOver();
+        MainUI.ShowGameOver();
         Managers.Skill.ResetSkill();
     }
 
@@ -119,18 +171,11 @@ public class GameManager
     {
         CurrentLevel++;
 
-        if (Mode == GameMode.Main && CurrentLevel > PlayerPrefs.GetInt("LevelsUnlocked", 0))
+        if (CurrentLevel > PlayerPrefs.GetInt(Data.LevelUnlock, 0))
         {
-            PlayerPrefs.SetInt("LevelsUnlocked", CurrentLevel);
+            PlayerPrefs.SetInt(Data.LevelUnlock, CurrentLevel);
         }
     }
 
-    public void LifeUp()
-    {
-        Life = Mathf.Clamp(Life, 0, 2);
-        //MainUI.SetLifeUI(false, Life);
-        if (Mode == GameMode.TimeAttack) TimeAttackUI.SetLifeUI(false, Life);
-        else if (Mode == GameMode.Main) MainUI.SetLifeUI(false, Life);
-        Life++;
-    }
+    #endregion
 }

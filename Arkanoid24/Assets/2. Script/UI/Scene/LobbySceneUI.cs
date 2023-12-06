@@ -15,6 +15,8 @@ public class LobbySceneUI : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private Button dataClearButton;
+    [SerializeField] private AudioSliderSetting BGMAudioSliderSetting;
+    [SerializeField] private AudioSliderSetting SFXAudioSliderSetting;
 
     [Header("Others")]
     [SerializeField] private Button[] backButtons;
@@ -32,20 +34,20 @@ public class LobbySceneUI : MonoBehaviour
             backBtn.onClick.AddListener(delegate { OpenMenu(0); });
         }
 
-        dataClearButton.onClick.AddListener(DataClear);
-
         // #3. 저장 데이터 체크
-        if (!PlayerPrefs.HasKey("LevelsUnlocked"))
-        {
-            PlayerPrefs.SetInt("LevelsUnlocked", 0);
-        }
+        DataCheck();
+
+        // #4. 오디오 시스템 체크
+        AudioCheck();
     }
 
+    #region Menu
+    
     private void OpenMenu(int menuIndex)
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
 
-        foreach (var menu in menus) 
+        foreach (var menu in menus)
         {
             menu.SetActive(false);
         }
@@ -53,10 +55,61 @@ public class LobbySceneUI : MonoBehaviour
         menus[menuIndex].SetActive(true);
     }
 
+    #endregion
+
+    #region Data
+
+    private void DataCheck()
+    {
+        // 데이터 초기화 버튼 리스너 추가
+        dataClearButton.onClick.AddListener(DataClear);
+
+        if (!PlayerPrefs.HasKey(Data.LevelUnlock))
+        {
+            PlayerPrefs.SetInt(Data.LevelUnlock, 0);
+        }
+
+        if (!PlayerPrefs.HasKey(Data.TimeRecord))
+        {
+            PlayerPrefs.SetFloat(Data.LevelUnlock, 0);
+        }
+
+        if (!PlayerPrefs.HasKey(Data.BGM))
+        {
+            PlayerPrefs.SetFloat(Data.BGM, 1f);
+        }
+
+        if (!PlayerPrefs.HasKey(Data.SFX))
+        {
+            PlayerPrefs.SetFloat(Data.SFX, 1f);
+        }
+    }
+
+    /// <summary>
+    /// 데이터 초기화
+    /// </summary>
     private void DataClear()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
 
+        Debug.Log("data clear");
         PlayerPrefs.DeleteAll();
     }
+
+    #endregion
+
+    #region Audio
+
+    private void AudioCheck()
+    {
+        //BGM
+        BGMAudioSliderSetting.audioSlider.value = PlayerPrefs.GetFloat(Data.BGM);
+        BGMAudioSliderSetting.BGMAuidoControl(BGMAudioSliderSetting.audioSlider.value);
+
+        //SFX
+        SFXAudioSliderSetting.audioSlider.value = PlayerPrefs.GetFloat(Data.SFX);
+        SFXAudioSliderSetting.SFXAuidoControl(SFXAudioSliderSetting.audioSlider.value);
+    }
+
+    #endregion
 }
