@@ -110,6 +110,8 @@ public class PlayerManager
         var mainCamera = Managers.Resource.Instantiate(CameraPrefabName);
 
         mainCamera.transform.position = MainCameraSpawnPoint;
+
+        mainCamera.AddComponent<CameraSetter>();
     }
     #endregion
 

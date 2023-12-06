@@ -7,8 +7,6 @@ public class PaddleInputController : PaddleController
 {
     #region Member Variables
 
-    private Camera _mainCamera;
-
     private bool _isMultiplay;
 
     #endregion
@@ -24,9 +22,6 @@ public class PaddleInputController : PaddleController
         base.Start();
 
         _isMultiplay = Managers.Game.IsMulti;
-
-        // Data Caching
-        _mainCamera = Camera.main;
     }
     #endregion
 
@@ -61,7 +56,7 @@ public class PaddleInputController : PaddleController
         mousePos.y = Mathf.Clamp(mousePos.y, 0, Screen.height);
 
         // 월드 좌표로 변환
-        mousePos = _mainCamera.ScreenToWorldPoint(mousePos);
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
         CallMoveEvent(mousePos);
     }
