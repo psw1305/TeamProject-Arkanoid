@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverPanel : MonoBehaviour
@@ -16,7 +17,7 @@ public class GameOverPanel : MonoBehaviour
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         Managers.Game.Score = 0;
-        SceneLoader.Instance.ChangeScene("Main");
+        SceneLoader.Instance.ChangeScene(SceneManager.GetActiveScene().name);
     }
 
     public void Menu()
