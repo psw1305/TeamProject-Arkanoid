@@ -35,7 +35,7 @@ public class PaddleInputController : PaddleController
 
     private void OnMovement(InputValue inputValue)
     {
-        if (Managers.Game.State == GameState.Pause) return;
+        if (Managers.Game.State != GameState.Play) return;
 
         Action<InputValue> movementAction = 
             (_isMultiplay == true) ? KeyboardMovementToMulti : MouseMovementToSolo;

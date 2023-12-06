@@ -79,7 +79,7 @@ public class BrickBreak : MonoBehaviour
     public void instantiateItem()
     {
         //_itemCreateRate 이하일 경우 아이템 생성
-        if (Random.Range(0, 101) <= _itemCreateRate)
+        if (Random.Range(0, 101) < _itemCreateRate)
         {
             _itemSpawner.transform.position = transform.position;
             Instantiate(_itemSpawner);

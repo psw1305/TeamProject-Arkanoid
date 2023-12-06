@@ -1,10 +1,10 @@
+
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class MainScene : MonoBehaviour
 {
     private StageBlueprint stageBlueprint;
-    private EdgeCollider2D screenEdge;
 
     #region MonoBehaviour
 
@@ -12,9 +12,6 @@ public class MainScene : MonoBehaviour
     {
         Managers.Resource.Initialize();
         Managers.Game.Initialize();
-
-        //screenEdge = GetComponent<EdgeCollider2D>();
-        //screenEdge.GenerateCameraBounds();
     }
 
     private void Start()
@@ -26,20 +23,28 @@ public class MainScene : MonoBehaviour
 
     private void InitMainGame()
     {
-        // #0. 씬 로딩
+        // #1. 씬 로딩
         SceneLoader.Instance.OnSceneLoaded();
 
-        // #1. 라이프 3개로 설정 
-        Managers.Game.Life = 3;
-
-        // #2. 스코어 0점으로 시작
-        //Managers.Game.Score = 0;
-        Managers.Player.CameraSpawn();
-
-        // #3. 현재 레벨에 맞는 스테이지 생성
+//<<<<<<< HEAD
+        // #2. 현재 레벨에 맞는 스테이지 생성
         CreateStage();
 
-        Managers.Player.PlayerSpawn();
+        // #3. 게임 모드 세팅
+        GameModeSetting();
+//=======
+//         #1. 라이프 3개로 설정 
+//        Managers.Game.Life = 3;
+
+//         #2. 스코어 0점으로 시작
+//        Managers.Game.Score = 0;
+//        Managers.Player.CameraSpawn();
+
+//         #3. 현재 레벨에 맞는 스테이지 생성
+//        CreateStage();
+
+//        Managers.Player.PlayerSpawn();
+//>>>>>>> Multi_Versus
 
         // #4. 공 생성 후 대기
         Managers.Game.InstanceBall();
@@ -50,7 +55,54 @@ public class MainScene : MonoBehaviour
     /// </summary>
     private void CreateStage()
     {
-        stageBlueprint = Managers.Game.CurrentStage();
+        stageBlueprint = Managers.Game.GetCurrentStage();
         Instantiate(stageBlueprint.StageMap);
+    }
+
+    /// <summary>
+    /// 게임 모드에 따른 세팅
+    /// </summary>
+    private void GameModeSetting()
+    {
+        switch (Managers.Game.Mode)
+        {
+            case GameMode.Main:
+                Managers.Game.Life = 3;
+                Managers.Game.Score = 0;
+                break;
+
+            case GameMode.TimeAttack:
+                Managers.Game.Life = 3;
+                StartCoroutine(StartTimer());
+                break;
+
+            case GameMode.Infinity:
+                break;
+
+            case GameMode.Versus:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 타이머 시작, 타이머 도달 시 => 게임 오버
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator StartTimer()
+    {
+        while (Managers.Game.Timer > 0)
+        {
+            if (Managers.Game.State != GameState.Play) break;
+            Managers.Game.Timer -= Time.deltaTime;
+            Managers.Game.MainUI.SetTimerUI(Managers.Game.Timer);
+            yield return null;
+        }
+
+        if (Managers.Game.Timer <= 0)
+        {
+            Managers.Game.Timer = 0;
+            Managers.Game.MainUI.SetTimerUI(0);
+            Managers.Game.GameOver();
+        }
     }
 }

@@ -17,7 +17,7 @@ public class PaddleFire : MonoBehaviour
 
     private void OnBallFire()
     {
-        if(SceneManager.GetActiveScene().name != "VersusMode")
+        if(SceneManager.GetActiveScene().name != "TEST_Versus")
         {
             var remainBall = Managers.Game.CurrentBalls.Find(ball => ball != null).GetComponent<Ball>();
 

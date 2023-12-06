@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEditor;
+using TMPro;
 
-public class VersusGameOverPanel : MonoBehaviour
+public class TimeAttackPanel : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI recordText;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button menuButton;
 
@@ -17,13 +17,12 @@ public class VersusGameOverPanel : MonoBehaviour
     public void Restart()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-        Managers.Game.Score = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneLoader.Instance.ChangeScene("Main");
     }
 
     public void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-        SceneManager.LoadScene("Lobby");
+        SceneLoader.Instance.ChangeScene("Lobby");
     }
 }

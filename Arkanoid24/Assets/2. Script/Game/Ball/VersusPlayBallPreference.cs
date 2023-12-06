@@ -36,12 +36,12 @@ public class VersusPlayBallPreference : MonoBehaviour
     {
         if (gameObject.tag == "Ball1")
         {
-            _paddleObj = GameObject.Find("PaddlePlayer1");
+            _paddleObj = GameObject.FindGameObjectWithTag("Player1");
             _paddleRbody = _paddleObj.GetComponent<Rigidbody2D>();
         }
         else  if (gameObject.tag == "Ball2")
         {
-            _paddleObj = GameObject.Find("PaddlePlayer2");
+            _paddleObj = GameObject.FindGameObjectWithTag("Player2");
             _paddleRbody = _paddleObj.GetComponent<Rigidbody2D>();
         }
 
@@ -55,7 +55,7 @@ public class VersusPlayBallPreference : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if(Managers.Game.State == GameState.Pause)
+        if(Managers.Versus.State == GameState.Pause)
         {
             _ballRbody.velocity = Vector2.zero;
             return;
