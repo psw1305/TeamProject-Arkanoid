@@ -12,7 +12,6 @@ public class Ball : BallPreference
     public int _maxPower = 1;
 
     public float _posX;
-    public float _paddleWidth;
 
     // Event
     private event Action OnBallLaunch;
@@ -67,11 +66,20 @@ public class Ball : BallPreference
         isCatch = false;
         BallState = BALL_STATE.LAUNCH;
 
-        _paddleWidth = ServiceLocator.GetService<PaddleInputController>().GetComponent<BoxCollider2D>().bounds.size.x;
-        var posX = _posX / _paddleWidth;
-        var dir = new Vector2(posX, 1).normalized;
+        CalculateBallPosToPaddle();
+    }
+
+    private void CalculateBallPosToPaddle()
+    {
+        var paddleWidth = _playerObject.GetComponent<BoxCollider2D>().bounds.size.x;
+        var posX = _ballRbody.position.x - _paddleRbody.position.x;
+
+        posX = posX / paddleWidth;
+        
+        var direction = new Vector2(posX, 1).normalized;
+
         if (posX != 0)
-            _ballRbody.velocity = dir * _currentSpeed;
+            _ballRbody.velocity = direction * _currentSpeed;
         else
             _ballRbody.velocity = Vector2.up * defaultSpeed;
     }

@@ -89,6 +89,14 @@ public class GameManager
 
     #region Game Play Methods
 
+    public GameObject CreateBall(GameObject player)
+    {
+        var ballStartPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f);
+        var ball = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
+
+        return ball;
+    }
+
     public void InstanceBall()
     {
         var paddle = GameObject.FindWithTag("Player");

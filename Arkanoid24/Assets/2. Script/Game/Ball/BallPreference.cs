@@ -25,6 +25,9 @@ public class BallPreference : MonoBehaviour
     public int ballHitCount = 0;
     public float ballIncreaseSpeedScope = 1.5f;
 
+    // Player Depend, Reference
+    protected GameObject _playerObject;
+
     public BALL_STATE BallState { get; set; } = BALL_STATE.READY;
 
     #endregion
@@ -38,8 +41,6 @@ public class BallPreference : MonoBehaviour
 
     protected virtual void Start()
     {
-        GameModeSyncGetComponent();
-
         _currentSpeed = defaultSpeed;
     }
 
@@ -50,31 +51,21 @@ public class BallPreference : MonoBehaviour
             _ballRbody.velocity = Vector2.zero;
             return;
         }
-
     }
     #endregion
 
 
     #region Utility
-    private void GameModeSyncGetComponent()
+    public void AssignPlayer(GameObject player)
     {
-        var activePlayer = Managers.Player.GetActivePlayers();
+        _playerObject = player;
 
-        if (Managers.Game.IsMulti)
-        {
-            if(gameObject.CompareTag("Ball1"))
-            {
-                
-            }
-            else
-            {
-                _paddleRbody = GameObject.FindWithTag("Player2").GetComponent<Rigidbody2D>();
-            }
-        }
-        else
-        {
-            _paddleRbody = ServiceLocator.GetService<PaddleInputController>().GetComponent<Rigidbody2D>();
-        }
+        GetPlayerComponent();
+    }
+
+    private void GetPlayerComponent()
+    {
+        _paddleRbody = _playerObject.GetComponent<Rigidbody2D>();
     }
 
     public void SetAdditionalCurrentSpeed(float additionalSpeed)

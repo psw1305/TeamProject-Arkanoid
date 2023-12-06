@@ -11,8 +11,6 @@ public class VersusScene : MonoBehaviour
     {
         Managers.Resource.Initialize();
         Managers.Versus.Initialize();
-
-
     }
 
     private void Start()
@@ -27,15 +25,21 @@ public class VersusScene : MonoBehaviour
         // #0. 씬 로딩
         SceneLoader.Instance.OnSceneLoaded();
 
-        // # 1. Setting (카메라, 플레이어, 스테이지)
+        // # 1. Camera, Player, Stage Setting (카메라, 플레이어, 스테이지)
         Managers.Player.CameraSpawn();
         Managers.Player.PlayerSpawn();
         CreateStage();
 
-        // #2. 공 생성 후 대기
-        // Managers.Versus.InstanceBall();
-        Managers.Versus.InstanceBall(VersusManager.player1Index);
-        Managers.Versus.InstanceBall(VersusManager.player2Index);
+        // # 2. Assign Player To Ball(Create)
+        foreach(var player in Managers.Player.GetActivePlayers())
+        {
+            GameObject ball = Managers.Game.CreateBall(player);
+
+            var ballPreference = ball.GetComponent<BallPreference>();
+            ballPreference.AssignPlayer(player);
+
+            Managers.Ball.AssignBallToPlayer(player, ball);
+        }
     }
 
     /// <summary>

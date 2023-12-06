@@ -16,7 +16,8 @@ public class PaddleFire : MonoBehaviour
 
     private void OnBallFire()
     {
-        foreach(var ball in Managers.Game.CurrentBalls)
+        var balls = Managers.Ball.GetBallsForPlayer(gameObject);
+        foreach (var ball in balls)
         {
             ball.GetComponent<Ball>().CallBallLaunch();
         }
