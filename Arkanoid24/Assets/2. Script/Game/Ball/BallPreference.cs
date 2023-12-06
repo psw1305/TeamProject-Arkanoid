@@ -23,7 +23,7 @@ public class BallPreference : MonoBehaviour
     protected Rigidbody2D _ballRbody;
 
     public int ballHitCount = 0;
-    public float ballIncreaseSpeedScope = 1.5f;
+    public float ballIncreaseSpeedScope = 0.5f;
 
     public BALL_STATE BallState { get; set; } = BALL_STATE.READY;
 
@@ -57,7 +57,7 @@ public class BallPreference : MonoBehaviour
     #region Utility
     public void SetAdditionalCurrentSpeed(float additionalSpeed)
     {
-        _currentSpeed = defaultSpeed + additionalSpeed;
+        _currentSpeed = _currentSpeed + additionalSpeed;
 
         if (_currentSpeed > MaxSpeed)
             _currentSpeed = MaxSpeed;
@@ -69,7 +69,9 @@ public class BallPreference : MonoBehaviour
     {
         if(ballHitCount++ >= 3)
         {
-            SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
+            //SetAdditionalCurrentSpeed(ballIncreaseSpeedScope);
+            Managers.Skill.BallExtraSpeed += ballIncreaseSpeedScope;
+            Managers.Skill.SetSpeed();
             ballHitCount = 0;
         }
     }

@@ -5,6 +5,9 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class BallSkillState
 {
+    private int _laserFireCount = 5;
+    private float _laserFireDelay = 0.3f;
+
     public int BallExtraPower = 0;
     public float BallExtraSpeed = 0f;
 
@@ -21,19 +24,19 @@ public class BallSkillState
         }
         set
         {
-            ResetSkill();
+            ResetSkill(false);
             _currnetSkill = value;
         }
     }
     
 
-    public void ResetSkill()
+    public void ResetSkill(bool isHardReset)
     {
         if (CurrentSkill == Items.Enlarge) UnEnalarge();
+        if (isHardReset) BallExtraSpeed = 0f;
         _currnetSkill = Items.None;
         UnPowerUp();
         BallExtraPower = 0;
-        BallExtraSpeed = 0f;
     }
 
     public void PowerUp()
@@ -84,10 +87,20 @@ public class BallSkillState
 
     public void Lasers(GameObject player)
     {
-        var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
-        bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
-        var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
-        bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
+        CoroutineHelper.StartCoroutine(LaserFire(player));
+    }
+
+    public IEnumerator LaserFire(GameObject player)
+    {
+        for(int i = 0; i < _laserFireCount; i++)
+        {
+            var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
+            bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
+            var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
+            bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
+            yield return new WaitForSeconds(_laserFireDelay);
+        }
+        
     }
 
     public void Enalarge(GameObject player)

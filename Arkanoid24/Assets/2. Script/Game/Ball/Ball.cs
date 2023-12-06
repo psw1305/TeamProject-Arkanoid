@@ -6,7 +6,6 @@ public class Ball : BallPreference
     #region Member Variables
 
     public bool isCatchLaunch = false;
-    public bool isCatch = false;
 
     public int _defaultPower = 1;
     public int _maxPower = 1;
@@ -60,8 +59,7 @@ public class Ball : BallPreference
     public void BallToStart()
     {
         if (BallState != BALL_STATE.READY) return;
-        if(isCatch) isCatchLaunch = true;
-        isCatch = false;
+        if(Managers.Skill.CurrentSkill == Items.Catch) isCatchLaunch = true;
         BallState = BALL_STATE.LAUNCH;
 
         _paddleWidth = ServiceLocator.GetService<PaddleController>().GetComponent<BoxCollider2D>().bounds.size.x;
@@ -71,6 +69,7 @@ public class Ball : BallPreference
             _ballRbody.velocity = dir * _currentSpeed;
         else
             _ballRbody.velocity = Vector2.up * defaultSpeed;
+        isCatchLaunch = false;
     }
 
     private void BallToReady()
