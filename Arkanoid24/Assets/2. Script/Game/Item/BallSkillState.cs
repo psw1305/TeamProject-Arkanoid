@@ -13,6 +13,9 @@ public class BallSkillState
     public float BallIncreaseSpeed = 0f;
 
     public GameObject Player;
+    //public GameObject LeftWall;
+    //public GameObject RightWall;
+    
 
     // Powers, Enlarge, Catch
 
@@ -96,6 +99,7 @@ public class BallSkillState
         {
             var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
             bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
+            yield return new WaitForSeconds(_laserFireDelay/2);
             var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
             bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
             yield return new WaitForSeconds(_laserFireDelay);
@@ -132,7 +136,7 @@ public class BallSkillState
     {
         float directionMultiplier = IsLeft ? -1f : 1f;
         float seta = Mathf.Atan2(BallVec.y, BallVec.x);
-        Vector2 ballPos = mainBall.transform.position + new Vector3(directionMultiplier, 0, 0);
+        Vector2 ballPos = mainBall.transform.position;
         GameObject ball = Managers.Resource.Instantiate("BallPrefab", ballPos);
         ball.GetComponent<Ball>().BallState = BallPreference.BALL_STATE.LAUNCH;
         ball.GetComponent<Ball>().AssignPlayer(player);

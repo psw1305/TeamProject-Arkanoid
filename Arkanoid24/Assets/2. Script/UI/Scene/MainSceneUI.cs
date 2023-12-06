@@ -8,7 +8,9 @@ public class MainSceneUI : MonoBehaviour
 
     [Header("Time Attack")]
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private TextMeshProUGUI bestTimerText;
+    [SerializeField] private TextMeshProUGUI bestTimeText;
+    [SerializeField] private TextMeshProUGUI currentRecordText;
+    [SerializeField] private TextMeshProUGUI bestRecordText;
 
     [Header("Score Board")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -90,7 +92,7 @@ public class MainSceneUI : MonoBehaviour
 
             case GameMode.TimeAttack:
                 timerText.gameObject.SetActive(true);
-                bestTimerText.gameObject.SetActive(true);
+                bestTimeText.gameObject.SetActive(true);
                 break;
         }
     }
@@ -123,7 +125,27 @@ public class MainSceneUI : MonoBehaviour
     /// <param name="bestScore"></param>
     public void SetBestScoreUI(float bestScore)
     {
-        bestScoreText.text = $"최고 기록 : {bestScore}";
+        bestScoreText.text = $"최고 점수 : {bestScore}";
+    }
+
+    /// <summary>
+    /// [타임 어택] 최고 기록 세팅
+    /// </summary>
+    /// <param name="bestTime">최고 기록</param>
+    public void SetBestTimeUI(float bestTime)
+    {
+        bestTimeText.text = $"최고기록  {bestTime:F2}초";
+    }
+
+    /// <summary>
+    /// [타임 어택] 기록 결과 세팅
+    /// </summary>
+    /// <param name="record">현재 기록</param>
+    /// <param name="bestRecord">최고 기록</param>
+    public void SetResultRecordUI(float record, float bestRecord)
+    {
+        currentRecordText.text = $"현재기록  {record:F2}초";
+        bestRecordText.text = $"최고기록  {bestRecord:F2}초";
     }
 
     public void SetRankingUI()

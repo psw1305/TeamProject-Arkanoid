@@ -75,8 +75,6 @@ public class Brick : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball") || collision.gameObject.CompareTag("Ball1") || collision.gameObject.CompareTag("Ball2"))
         {
             SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
-            Damaged(1);
-            
             Damaged(collision.gameObject.GetComponent<Ball>()._maxPower);
         }
     }

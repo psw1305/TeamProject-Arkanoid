@@ -18,6 +18,7 @@ public class InfinityButton : MonoBehaviour
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
 
         Managers.Game.Life = 3;
+        Managers.Game.Score = 0;
         Managers.Game.CurrentLevel = 0;
         Managers.Game.Mode = GameMode.Infinity;
         SceneLoader.Instance.ChangeScene("Main");
