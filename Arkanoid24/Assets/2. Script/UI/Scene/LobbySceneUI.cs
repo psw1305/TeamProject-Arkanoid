@@ -14,7 +14,7 @@ public class LobbySceneUI : MonoBehaviour
     [SerializeField] private LevelButton[] levels;
     [SerializeField] private GameObject[] specialLevels;
     [SerializeField] private TextMeshProUGUI bestScoreText;
-    [SerializeField] private TextMeshProUGUI bestTimeText;
+    [SerializeField] private TextMeshProUGUI bestRecordText;
 
     [Header("Settings")]
     [SerializeField] private Button dataClearButton;
@@ -80,17 +80,18 @@ public class LobbySceneUI : MonoBehaviour
         else
         {
             var bestScore = PlayerPrefs.GetFloat(Data.BestScore);
-            bestScoreText.text = $"최고점수 : {bestScore}";
+            bestScoreText.text = $"최고점수  {bestScore}";
         }
 
         if (!PlayerPrefs.HasKey(Data.TimeRecord))
         {
             PlayerPrefs.SetFloat(Data.TimeRecord, 0);
+            bestRecordText.text = string.Empty;
         }
         else
         {
-            var bestTime = PlayerPrefs.GetFloat(Data.BestScore);
-            bestTimeText.text = $"최고기록 : {bestTime:F2}초";
+            var bestTime = PlayerPrefs.GetFloat(Data.TimeRecord);
+            bestRecordText.text = $"최고기록  {bestTime:F2}초";
         }
 
         if (!PlayerPrefs.HasKey(Data.BGM))

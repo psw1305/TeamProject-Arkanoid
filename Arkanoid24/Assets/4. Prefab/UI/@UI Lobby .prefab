@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 3265579567547691006}
   - component: {fileID: 2679276213586234649}
   m_Layer: 5
-  m_Name: Best Time Text
+  m_Name: Best Record Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3760,7 +3760,7 @@ MonoBehaviour:
   - {fileID: 8276681490240222378}
   - {fileID: 936002567448344151}
   bestScoreText: {fileID: 3268913338552030443}
-  bestTimeText: {fileID: 2679276213586234649}
+  bestRecordText: {fileID: 2679276213586234649}
   dataClearButton: {fileID: 2351858302952502796}
   BGMAudioSliderSetting: {fileID: 2580517036376231060}
   SFXAudioSliderSetting: {fileID: 6146895811182001881}
@@ -4632,7 +4632,7 @@ RectTransform:
   m_Children:
   - {fileID: 2148092625838528344}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

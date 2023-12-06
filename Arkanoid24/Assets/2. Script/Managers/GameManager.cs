@@ -21,7 +21,7 @@ public class GameManager
     #region Properties - Mode
 
     public float Timer { get; set; }
-    public float BestTime { get; set; }
+    public float BestRecord { get; set; }
     public float Score { get; set; }
     public float BestScore { get; set; }
 
@@ -66,8 +66,10 @@ public class GameManager
         switch (Mode) 
         {
             case GameMode.TimeAttack:
-                Timer = 20;
+                Timer = 30;
+                BestRecord = PlayerPrefs.GetFloat(Data.TimeRecord, 0);
                 MainUI.SetTimerUI(Timer);
+                MainUI.SetBestTimeUI(BestRecord);
                 break;
             case GameMode.Infinity:
                 BestScore = PlayerPrefs.GetFloat(Data.BestScore, 0);
@@ -161,6 +163,13 @@ public class GameManager
                 MainUI.ShowNextStage();
                 break;
             case GameMode.TimeAttack:
+                if (Timer > BestRecord)
+                {
+                    BestRecord = Timer;
+                    PlayerPrefs.SetFloat(Data.TimeRecord, BestRecord);
+                }
+
+                MainUI.SetResultRecordUI(Timer, BestRecord);
                 MainUI.ShowTimeAttack();
                 break;
             // 무한 모드 => 팝업 생성 없이 바로 다음 레벨 진행
