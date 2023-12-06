@@ -22,6 +22,6 @@ public class GameOverPanel : MonoBehaviour
     public void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
-        SceneLoader.Instance.ChangeScene("Main");
+        SceneLoader.Instance.ChangeScene("Lobby");
     }
 }

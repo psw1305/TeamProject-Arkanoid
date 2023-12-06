@@ -20,21 +20,25 @@ public class LevelButton : MonoBehaviour
         // 언락 레벨보다 낮을 경우, 버튼 잠김
         if (level <= PlayerPrefs.GetInt("LevelsUnlocked"))
         {
+            button.enabled = true;
             board.color = Color.white;
         }
         else
         {
-            button.interactable = false;
-            board.color = new Color32(255, 0, 0, 200);
+            button.enabled = false;
+            board.color = Color.black;
         }
     }
 
+    /// <summary>
+    /// 해당 레벨 플레이
+    /// </summary>
     private void LevelStart()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
 
-        Managers.Game.CurrentLevel = level;
         Managers.Game.Mode = GameMode.Main;
+        Managers.Game.CurrentLevel = level;
         SceneLoader.Instance.ChangeScene("Main");
     }
 }

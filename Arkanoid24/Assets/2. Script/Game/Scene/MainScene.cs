@@ -7,12 +7,6 @@ public class MainScene : MonoBehaviour
 
     #region MonoBehaviour
 
-    private void Awake()
-    {
-        Managers.Resource.Initialize();
-        Managers.Game.Initialize();
-    }
-
     private void Start()
     {
         InitMainGame();
@@ -22,16 +16,19 @@ public class MainScene : MonoBehaviour
 
     private void InitMainGame()
     {
-        // #1. 씬 로딩
+        // #1. 매니저 세팅
+        Managers.Game.InitScene();
+
+        // #2. 씬 로딩
         SceneLoader.Instance.OnSceneLoaded();
 
-        // #2. 현재 레벨에 맞는 스테이지 생성
+        // #3. 현재 레벨에 맞는 스테이지 생성
         CreateStage();
 
-        // #3. 게임 모드 세팅
+        // #4. 게임 모드 세팅
         GameModeSetting();
 
-        // #4. 공 생성 후 대기
+        // #5. 공 생성 후 대기
         Managers.Game.InstanceBall();
     }
 
