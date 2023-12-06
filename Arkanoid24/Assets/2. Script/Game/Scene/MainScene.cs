@@ -69,9 +69,6 @@ public class MainScene : MonoBehaviour
 
             case GameMode.Infinity:
                 break;
-
-            case GameMode.Versus:
-                break;
         }
     }
 

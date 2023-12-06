@@ -31,6 +31,6 @@ public class VersusSceneUI : MonoBehaviour
         }
 
         gameOverPopup.SetActive(true);
-        Managers.Versus.State = GameState.Pause;
+        Managers.Game.State = GameState.Pause;
     }
 }

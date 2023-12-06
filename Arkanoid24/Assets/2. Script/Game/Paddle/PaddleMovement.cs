@@ -13,8 +13,6 @@ public class PaddleMovement : MonoBehaviour
     private Vector2 _movementAxis;
     private float _movementSpeed = 10f;
 
-    private bool _isMultiplay;
-
     #endregion
 
 
@@ -24,8 +22,6 @@ public class PaddleMovement : MonoBehaviour
     {
         _paddleController = GetComponent<PaddleController>();
         _rbody = GetComponent<Rigidbody2D>();
-
-        _isMultiplay = Managers.Game.IsMulti;
 
         _paddleController.OnMoveEvent += Movement;
     }
@@ -50,7 +46,7 @@ public class PaddleMovement : MonoBehaviour
     #region Apply Methods
     private void ApplyMovement()
     {
-        if (_isMultiplay)
+        if (Managers.Game.Mode == GameMode.Versus)
             KeyboardMovement();
         else
             MouseMovement();

@@ -34,5 +34,6 @@ public class Managers : SingletonBehaviour<Managers>
 
         Resource.Initialize();
         Game.Initialize();
+        Versus.Initialize();
     }
 }

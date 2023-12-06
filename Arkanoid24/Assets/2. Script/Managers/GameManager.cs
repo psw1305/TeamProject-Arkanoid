@@ -14,8 +14,6 @@ public class GameManager
     public int Bricks { get; set; }
     public int Life { get; set; }
 
-    public bool IsMulti { get; set; } = false;
-
     #endregion
 
     #region Properties - Mode
@@ -47,9 +45,6 @@ public class GameManager
         Main = Object.FindObjectOfType<MainScene>();
         MainUI = Object.FindObjectOfType<MainSceneUI>();
 
-        //Managers.Player.ReleasePlayerObject();
-        //Managers.Ball.ReleaseAll();
-
         State = GameState.Play;
         Bricks = Stages[CurrentLevel].Bricks;
 
@@ -76,8 +71,6 @@ public class GameManager
                 MainUI.SetScoreUI(Score);
                 MainUI.SetBestScoreUI(BestScore);
                 MainUI.SetCurrentLifeUI(Life);
-                break;
-            case GameMode.Versus:
                 break;
         }
     }

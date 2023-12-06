@@ -109,7 +109,7 @@
                 {
                     "name": "",
                     "id": "61dd6623-4656-492b-9810-78b1547338bf",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyMouse",
@@ -179,7 +179,7 @@
                 {
                     "name": "",
                     "id": "b4e7d5b8-d372-44fa-b01e-d9fc70c468e9",
-                    "path": "<Keyboard>/rightShift",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyMouse",

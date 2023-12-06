@@ -139,11 +139,13 @@ public class BallSkillState
         float directionMultiplier = IsLeft ? -1f : 1f;
         float seta = Mathf.Atan2(BallVec.y, BallVec.x);
         Vector2 ballPos = mainBall.transform.position;
-        GameObject ball = Managers.Resource.Instantiate("BallPrefab", ballPos);
+
+        var ball = Managers.Ball.CreateBallForPlayer(player, ballPos);
+
         ball.GetComponent<Ball>().BallState = BallPreference.BALL_STATE.LAUNCH;
-        ball.GetComponent<Ball>().AssignPlayer(player);
-        Managers.Ball.AssignBallToPlayer(player, ball);
+
         Rigidbody2D secondBallRb = ball.GetComponent<Rigidbody2D>();
+
         if (BallVec.x == 0)
         {
             secondBallRb.velocity = new Vector2(directionMultiplier * 1f * Mathf.Cos(45), 1f * Mathf.Sin(45));
