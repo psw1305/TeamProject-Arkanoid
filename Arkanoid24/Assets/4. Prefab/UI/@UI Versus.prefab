@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1994949214114738961}
   - component: {fileID: 7515220608710778754}
   - component: {fileID: 7609397121573538715}
-  - component: {fileID: 7033492843062584461}
+  - component: {fileID: 6975012999843191243}
   m_Layer: 5
   m_Name: GameOver Popup
   m_TagString: Untagged
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7033492843062584461
+--- !u!114 &6975012999843191243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 192557187649678237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e20a9c39613c94e92efe3614de8ce9, type: 3}
+  m_Script: {fileID: 11500000, guid: ff2e25d9dfa5f1b42998189499a2dcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   restartButton: {fileID: 3525897175356293368}
@@ -843,7 +843,7 @@ RectTransform:
   - {fileID: 1187527043151388548}
   - {fileID: 1994949214114738961}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
