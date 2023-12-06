@@ -59,15 +59,19 @@ public class BallManager
         }
     }
 
-    public void CreateBallForPlayer(GameObject player)
+    public GameObject CreateBallForPlayer(GameObject player, Vector3? startPos = null)
     {
-        var ballStartPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f);
+        var ballStartPos = startPos ?? new Vector3(player.transform.position.x, player.transform.position.y + 0.5f);
         var ball = Managers.Resource.Instantiate("BallPrefab", ballStartPos);
 
         var ballPreference = ball.GetComponent<BallPreference>();
         ballPreference.AssignPlayer(player);
 
         AssignBallToPlayer(player, ball);
+
+        SetBallMaterial(player, ball);
+
+        return ball;
     }
 
     public void CreateBalls()
@@ -75,6 +79,23 @@ public class BallManager
         foreach(var player in Managers.Player.GetActivePlayers())
         {
             CreateBallForPlayer(player);
+        }
+    }
+
+    private void SetBallMaterial(GameObject player, GameObject ball)
+    {
+        var ballSpriteRenderer = ball.GetComponentInChildren<SpriteRenderer>();
+        if (player.tag == PlayerManager.TagPlayer1)
+        {
+            ballSpriteRenderer.material = Managers.Resource.GetMaterial("BlueGlow_Ball");
+        }
+        else if (player.tag == PlayerManager.TagPlayer2)
+        {
+            ballSpriteRenderer.material = Managers.Resource.GetMaterial("RedGlow_Ball");
+        }
+        else
+        {
+            ballSpriteRenderer.material = Managers.Resource.GetMaterial("BlueGlow_Ball");
         }
     }
 

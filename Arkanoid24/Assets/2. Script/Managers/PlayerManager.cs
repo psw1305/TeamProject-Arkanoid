@@ -1,7 +1,9 @@
 
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerManager
 {
@@ -54,8 +56,19 @@ public class PlayerManager
         player1.tag = TagPlayer1;
         player2.tag = TagPlayer2;
 
+        MultiPlayerSpriteSetting(player1, player2);
+
         _players.Add(player1);
         _players.Add(player2);
+    }
+
+    private void MultiPlayerSpriteSetting(GameObject player1, GameObject player2)
+    {
+        var p1SpriteRenderer = player1.GetComponentInChildren<SpriteRenderer>();
+        var p2SpriteRenderer = player2.GetComponentInChildren<SpriteRenderer>();
+
+        p1SpriteRenderer.material = Managers.Resource.GetMaterial("BlueGlow_Paddle");
+        p2SpriteRenderer.material = Managers.Resource.GetMaterial("RedGlow_Paddle");
     }
 
     private void SoloPlayerSpawn()

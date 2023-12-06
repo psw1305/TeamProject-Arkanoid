@@ -15,31 +15,40 @@ public class Brick : MonoBehaviour
     [SerializeField] 
     private GameObject itemSpawner;
 
-    private void Start()
-    {
-        if(SceneManager.GetActiveScene().name == "TEST_Versus")
-        {
-            itemCreateRate = 0;
-        }
-    }
-
     /// <summary>
     /// �긯 ������ ��� �޼ҵ�
     /// </summary>
     /// <param name="damaged">������ ��ġ</param>
-    public void Damaged(int damaged)
+    public void Damaged(int damaged, GameObject player = null)
     {
         hp -= damaged;
 
-        if (hp <= 0)
+        if (Managers.Game.Mode == GameMode.Versus)
         {
-            GetComponent<BoxCollider2D>().enabled = false;
-            StartCoroutine(DeathCoroutine());
+            if (hp <= 0)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+                StartCoroutine(MultiDeathCoroutine(player));
+            }
+            else
+            {
+                sprite.DOFade(1, 0.15f);
+                sprite.DOFade(80f / 255f, 0.15f).SetDelay(0.15f);
+            }
         }
         else
         {
-            sprite.DOFade(1, 0.15f);
-            sprite.DOFade(80f / 255f, 0.15f).SetDelay(0.15f);
+            // 기존 로직
+            if (hp <= 0)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+                StartCoroutine(DeathCoroutine());
+            }
+            else
+            {
+                sprite.DOFade(1, 0.15f);
+                sprite.DOFade(80f / 255f, 0.15f).SetDelay(0.15f);
+            }
         }
     }
 
@@ -54,6 +63,20 @@ public class Brick : MonoBehaviour
         Managers.Game.AddScore(100);
         InstantiateItem();
         yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
+    public IEnumerator MultiDeathCoroutine(GameObject player)
+    {
+        sprite.gameObject.SetActive(false);
+        particle.Play();
+
+        Managers.Versus.PlayerBrickCount(player);
+
+        InstantiateItem();
+
+        yield return new WaitForSeconds(1f);
+
         Destroy(gameObject);
     }
 
@@ -72,10 +95,14 @@ public class Brick : MonoBehaviour
     // �浹�� �߻��ϸ� ����
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ball") || collision.gameObject.CompareTag("Ball1") || collision.gameObject.CompareTag("Ball2"))
+        if (collision.gameObject.CompareTag("Ball"))
         {
             SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
-            Damaged(collision.gameObject.GetComponent<Ball>()._maxPower);
+
+            var ball = collision.gameObject.GetComponent<Ball>();
+            var player = ball.BallOwner;
+
+            Damaged(ball._maxPower, player);
         }
     }
 

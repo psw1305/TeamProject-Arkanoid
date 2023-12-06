@@ -62,14 +62,6 @@ public class BrickBreak : MonoBehaviour
             // 점수는 추후 벽돌 종류에 따라 변경 가능
             Managers.Game.AddScore(100);
             Debug.Log("Ball Destory");
-
-            foreach(var player in players)
-            {
-                if (player.tag == "Player1")
-                    Managers.Versus.Player1BrickCount();
-                else if (player.tag == "Player2")
-                    Managers.Versus.Player2BrickCount();
-            }
         }
         
         // MultiPlayer

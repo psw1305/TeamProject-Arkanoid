@@ -37,13 +37,18 @@ using UnityEngine;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Managers.Skill.Player = collision.gameObject;
-        
-        if (collision.CompareTag("Player") && state != ModelState.Dead)
+
+        var activePlayers = Managers.Player.GetActivePlayers();
+
+        foreach(var player in activePlayers)
         {
-            state = ModelState.Dead;
-            SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
-            ItemSkill(collision.gameObject);
-            StartCoroutine(DeathCoroutine());
+            if (player == collision.gameObject && state != ModelState.Dead)
+            {
+                state = ModelState.Dead;
+                SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
+                ItemSkill(collision.gameObject);
+                StartCoroutine(DeathCoroutine());
+            }
         }
     }
 

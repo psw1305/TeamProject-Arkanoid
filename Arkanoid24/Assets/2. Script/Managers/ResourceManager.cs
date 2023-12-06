@@ -5,11 +5,17 @@ using UnityEngine;
 public class ResourceManager
 {
     private List<StageBlueprint> stages = new();
+    private List<VersusLevelBlueprint> versusStages = new();
+
+    private Dictionary<string, Material> materials = new();
     private Dictionary<string, GameObject> prefabs = new();
 
-    private List<VersusLevelBlueprint> versusStages = new();
     public void Initialize()
     {
+        // Materials
+        var materials = Resources.LoadAll<Material>("Materials");
+        foreach (Material material in materials) this.materials[material.name] = material;
+
         // 스테이지 SO 파일
         StageBlueprint[] stages = Resources.LoadAll<StageBlueprint>("Blueprint/Stage");
         foreach (StageBlueprint stage in stages) this.stages.Add(stage);
@@ -51,6 +57,12 @@ public class ResourceManager
     public VersusLevelBlueprint[] GetVersusStages()
     {
         return versusStages.ToArray();
+    }
+
+    public Material GetMaterial(string materialName)
+    {
+        if (!materials.TryGetValue(materialName, out Material material)) return null;
+        return material;
     }
 }
 

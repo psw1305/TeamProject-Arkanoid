@@ -42,21 +42,37 @@ public class VersusManager
     }
     
 
-    public void Player1BrickCount()
+    public void PlayerBrickCount(GameObject player)
+    {
+        var activePlayers = Managers.Player.GetActivePlayers();
+
+        if (player == activePlayers[0])
+        {
+            Player1BrickCount();
+        }
+        else if (player == activePlayers[1])
+        {
+            Player2BrickCount();
+        }
+    }
+
+    private void Player1BrickCount()
     {
         Player1Bricks--;
 
         if (Player1Bricks == 0)
         {
+            Debug.Log("player1 win");
             VersusUI.ShowGameOver("Player1");
         }
     }
-    public void Player2BrickCount()
+    private void Player2BrickCount()
     {
         Player2Bricks--;
 
         if (Player2Bricks == 0)
         {
+            Debug.Log("player2 win");
             VersusUI.ShowGameOver("Player2");
         }
     }
