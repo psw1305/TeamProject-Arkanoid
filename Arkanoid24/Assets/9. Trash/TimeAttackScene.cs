@@ -47,7 +47,7 @@ public class TimeAttackScene : MonoBehaviour
     /// </summary>
     private void CreateStage()
     {
-        stageBlueprint = Managers.Game.CurrentStage();
+        stageBlueprint = Managers.Game.GetCurrentStage();
         Instantiate(stageBlueprint.StageMap);
     }
 

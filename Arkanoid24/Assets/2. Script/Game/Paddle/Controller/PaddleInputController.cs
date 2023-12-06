@@ -24,7 +24,7 @@ public class PaddleInputController : MonoBehaviour
 
     private void OnMovement(InputValue inputValue)
     {
-        if (Managers.Game.State == GameState.Pause) return;
+        if (Managers.Game.State != GameState.Play) return;
 
         Vector2 mousePos = inputValue.Get<Vector2>();
 

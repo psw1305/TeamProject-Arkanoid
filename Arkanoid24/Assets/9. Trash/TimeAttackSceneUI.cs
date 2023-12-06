@@ -59,7 +59,7 @@ public class TimeAttackSceneUI : MonoBehaviour
         bestscore = PlayerPrefs.GetFloat(KeyName, 0);
         BestscoreText.text = $"최고 기록 : {bestscore.ToString()}";
 
-        _timer = Managers.Game.Time[Managers.Game.CurrentLevel];
+        //_timer = Managers.Game.Time[Managers.Game.CurrentLevel];
 
         StartCoroutine(TimerStart());
     }
@@ -77,7 +77,7 @@ public class TimeAttackSceneUI : MonoBehaviour
     {
         while (_timer > 0)
         {
-            if (Managers.Game.State == GameState.Pause) break;
+            if (Managers.Game.State != GameState.Play) break;
             _timer -= Time.deltaTime;
             timerText.text = string.Format(_timer.ToString("F2"));
             yield return null;
