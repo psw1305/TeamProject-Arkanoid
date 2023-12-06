@@ -28,7 +28,7 @@ public class GameManager
     public bool IsMulti { get; set; } = true; // Test : true
     
     public List<float> Time {  get; set; }
-    public GameMode Mode { get; set; } = GameMode.Main;
+    //public GameMode Mode { get; set; } = GameMode.Main;
     public TimeAttackSceneUI TimeAttackUI { get; private set; }
 
     

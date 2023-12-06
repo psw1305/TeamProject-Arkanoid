@@ -1,3 +1,7 @@
+
+using System.Collections;
+using UnityEngine;
+
 public class MainScene : MonoBehaviour
 {
     private StageBlueprint stageBlueprint;

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class Brick : MonoBehaviour
     private int itemCreateRate;
     [SerializeField] 
     private GameObject itemSpawner;
+
+    private void Start()
+    {
+        if(Managers.Game.Mode == GameMode.Versus)
+        {
+            itemCreateRate = 0;
+        }
+    }
 
     /// <summary>
     /// 브릭 데미지 계산 메소드
@@ -52,7 +61,7 @@ public class Brick : MonoBehaviour
     public void InstantiateItem()
     {
         // itemCreateRate 이하일 경우 아이템 생성
-        if (Random.Range(0, 101) <= itemCreateRate)
+        if (Random.Range(0, 101) < itemCreateRate)
         {
             itemSpawner.transform.position = transform.position;
             Instantiate(itemSpawner);
@@ -63,7 +72,7 @@ public class Brick : MonoBehaviour
     // 충돌이 발생하면 실행
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ball"))
+        if (collision.gameObject.CompareTag("Ball") || collision.gameObject.CompareTag("Ball1") || collision.gameObject.CompareTag("Ball2"))
         {
             SFX.Instance.PlayOneShot(SFX.Instance.brickHit);
             Damaged(1);
