@@ -98,7 +98,7 @@ public class GameManager
         if (Bricks == 0)
         {
             State = GameState.Pause;
-            Managers.Skill.ResetSkill();
+            Managers.Skill.ResetSkill(true);
             GameClearMode();
         }
 
@@ -169,7 +169,7 @@ public class GameManager
     {
         State = GameState.Pause;
         MainUI.ShowGameOver();
-        Managers.Skill.ResetSkill();
+        Managers.Skill.ResetSkill(true);
     }
 
     public void LevelClear()
