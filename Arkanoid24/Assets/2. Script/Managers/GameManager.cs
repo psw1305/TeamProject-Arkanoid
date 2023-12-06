@@ -15,21 +15,24 @@ public class GameManager
     public int CurrentLevel { get; set; }
     public int Bricks { get; set; }
     public int Life { get; set; }
-    public float Score { get; set; }
 
     #endregion
 
     #region Properties - Mode
 
     public float Timer { get; set; }
+    public float BestTime { get; set; }
+    public float Score { get; set; }
     public float BestScore { get; set; }
+
+    public float[] RankScores { get; set; } = new float[5];
 
     #endregion
 
     #region Initialize
 
     /// <summary>
-    /// °ÔÀÓ ¸Å´ÏÀú ÃÊ±âÈ­
+    /// Managers Awake ì´ˆê¸°í™”
     /// </summary>
     public void Initialize()
     {
@@ -37,7 +40,7 @@ public class GameManager
     }
 
     /// <summary>
-    /// ¸ŞÀÎ ¾À OnStart ÃÊ±âÈ­
+    /// ë©”ì¸ ì”¬ OnStart ì´ˆê¸°í™”
     /// </summary>
     public void InitScene()
     {
@@ -52,7 +55,7 @@ public class GameManager
     }
 
     /// <summary>
-    /// °ÔÀÓ ¸ğµå¿¡ µû¸¥ ÃÊ±âÈ­
+    /// ê²Œì„ ëª¨ë“œì— ë”°ë¥¸ ì´ˆê¸°í™”
     /// </summary>
     private void InitMode()
     {
@@ -64,9 +67,10 @@ public class GameManager
                 Timer = 20;
                 MainUI.SetTimerUI(Timer);
                 break;
-            // ¹«ÇÑ¸ğµå => Á¡¼ö, ¶óÀÌÇÁ À¯Áö
             case GameMode.Infinity:
+                BestScore = PlayerPrefs.GetFloat(Data.BestScore, 0);
                 MainUI.SetScoreUI(Score);
+                MainUI.SetBestScoreUI(BestScore);
                 MainUI.SetCurrentLifeUI(Life);
                 break;
             case GameMode.Versus:
@@ -104,6 +108,16 @@ public class GameManager
 
         Score += score;
         MainUI.SetScoreUI(Score);
+        
+        // ë¬´í•œ ëª¨ë“œì¼ ê²½ìš°, ìµœê³  ì ìˆ˜ ê¸°ë¡
+        if (Mode != GameMode.Infinity) return;
+
+        if (Score >= BestScore)
+        {
+            BestScore = Score;
+            PlayerPrefs.SetFloat(Data.BestScore, BestScore);
+            MainUI.SetBestScoreUI(BestScore);
+        }
     }
 
     public void LifeUp()
@@ -142,7 +156,7 @@ public class GameManager
     #region Game Result Methods
 
     /// <summary>
-    /// °ÔÀÓ ¸ğµå¿¡ µû¸¥ Å¬¸®¾î ¼³Á¤
+    /// ê²Œì„ ëª¨ë“œì— ë”°ë¥¸ ê²Œì„ ê²°ê³¼ ê¸°ëŠ¥
     /// </summary>
     private void GameClearMode()
     {
@@ -155,7 +169,7 @@ public class GameManager
             case GameMode.TimeAttack:
                 MainUI.ShowTimeAttack();
                 break;
-            // Å¬¸®¾î ½Ã, ÆË¾÷ ¾È ¶ç¿ì°í ¹Ù·Î, ´ÙÀ½ ½ºÅ×ÀÌÁö
+            // ë¬´í•œ ëª¨ë“œ => íŒì—… ìƒì„± ì—†ì´ ë°”ë¡œ ë‹¤ìŒ ë ˆë²¨ ì§„í–‰
             case GameMode.Infinity:
                 LevelClear();
                 SceneLoader.Instance.ChangeScene("Main");
@@ -165,10 +179,25 @@ public class GameManager
         }
     }
 
+    /// <summary>
+    /// ì¼ë°˜ì ìœ¼ë¡œ ê²Œì„ ì˜¤ë²„ íŒì—… ìƒì„±
+    /// ë¬´í•œ ëª¨ë“œëŠ” ë­í‚¹ íŒì—…ìœ¼ë¡œ ìƒì„±
+    /// </summary>
     public void GameOver()
     {
         State = GameState.Pause;
-        MainUI.ShowGameOver();
+
+        if (Mode == GameMode.Infinity)
+        {
+            Ranking();
+            MainUI.SetRankingUI();
+            MainUI.ShowRanking();
+        }
+        else
+        {
+            MainUI.ShowGameOver();
+        }
+
         Managers.Skill.ResetSkill(true);
     }
 
@@ -176,9 +205,27 @@ public class GameManager
     {
         CurrentLevel++;
 
+        if (Mode != GameMode.Main) return;
         if (CurrentLevel > PlayerPrefs.GetInt(Data.LevelUnlock, 0))
         {
             PlayerPrefs.SetInt(Data.LevelUnlock, CurrentLevel);
+        }
+    }
+
+    public void Ranking()
+    {
+        for (int i = 0; i < RankScores.Length; i++)
+        {
+            RankScores[i] = PlayerPrefs.GetFloat($"Ranks{i}", 0);
+
+            while (RankScores[i] < Score)
+            {
+                var tmpScore = RankScores[i];
+                RankScores[i] = Score;
+
+                PlayerPrefs.SetFloat($"Ranks{i}", Score);
+                Score = tmpScore;
+            }
         }
     }
 

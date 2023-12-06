@@ -826,8 +826,9 @@ GameObject:
   - component: {fileID: 6148245535158888528}
   - component: {fileID: 749997257402967693}
   - component: {fileID: 7831910299468343618}
+  - component: {fileID: 7945934967451904983}
   m_Layer: 5
-  m_Name: 'Infinity Popup '
+  m_Name: 'Ranking Popup '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,6 +896,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7945934967451904983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588523535748741232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b91674f7c6f118429c3e444cdbd2d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartButton: {fileID: 6826910212915606139}
+  menuButton: {fileID: 3545582832382642363}
 --- !u!1 &2804529807903294258
 GameObject:
   m_ObjectHideFlags: 0
@@ -4288,8 +4303,15 @@ MonoBehaviour:
   bestTimerText: {fileID: 6476485805080038980}
   scoreText: {fileID: 5557653806728054942}
   bestScoreText: {fileID: 1455105829983088653}
+  rankTexts:
+  - {fileID: 6796510446726948321}
+  - {fileID: 7603714668176840632}
+  - {fileID: 6601422548230369105}
+  - {fileID: 729524003133317766}
+  - {fileID: 4284388724244807511}
   gameOverPopup: {fileID: 192557187649678237}
   nextStagePopup: {fileID: 5652058932332297685}
+  rankingPopup: {fileID: 2588523535748741232}
   timeAttackPopup: {fileID: 2197938240458686436}
 --- !u!1 &8129691214471337747
 GameObject:
@@ -4507,10 +4529,10 @@ RectTransform:
   - {fileID: 1187527043151388548}
   - {fileID: 1994949214114738961}
   - {fileID: 9114593552406220152}
-  - {fileID: 8157686844596790692}
   - {fileID: 6148245535158888528}
+  - {fileID: 8157686844596790692}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

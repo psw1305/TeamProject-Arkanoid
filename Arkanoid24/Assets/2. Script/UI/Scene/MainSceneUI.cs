@@ -13,12 +13,12 @@ public class MainSceneUI : MonoBehaviour
     [Header("Score Board")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI bestScoreText;
-    private string KeyName = "BestScore";
-    private float bestscore = 0;
+    [SerializeField] private TextMeshProUGUI[] rankTexts;
 
     [Header("Popup")]
     [SerializeField] private GameObject gameOverPopup;
     [SerializeField] private GameObject nextStagePopup;
+    [SerializeField] private GameObject rankingPopup;
     [SerializeField] private GameObject timeAttackPopup;
 
     #region Set UI
@@ -40,17 +40,6 @@ public class MainSceneUI : MonoBehaviour
         }
     }
 
-    public void SetBestScoreUI()
-    {
-        bestscore = PlayerPrefs.GetFloat(KeyName, 0);
-        bestScoreText.text = $"최고 기록 : {bestscore}";
-
-        if (Managers.Game.Score > bestscore)
-        {
-            PlayerPrefs.SetFloat(KeyName, Managers.Game.Score);
-        }
-    }
-
     #endregion
 
     #region Show Popup
@@ -65,6 +54,12 @@ public class MainSceneUI : MonoBehaviour
     {
         SFX.Instance.PlayOneShot(SFX.Instance.nextstage);
         nextStagePopup.SetActive(true);
+    }
+
+    public void ShowRanking()
+    {
+        SFX.Instance.PlayOneShot(SFX.Instance.nextstage);
+        rankingPopup.SetActive(true);
     }
 
     public void ShowTimeAttack()
@@ -119,6 +114,23 @@ public class MainSceneUI : MonoBehaviour
         {
             if (i < num) lifes[i].SetActive(true);
             else lifes[i].SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// [무한 모드] 최고 점수 세팅
+    /// </summary>
+    /// <param name="bestScore"></param>
+    public void SetBestScoreUI(float bestScore)
+    {
+        bestScoreText.text = $"최고 기록 : {bestScore}";
+    }
+
+    public void SetRankingUI()
+    {
+        for (int i = 0; i < rankTexts.Length; i++)
+        {
+            rankTexts[i].text = $"{i + 1}등  {Managers.Game.RankScores[i]}점";
         }
     }
 
