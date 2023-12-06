@@ -97,9 +97,11 @@ public class BallSkillState
     {
         for(int i = 0; i < _laserFireCount; i++)
         {
+            SFX.Instance.PlayOneShot(SFX.Instance.laser);
             var bullet1 = Managers.Resource.Instantiate("Laser", player.transform.position);
             bullet1.transform.position += new Vector3(-0.5f, 0f, 0f);
             yield return new WaitForSeconds(_laserFireDelay/2);
+            SFX.Instance.PlayOneShot(SFX.Instance.laser);
             var bullet2 = Managers.Resource.Instantiate("Laser", player.transform.position);
             bullet2.transform.position += new Vector3(0.5f, 0f, 0f);
             yield return new WaitForSeconds(_laserFireDelay);
