@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 462699daa0223b3448030b41ad4f5244, type: 2}
-  testBGM: {fileID: 8300000, guid: b9aa2fd2b2b7d864d9388e5cf41c5ae5, type: 3}
+  testBGM: {fileID: 8300000, guid: 7c03ff060f2e0f8418635ea019686ea5, type: 3}
 --- !u!1 &5427125117502161968
 GameObject:
   m_ObjectHideFlags: 0
