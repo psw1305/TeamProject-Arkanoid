@@ -22,6 +22,10 @@ public class BallPreference : MonoBehaviour
     protected Rigidbody2D _paddleRbody;
     protected Rigidbody2D _ballRbody;
 
+    // Game Pause
+    protected Vector2 _prevVelocity;
+    protected bool _isStarted = true;
+
     public float ballIncreaseSpeedScope = 0.5f;
 
     // Player Depend, Reference
@@ -50,8 +54,20 @@ public class BallPreference : MonoBehaviour
     {
         if(Managers.Game.State != GameState.Play)
         {
+            if (_isStarted)
+            {
+                _isStarted = false;
+                _prevVelocity = _ballRbody.velocity;
+            }
+
             _ballRbody.velocity = Vector2.zero;
             return;
+        }
+
+        if (!_isStarted)
+        {
+            _ballRbody.velocity = _prevVelocity;
+            _isStarted = true;
         }
     }
     #endregion

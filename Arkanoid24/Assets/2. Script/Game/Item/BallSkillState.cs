@@ -12,7 +12,7 @@ public class BallSkillState
     public float BallExtraSpeed = 0f;
     public float BallIncreaseSpeed = 0f;
 
-    public GameObject Player;
+     public GameObject Player;
     //public GameObject LeftWall;
     //public GameObject RightWall;
     
@@ -89,6 +89,8 @@ public class BallSkillState
 
     public void PlayerItem()
     {
+        if (Managers.Game.Mode == GameMode.Versus) return;
+
         Managers.Game.LifeUp();
     }
 

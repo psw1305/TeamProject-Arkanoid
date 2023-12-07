@@ -14,7 +14,17 @@ public class InstantItem : MonoBehaviour
 
     private void CreatItem()
     {
-        GameObject spawnItem = Instantiate(itemList[Random.Range(0, itemList.Count)]);
+        int excludeIndex = Random.Range(0, itemList.Count);
+
+        if (Managers.Game.Mode == GameMode.Versus)
+        {
+            while(excludeIndex == 4 || excludeIndex == 3)
+            {
+                excludeIndex = Random.Range(0, itemList.Count);
+            }
+        }
+        
+        GameObject spawnItem = Instantiate(itemList[excludeIndex]);
         spawnItem.transform.position = transform.position;
     }
 }
