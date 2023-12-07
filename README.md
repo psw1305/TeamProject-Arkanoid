@@ -3,6 +3,7 @@
 </p>
 
 ## 🖥️ Arkanoid 24
+### [게임 플레이 itch.io](https://shshck5.itch.io/arkanoid24)
 
 + 벽돌깨기 게임의 대명사 'Arkanoid'. 2024년, 사이버펑크로 돌아오다!
 + 클래식 : 10개의 level, 점점 단단해지는 벽돌!
@@ -29,8 +30,7 @@
 - 팀원4 `고민수` - 아이템 디자인 / 아이템 스킬 구현 / 스킬 매니저 / 코드 분기 통합 / 트러블 슈팅
 - 팀원5 `나재민` - 아이템 디자인 / 아이템 스킬 구현 / UI디자인 (설정) / 상호작용(Interact)
 
-
-## ▶️ 게임 플레이
+## ▶️ 게임 스크린샷
 
 <p align="center">
   <img src="https://github.com/psw1305/TeamProject-Arkanoid/assets/6329345/cbbc8078-e671-49af-9506-1bd1efe6649b" width="49%"/>
