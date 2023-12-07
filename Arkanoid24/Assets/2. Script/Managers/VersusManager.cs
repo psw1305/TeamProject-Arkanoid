@@ -62,7 +62,6 @@ public class VersusManager
 
         if (Player1Bricks == 0)
         {
-            Debug.Log("player1 win");
             VersusUI.ShowGameOver("Player1");
         }
     }
@@ -72,7 +71,6 @@ public class VersusManager
 
         if (Player2Bricks == 0)
         {
-            Debug.Log("player2 win");
             VersusUI.ShowGameOver("Player2");
         }
     }
