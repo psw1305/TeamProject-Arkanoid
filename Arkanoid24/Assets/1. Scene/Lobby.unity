@@ -408,6 +408,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9371606443947863, guid: 443d7f0653e73fa4ea98370cb5c5c2f4, type: 3}
+      propertyPath: m_text
+      value: "\uD06C\uB808\uB527"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641153249150963249, guid: 443d7f0653e73fa4ea98370cb5c5c2f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3226897656569292429, guid: 443d7f0653e73fa4ea98370cb5c5c2f4, type: 3}
+      propertyPath: m_text
+      value: "\uD06C\uB808\uB527"
+      objectReference: {fileID: 0}
     - target: {fileID: 3463919748460755582, guid: 443d7f0653e73fa4ea98370cb5c5c2f4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
