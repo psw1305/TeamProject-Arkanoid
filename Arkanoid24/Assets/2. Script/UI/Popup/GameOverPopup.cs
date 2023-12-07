@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class TimeAttackPanel : MonoBehaviour
+public class GameOverPopup : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI recordText;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button menuButton;
 
@@ -14,13 +12,14 @@ public class TimeAttackPanel : MonoBehaviour
         menuButton.onClick.AddListener(Menu);
     }
 
-    public void Restart()
+    private void Restart()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
+        Managers.Game.Score = 0;
         SceneLoader.Instance.ChangeScene("Main");
     }
 
-    public void Menu()
+    private void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         SceneLoader.Instance.ChangeScene("Lobby");

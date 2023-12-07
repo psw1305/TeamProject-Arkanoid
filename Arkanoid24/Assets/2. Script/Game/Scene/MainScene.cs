@@ -53,7 +53,7 @@ public class MainScene : MonoBehaviour
     /// <summary>
     /// 게임 모드에 따른 세팅
     /// </summary>
-    private void GameModeSetting()
+    public void GameModeSetting()
     {
         switch (Managers.Game.Mode)
         {

@@ -75,6 +75,11 @@ public class GameManager
         }
     }
 
+    public void InitRestart()
+    {
+
+    }
+
     public StageBlueprint GetCurrentStage()
     {
         return Stages[CurrentLevel];
