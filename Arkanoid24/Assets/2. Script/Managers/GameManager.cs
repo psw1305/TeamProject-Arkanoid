@@ -87,7 +87,11 @@ public class GameManager
     public void AddScore(float score)
     {
         Bricks--;
+        // 벽을 부수면 공 속도 증가
+        Managers.Skill.BallIncreaseSpeed += 0.5f;
+        
         if (MainUI == null) return;
+        Score += score;
         if (Bricks == 0)
         {
             State = GameState.Pause;
@@ -95,7 +99,6 @@ public class GameManager
             GameClearMode();
         }
 
-        Score += score;
         MainUI.SetScoreUI(Score);
         
         // 무한 모드일 경우, 최고 점수 기록

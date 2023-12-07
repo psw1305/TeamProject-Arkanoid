@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NextStagePanel : MonoBehaviour
+public class NextStagePopup : MonoBehaviour
 {
     [SerializeField] private Button nextButton;
     [SerializeField] private Button menuButton;
@@ -12,7 +12,7 @@ public class NextStagePanel : MonoBehaviour
         menuButton.onClick.AddListener(Menu);
     }
 
-    public void NextLevel()
+    private void NextLevel()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
 
@@ -26,7 +26,7 @@ public class NextStagePanel : MonoBehaviour
         }
     }
 
-    public void Menu()
+    private void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         SceneLoader.Instance.ChangeScene("Lobby");

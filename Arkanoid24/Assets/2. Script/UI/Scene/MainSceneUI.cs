@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class MainSceneUI : MonoBehaviour
 {
     [Header("Main")]
     [SerializeField] private GameObject[] lifes;
+    [SerializeField] private Button settingButton;
 
     [Header("Time Attack")]
     [SerializeField] private TextMeshProUGUI timerText;
@@ -18,10 +20,16 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] rankTexts;
 
     [Header("Popup")]
+    [SerializeField] private GameObject settingPopup;
     [SerializeField] private GameObject gameOverPopup;
     [SerializeField] private GameObject nextStagePopup;
     [SerializeField] private GameObject rankingPopup;
     [SerializeField] private GameObject timeAttackPopup;
+
+    private void Start()
+    {
+        settingButton.onClick.AddListener(ShowSettings);
+    }
 
     #region Set UI
 
@@ -45,6 +53,13 @@ public class MainSceneUI : MonoBehaviour
     #endregion
 
     #region Show Popup
+
+    public void ShowSettings()
+    {
+        SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
+        Managers.Game.State = GameState.Pause;
+        settingPopup.SetActive(true);
+    }
 
     public void ShowGameOver()
     {

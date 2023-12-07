@@ -16,7 +16,7 @@ public class TimeAttackScene : MonoBehaviour
         Managers.Game.Initialize();
 
         screenEdge = GetComponent<EdgeCollider2D>();
-        screenEdge.GenerateCameraBounds();
+        //screenEdge.GenerateCameraBounds();
     }
 
     private void Start()

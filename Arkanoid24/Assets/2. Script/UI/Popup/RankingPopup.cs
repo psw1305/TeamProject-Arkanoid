@@ -1,8 +1,7 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RankingPanel : MonoBehaviour
+public class RankingPopup : MonoBehaviour
 {
     [SerializeField] private Button restartButton;
     [SerializeField] private Button menuButton;
@@ -13,7 +12,7 @@ public class RankingPanel : MonoBehaviour
         menuButton.onClick.AddListener(Menu);
     }
 
-    public void Restart()
+    private void Restart()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         Managers.Game.Life = 3;
@@ -21,7 +20,7 @@ public class RankingPanel : MonoBehaviour
         SceneLoader.Instance.ChangeScene("Main");
     }
 
-    public void Menu()
+    private void Menu()
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         SceneLoader.Instance.ChangeScene("Lobby");
