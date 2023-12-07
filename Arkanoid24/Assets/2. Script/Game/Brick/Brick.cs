@@ -27,6 +27,7 @@ public class Brick : MonoBehaviour
         {
             if (hp <= 0)
             {
+                player.GetComponent<BallSkillState>().BallIncreaseSpeed += 0.5f;
                 GetComponent<BoxCollider2D>().enabled = false;
                 StartCoroutine(MultiDeathCoroutine(player));
             }
@@ -41,6 +42,7 @@ public class Brick : MonoBehaviour
             // 기존 로직
             if (hp <= 0)
             {
+                if (player != null) player.GetComponent<BallSkillState>().BallIncreaseSpeed += 0.5f;
                 GetComponent<BoxCollider2D>().enabled = false;
                 StartCoroutine(DeathCoroutine());
             }

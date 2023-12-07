@@ -29,7 +29,6 @@ public class BallDestroyer : MonoBehaviour
         GameObject ball = col.gameObject;
         GameObject playerOwner = ball.GetComponent<BallPreference>().BallOwner;
         Managers.Ball.RemoveBallFromPlayer(playerOwner, ball);
-
         Managers.Game.LifeDown(playerOwner);
 
         Destroy(col.gameObject);

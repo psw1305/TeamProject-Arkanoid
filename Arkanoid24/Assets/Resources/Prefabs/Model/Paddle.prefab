@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 9151341998151473308}
   - component: {fileID: 6996380670935850066}
   - component: {fileID: 4191919945878495410}
+  - component: {fileID: 8920734121839225290}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Player
@@ -164,7 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220a2d30c8b61aa4294883b12114a6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddleCamera: {fileID: 5079212559161242321, guid: c6085c381497e0842bf5cd8c0121d7d7, type: 3}
 --- !u!114 &4461057982904232956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,3 +261,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &8920734121839225290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399632320138629234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69d1e532bd2b142b11fc70ccf4de22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BallExtraPower: 0
+  BallExtraSpeed: 0
+  BallIncreaseSpeed: 0
+  Player: {fileID: 0}

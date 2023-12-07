@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-public class BallSkillState
+public class BallSkillState : MonoBehaviour
 {
     private int _laserFireCount = 5;
     private float _laserFireDelay = 0.3f;

@@ -31,8 +31,8 @@ public class Ball : BallPreference
         
         OnBallLaunch += BallToStart;
 
-        SetAdditionalCurrentSpeed(Managers.Skill.BallExtraSpeed);
-        SetPower(Managers.Skill.BallExtraPower);
+        SetAdditionalCurrentSpeed(BallOwner.GetComponent<BallSkillState>().BallExtraSpeed);
+        SetPower(BallSkill.BallExtraPower);
     }
 
     protected override void FixedUpdate()
@@ -61,7 +61,7 @@ public class Ball : BallPreference
     private void BallToStart()
     {
         if (BallState != BALL_STATE.READY) return;
-        if(Managers.Skill.CurrentSkill == Items.Catch) isCatchLaunch = true;
+        if(BallSkill.CurrentSkill == Items.Catch) isCatchLaunch = true;
         BallState = BALL_STATE.LAUNCH;
 
         CalculateBallPosToPaddle();
@@ -113,7 +113,7 @@ public class Ball : BallPreference
 
     public void CheckCatchActivation()
     {
-        if (Managers.Skill.CurrentSkill == Items.Catch)
+        if (BallSkill.CurrentSkill == Items.Catch)
         {
             BallState = BALL_STATE.READY;
             _posX = transform.position.x - _paddleRbody.transform.position.x;
@@ -124,7 +124,7 @@ public class Ball : BallPreference
     public void SetPower(int extraPower)
     {
         _maxPower = _defaultPower + extraPower;
-        if(Managers.Skill.CurrentSkill == Items.Power)
+        if(BallSkill.CurrentSkill == Items.Power)
         {
             transform.localScale = transform.localScale * 2f;
         }
