@@ -453,9 +453,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1587052017387385908, guid: f44c878e22274bc4d8e7c997be90c17f, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 4506992351978954790, guid: f44c878e22274bc4d8e7c997be90c17f, type: 3}
       propertyPath: m_Name
       value: Play Board Versus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529118273712463634, guid: f44c878e22274bc4d8e7c997be90c17f, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8361877585835760749, guid: f44c878e22274bc4d8e7c997be90c17f, type: 3}
       propertyPath: m_RootOrder
