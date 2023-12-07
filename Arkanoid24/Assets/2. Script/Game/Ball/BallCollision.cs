@@ -28,7 +28,7 @@ public class BallCollision : MonoBehaviour
                 float paddleWidth = col.collider.bounds.size.x;
 
                 _ball.CheckCatchActivation();
-                if (Managers.Skill.CurrentSkill != Items.Catch)
+                if (player.GetComponent<BallSkillState>().CurrentSkill != Items.Catch)
                 {
                     var posX = HitFactor(col.transform.position, paddleWidth);
                     var direction = new Vector2(posX, 1).normalized;

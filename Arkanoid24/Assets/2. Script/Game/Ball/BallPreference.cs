@@ -36,6 +36,8 @@ public class BallPreference : MonoBehaviour
     // Getter
     public GameObject BallOwner { get { return _playerObject; } }
 
+    public BallSkillState BallSkill;
+
     #endregion
 
 
@@ -48,6 +50,7 @@ public class BallPreference : MonoBehaviour
     protected virtual void Start()
     {
         _currentSpeed = defaultSpeed;
+        BallSkill = BallOwner.GetComponent<BallSkillState>();
     }
 
     protected virtual void FixedUpdate()
@@ -98,7 +101,7 @@ public class BallPreference : MonoBehaviour
 
     public void BallHitBrick()
     {
-        Managers.Skill.SetSpeed(BallOwner);
+        BallSkill.SetSpeed(BallOwner);
     }
 
     public bool InvalidCheckDirection(Vector2 direction)

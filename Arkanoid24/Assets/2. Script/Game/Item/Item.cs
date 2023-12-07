@@ -36,7 +36,6 @@ using UnityEngine;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Managers.Skill.Player = collision.gameObject;
 
         var activePlayers = Managers.Player.GetActivePlayers();
 
@@ -44,9 +43,11 @@ using UnityEngine;
         {
             if (player == collision.gameObject && state != ModelState.Dead)
             {
+                BallSkillState playerSkill = collision.GetComponent<BallSkillState>();
+                playerSkill.Player = collision.gameObject;
                 state = ModelState.Dead;
                 SFX.Instance.PlayOneShot(SFX.Instance.itemPickup);
-                ItemSkill(collision.gameObject);
+                ItemSkill(collision.gameObject, playerSkill);
                 StartCoroutine(DeathCoroutine());
             }
         }
@@ -60,42 +61,42 @@ using UnityEngine;
         Destroy(gameObject);
     }
 
-    private void ItemSkill(GameObject player)
+    private void ItemSkill(GameObject player, BallSkillState playerSkill)
     {
         switch (itemType)
         {
             case Items.Player:
                 // 목숨 추가
-                Managers.Skill.PlayerItem();
+                playerSkill.PlayerItem();
                 break;
 
             case Items.Lasers:
                 // 2발씩 발사
-                Managers.Skill.Lasers(player);
+                playerSkill.Lasers(player);
                 break;
 
             case Items.Enlarge:
                 // 패들이 1.5배 커짐(가로)
-                Managers.Skill.Enalarge(player);
+                playerSkill.Enalarge(player);
                 break;
 
             case Items.Catch:
                 // 공이 튕기지않고 패들에 달라붙음
-                Managers.Skill.Catch();
+                playerSkill.Catch();
                 break;
 
             case Items.Slow:
                 // 공 속도 감소
-                Managers.Skill.Slow(player);
+                playerSkill.Slow(player);
                 break;
 
             case Items.Disruption:
                 // 공 2개 추가
-                Managers.Skill.Disruption(player);
+                playerSkill.Disruption(player);
                 break;
 
             case Items.Power:
-                Managers.Skill.PowerUp(player);
+                playerSkill.PowerUp(player);
             break;
 
         }

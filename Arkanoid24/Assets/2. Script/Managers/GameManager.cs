@@ -87,15 +87,12 @@ public class GameManager
     public void AddScore(float score)
     {
         Bricks--;
-        // 벽을 부수면 공 속도 증가
-        Managers.Skill.BallIncreaseSpeed += 0.5f;
         
         if (MainUI == null) return;
         Score += score;
         if (Bricks == 0)
         {
             State = GameState.Pause;
-            Managers.Skill.ResetSkill(true);
             GameClearMode();
         }
 
@@ -122,7 +119,6 @@ public class GameManager
     public void LifeDown(GameObject player)
     {
         if (Managers.Ball.GetBallsForPlayer(player).Count != 0) return;
-        Managers.Skill.BallIncreaseSpeed = 0f;
 
         if (MainUI == null)
         {
@@ -130,6 +126,7 @@ public class GameManager
             return;
         }
 
+        player.GetComponent<BallSkillState>().BallIncreaseSpeed = 0f;
         Life--;
         MainUI.SetLifeUI(true, Life);
 
@@ -197,8 +194,6 @@ public class GameManager
         {
             MainUI.ShowGameOver();
         }
-
-        Managers.Skill.ResetSkill(true);
     }
 
     public void LevelClear()
