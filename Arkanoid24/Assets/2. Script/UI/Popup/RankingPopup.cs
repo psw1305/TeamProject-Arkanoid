@@ -16,6 +16,7 @@ public class RankingPopup : MonoBehaviour
     {
         SFX.Instance.PlayOneShot(SFX.Instance.btnClick);
         Managers.Game.Life = 3;
+        Managers.Game.Score = 0;
         Managers.Game.CurrentLevel = 0;
         SceneLoader.Instance.ChangeScene("Main");
     }
