@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ball
+  - Bullet
+  - Item
+  - Brick
+  - UnCountBrick
+  - Wall
+  - Ball2
+  - Ball1
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
@@ -11,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ball
   - 
   - 
   - 
