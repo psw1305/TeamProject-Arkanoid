@@ -370,6 +370,18 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6993981369866999392, guid: 3a4eb50d16242294c8dc0c9986c8410e, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993981369866999392, guid: 3a4eb50d16242294c8dc0c9986c8410e, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993981369866999392, guid: 3a4eb50d16242294c8dc0c9986c8410e, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 8286392316367854104, guid: 3a4eb50d16242294c8dc0c9986c8410e, type: 3}
       propertyPath: m_Name
       value: '@UI Versus'
